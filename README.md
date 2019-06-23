@@ -1,8 +1,7 @@
-## 大数据评测软件后端
+# 大数据评测软件后端
 
-## 开发环境安装步骤
+## 开发环境安装
 
-### 安装虚拟环境
 ```
 pip3 install virtualenv
 virtualenv .py --python=python3
