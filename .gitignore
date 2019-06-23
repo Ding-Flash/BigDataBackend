@@ -107,3 +107,10 @@ venv.bak/
 
 .vscode/
 .py/
+.idea/
+
+# text file
+*.csv
+*.out
+*.txt
+*.pkl
