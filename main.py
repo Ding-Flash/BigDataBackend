@@ -1,6 +1,6 @@
 import json
 from operator import itemgetter
-from threading import Lock
+from multiprocessing import Lock
 
 from flask import (
     Flask,
@@ -10,7 +10,6 @@ from flask_cors import CORS
 import pandas as pd
 
 from mock import hdfs
-
 from apps.hdfs.parse import Parse as ps
 from utils import cache_data
 from apps.store import (
@@ -24,6 +23,7 @@ app = Flask(__name__)
 CORS(app)
 
 bench_name = "bench"
+mutex = Lock()
 
 @app.route("/")
 def hello_world():
@@ -35,9 +35,10 @@ def hello_world():
 def get_func_feature():
     path = request.args["path"]
     # TODO 这里除了传递path之外 还要传递一个任务名字 这里先用bench代替
-    cache = hdfs_cache.get(bench_name)
-    if not cache:
-        cache = cache_data(ps(path), bench_name)
+    with mutex:
+        cache = hdfs_cache.get(bench_name)
+        if not cache:
+            cache = cache_data(ps(path), bench_name)
     return json.dumps(cache.func_feature)
 
 
@@ -45,9 +46,10 @@ def get_func_feature():
 def get_time_line():
     get_args = itemgetter("path", "count", "name")
     path, count, name = get_args(request.args)
-    cache = hdfs_cache.get(bench_name)
-    if not cache:
-        cache = cache_data(ps(path), bench_name)
+    with mutex:
+        cache = hdfs_cache.get(bench_name)
+        if cache is None:
+            cache = cache_data(ps(path), bench_name)
     df = cache.time_line
     timeline = df["begin"]
     com_timeline = df[df['name'] == name]['begin']
@@ -64,14 +66,16 @@ def get_time_line():
 def get_call_tree():
     path = request.args["path"]
     func_name = request.args["func_name"]
-    cache = hdfs_cache.get(bench_name)
-    if not cache:
-        cache = cache_data(ps(path), bench_name)
+    with mutex:
+        cache = hdfs_cache.get(bench_name)
+        if cache is None:
+            cache = cache_data(ps(path), bench_name)
     records = cache.call_tree.records
     all_trees = cache.call_tree.trees
     trees = [r['root'] for r in records if func_name in r['node']]
     res = dict(res=[all_trees[tree] for tree in trees])
     return json.dumps(res)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
