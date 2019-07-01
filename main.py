@@ -9,7 +9,7 @@ from flask import (
 from flask_cors import CORS
 import pandas as pd
 
-from mock import hdfs
+from mock import spark
 from apps.hdfs.parse import Parse as ps
 from utils import cache_data
 from apps.store import (
@@ -35,6 +35,7 @@ def hello_world():
 def get_func_feature():
     path = request.args["path"]
     # TODO 这里除了传递path之外 还要传递一个任务名字 这里先用bench代替
+    path = "./data/hdfs/trace.out"
     with mutex:
         cache = hdfs_cache.get(bench_name)
         if not cache:
@@ -46,6 +47,7 @@ def get_func_feature():
 def get_time_line():
     get_args = itemgetter("path", "count", "name")
     path, count, name = get_args(request.args)
+    path = "./data/hdfs/trace.out"
     with mutex:
         cache = hdfs_cache.get(bench_name)
         if cache is None:
@@ -65,6 +67,7 @@ def get_time_line():
 @app.route("/api/hdfs/getcalltree", methods=["GET"])
 def get_call_tree():
     path = request.args["path"]
+    path = "./data/hdfs/trace.out"
     func_name = request.args["func_name"]
     with mutex:
         cache = hdfs_cache.get(bench_name)
@@ -76,6 +79,13 @@ def get_call_tree():
     res = dict(res=[all_trees[tree] for tree in trees])
     return json.dumps(res)
 
+@app.route("/api/spark/timeline")
+def get_spark_timeline():
+    return json.dumps(spark.timeline)
+
+@app.route("/api/spark/straggler")
+def get_straggler():
+    return json.dumps(spark.straggler)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
