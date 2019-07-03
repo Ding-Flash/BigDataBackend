@@ -29,7 +29,8 @@ timeline = {
            [65, 3, 226, 53, 2, 93, 199, 94, 0, 69, 1687, 2, 2, 1, 8, 0, 0, 0, 0, 0, 0, 0, 8, 51, 170, 3, 3, 6, 2, 214, 2, 0, 229],  
            [65, 1, 220, 52, 1, 124, 194, 129, 2, 68, 1782, 3, 6, 1, 7, 0, 0, 0, 0, 0, 0, 0, 7, 50, 170, 5, 3, 11, 7, 202, 2, 0, 221], 
            [55, 1, 219, 43, 0, 88, 156, 88, 1, 65, 1880, 2, 1, 0, 1, 0, 0, 0, 0, 449, 1115, 39, 1, 55, 171, 4, 4, 5, 3, 205, 1, 0, 221]
-        ]
+        ],
+        "op_name_list":{0: 'HadoopRDD', 1: 'MapPartitionsRDD', 2: 'MapPartitionsRDD', 3: 'MapPartitionsRDD', 4: 'MapPartitionsRDD', 5: 'ShuffledRDD', 6: 'MapPartitionsRDD', 7: 'ZippedWithIndexRDD', 8: 'MapPartitionsRDD', 9: 'MapPartitionsRDD', 10: 'MapPartitionsRDD', 11: 'MapPartitionsRDD', 12: 'MapPartitionsRDD', 13: 'MapPartitionsRDD', 14: 'MapPartitionsRDD', 22: 'MapPartitionsRDD', 23: 'MapPartitionsRDD', 24: 'MapPartitionsRDD', 25: 'MapPartitionsRDD', 26: 'MapPartitionsRDD', 27: 'ShuffledRDD', 28: 'MapPartitionsRDD', 29: 'MapPartitionsRDD', 30: 'MapPartitionsRDD', 31: 'ZippedPartitionsRDD2', 32: 'MapPartitionsRDD', 19: 'MapPartitionsRDD', 20: 'MapPartitionsRDD', 21: 'MapPartitionsRDD'}
     }
 }
 
