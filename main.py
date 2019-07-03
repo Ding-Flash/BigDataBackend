@@ -87,5 +87,9 @@ def get_spark_timeline():
 def get_straggler():
     return json.dumps(spark.straggler)
 
+@app.route("/api/spark/cart_tree")
+def get_cart_tree():
+    return json.dumps(spark.cart_tree)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
