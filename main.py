@@ -12,7 +12,7 @@ import pandas as pd
 
 from mock import spark
 from apps.hdfs.parse import Parse as ps
-from utils import cache_hdfs_data
+from utils import cache_hdfs_data, change_xml
 from apps.store import (
     hdfs_cache,
     # spark_cache,
@@ -38,10 +38,10 @@ def create_hdfs_task():
     name = r['name']
     if hdfs_cache.get_task_path(name):
         return json.dumps({'status': 2})
-    del r['name']
     r['time'] = datetime.now()
     hdfs_cache.set_conf(name, r)
     hdfs_cache.set_task_path(name)
+    change_xml(r)
     hdfs_cache.store_pickle()
     return json.dumps({'status': 0})
 
