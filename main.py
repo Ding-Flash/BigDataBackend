@@ -1,6 +1,7 @@
 import json
 from operator import itemgetter
 from multiprocessing import Lock
+from datetime import datetime
 
 from flask import (
     Flask,
@@ -11,12 +12,12 @@ import pandas as pd
 
 from mock import spark
 from apps.hdfs.parse import Parse as ps
-from utils import cache_data
+from utils import cache_hdfs_data
 from apps.store import (
     hdfs_cache,
-    spark_cache,
-    bigdata_cache,
-    tree_cache
+    # spark_cache,
+    # bigdata_cache,
+    # tree_cache
 )
 
 app = Flask(__name__)
@@ -31,15 +32,43 @@ def hello_world():
 
 
 # htrace 相关
+@app.route("/api/hdfs/createtask", methods=["GET"])
+def create_hdfs_task():
+    r = request.args.to_dict()
+    name = r['name']
+    if hdfs_cache.get_task_path(name):
+        return json.dumps({'status': 2})
+    del r['name']
+    r['time'] = datetime.now()
+    hdfs_cache.set_conf(name, r)
+    hdfs_cache.set_task_path(name)
+    hdfs_cache.store_pickle()
+    return json.dumps({'status': 0})
+
+
+@app.route("/api/hdfs/gettasklist")
+def get_task_list():
+    l = []
+    for name, conf in hdfs_cache.conf.items():
+        l.append({
+            "name": name,
+            "sampler": conf['sampler'],
+            "time": str(conf['time'])[:19],
+            "desc": conf["desc"],
+            "status": hdfs_cache.status[name]
+        })
+    return json.dumps({"data": l})
+
+
 @app.route("/api/hdfs/getfuncfeature", methods=["GET"])
 def get_func_feature():
     path = request.args["path"]
     # TODO 这里除了传递path之外 还要传递一个任务名字 这里先用bench代替
     path = "./data/hdfs/trace.out"
     with mutex:
-        cache = hdfs_cache.get(bench_name)
+        cache = hdfs_cache.get_task_report(bench_name)
         if not cache:
-            cache = cache_data(ps(path), bench_name)
+            cache = cache_hdfs_data(ps(path), bench_name)
     return json.dumps(cache.func_feature)
 
 
@@ -49,9 +78,9 @@ def get_time_line():
     path, count, name = get_args(request.args)
     path = "./data/hdfs/trace.out"
     with mutex:
-        cache = hdfs_cache.get(bench_name)
+        cache = hdfs_cache.get_task_report(bench_name)
         if cache is None:
-            cache = cache_data(ps(path), bench_name)
+            cache = cache_hdfs_data(ps(path), bench_name)
     df = cache.time_line
     timeline = df["begin"]
     com_timeline = df[df['name'] == name]['begin']
@@ -70,26 +99,31 @@ def get_call_tree():
     path = "./data/hdfs/trace.out"
     func_name = request.args["func_name"]
     with mutex:
-        cache = hdfs_cache.get(bench_name)
+        cache = hdfs_cache.get_task_report(bench_name)
         if cache is None:
-            cache = cache_data(ps(path), bench_name)
+            cache = cache_hdfs_data(ps(path), bench_name)
     records = cache.call_tree.records
     all_trees = cache.call_tree.trees
     trees = [r['root'] for r in records if func_name in r['node']]
     res = dict(res=[all_trees[tree] for tree in trees])
     return json.dumps(res)
 
+
+# spark 相关
 @app.route("/api/spark/timeline")
 def get_spark_timeline():
     return json.dumps(spark.timeline)
+
 
 @app.route("/api/spark/straggler")
 def get_straggler():
     return json.dumps(spark.straggler)
 
+
 @app.route("/api/spark/cart_tree")
 def get_cart_tree():
     return json.dumps(spark.cart_tree)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

@@ -1,22 +1,73 @@
 from addict import Dict
+from abc import ABCMeta, abstractmethod
+import pickle
+import os
+
+path = os.path.dirname(os.path.abspath(__file__))
+store_path = path[:-4] + 'data/'
 
 
-class Cache:
+class Cache(metaclass=ABCMeta):
 
     def __init__(self):
-        self._data = dict()
-    
-    def get(self, name):
-        return self._data.get(name)
+        self.task_path = dict()
+        self.report = Dict()
+        self.status = dict()
 
-    def set(self, name, value):
-        self._data[name] = Dict(value)
-        return self._data[name] 
+    @abstractmethod
+    def get_task_path(self, name):
+        pass
+
+    @abstractmethod
+    def set_task_path(self, name):
+        pass
+
+    @abstractmethod
+    def get_task_report(self, name):
+        pass
+
+    @abstractmethod
+    def set_task_report(self, name, report):
+        pass
+
+    def store_pickle(self):
+        class_type = self.__class__.__name__
+        if class_type == "HdfsCache":
+            file_name = store_path + 'hdfs/'+'cache.pkl'
+        elif class_type == "SparkCache":
+            file_name = store_path + 'spark/' + 'cache.pkl'
+        else:
+            file_name = store_path + 'bigdata/' + 'cache.pkl'
+
+        with open(file_name, "wb") as f:
+            pickle.dump(self, f)
+
 
 class HdfsCache(Cache):
 
     def __init__(self):
         super().__init__()
+        self.conf = dict()
+
+    def set_conf(self, name, setting):
+        self.conf[name] = setting
+
+    def get_conf(self, name):
+        return self.conf[name]
+
+    def get_task_path(self, name):
+        return self.task_path.get(name, None)
+
+    def set_task_path(self, name):
+        self.task_path[name] = store_path + "/hdfs/" + name
+        os.mkdir(self.task_path[name])
+        self.status[name] = "submit"
+
+    def get_task_report(self, name):
+        return self.report.get(name, None)
+
+    def set_task_report(self, name, report):
+        self.report[name] = report
 
 
 class SparkCache(Cache):
@@ -30,14 +81,12 @@ class BigDataCache(Cache):
     def __init__(self):
         super().__init__()
 
+# spark_cache = SparkCache()
+# bigdata_cache = BigDataCache()
 
-class TreeCache(Cache):
-    
-    def __init__(self):
-        super().__init__()
-
-
-hdfs_cache = HdfsCache()
-spark_cache = SparkCache()
-bigdata_cache = BigDataCache()
-tree_cache = TreeCache()
+try:
+    file_path = store_path + 'hdfs/cache.pkl'
+    with open(file_path, 'rb') as f:
+        hdfs_cache = pickle.load(f)
+except FileNotFoundError:
+    hdfs_cache = HdfsCache()
