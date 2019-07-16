@@ -2,6 +2,7 @@ from addict import Dict
 from abc import ABCMeta, abstractmethod
 import pickle
 import os
+import shutil
 
 path = os.path.dirname(os.path.abspath(__file__))
 store_path = path[:-4] + 'data/'
@@ -59,15 +60,29 @@ class HdfsCache(Cache):
         return self.task_path.get(name, None)
 
     def set_task_path(self, name):
-        self.task_path[name] = store_path + "/hdfs/" + name
-        os.mkdir(self.task_path[name])
+        self.task_path[name] = store_path + "hdfs/" + name
+        try:
+            os.mkdir(self.task_path[name])
+        except FileExistsError:
+            pass
         self.status[name] = "submit"
 
     def get_task_report(self, name):
         return self.report.get(name, None)
 
     def set_task_report(self, name, report):
-        self.report[name] = report
+        self.report[name] = Dict(report)
+
+    def delete_task(self, name):
+        if name in self.conf:
+            del self.conf[name]
+        if name in self.status:
+            del self.status[name]
+        if name in self.report:
+            del self.report[name]
+        task_path = self.task_path[name]
+        shutil.rmtree(task_path)
+        self.store_pickle()
 
 
 class SparkCache(Cache):

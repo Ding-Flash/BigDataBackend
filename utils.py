@@ -20,9 +20,11 @@ def cache_hdfs_data(bench, name):
     :return: bench_data
     """
     hdfs_cache.set_task_report(name, {
+        "size": bench.size,
         "func_feature": bench.get_func_feature(),
         "call_tree": bench.get_call_tree(),
-        "time_line": bench.get_time_line()
+        "time_line": bench.get_time_line(),
+        "func_type": len(bench.names)
     })
     return hdfs_cache.get_task_report(name)
 

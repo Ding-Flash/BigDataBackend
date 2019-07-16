@@ -2,6 +2,7 @@ import json
 from operator import itemgetter
 from multiprocessing import Lock
 from datetime import datetime
+import os.path
 
 from flask import (
     Flask,
@@ -23,8 +24,8 @@ from apps.store import (
 app = Flask(__name__)
 CORS(app)
 
-bench_name = "bench"
 mutex = Lock()
+
 
 @app.route("/")
 def hello_world():
@@ -57,14 +58,35 @@ def get_task_list():
             "desc": conf["desc"],
             "status": hdfs_cache.status[name]
         })
-    return json.dumps({"data": l})
+    return json.dumps({"data": l[::-1]})
+
+
+@app.route("/api/hdfs/refresh")
+def refresh_bench_status():
+    bench_name = request.args['name']
+    path = hdfs_cache.get_task_path(bench_name)
+    res = {}
+    if os.path.isfile(path+'/trace.out'):
+        hdfs_cache.status[bench_name] = "finshed"
+        res['status'] = 1
+    else:
+        res['status'] = 0
+    return json.dumps(res)
+
+
+@app.route("/api/hdfs/delete")
+def delete_hdfs_task():
+    bench_name = request.args['name']
+    hdfs_cache.delete_task(bench_name)
+    return json.dumps({
+        'status': 0
+    })
 
 
 @app.route("/api/hdfs/getfuncfeature", methods=["GET"])
 def get_func_feature():
-    path = request.args["path"]
-    # TODO 这里除了传递path之外 还要传递一个任务名字 这里先用bench代替
-    path = "./data/hdfs/trace.out"
+    bench_name = request.args["name"]
+    path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     with mutex:
         cache = hdfs_cache.get_task_report(bench_name)
         if not cache:
@@ -74,29 +96,29 @@ def get_func_feature():
 
 @app.route("/api/hdfs/gettimeline", methods=["GET"])
 def get_time_line():
-    get_args = itemgetter("path", "count", "name")
-    path, count, name = get_args(request.args)
-    path = "./data/hdfs/trace.out"
+    get_args = itemgetter("name", "count", "func_name")
+    bench_name, count, fname = get_args(request.args)
+    path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     with mutex:
         cache = hdfs_cache.get_task_report(bench_name)
         if cache is None:
             cache = cache_hdfs_data(ps(path), bench_name)
     df = cache.time_line
     timeline = df["begin"]
-    com_timeline = df[df['name'] == name]['begin']
+    com_timeline = df[df['name'] == fname]['begin']
     interval = range(0, timeline.max(), timeline.max() // int(count))
     res = pd.cut(timeline, interval, right=False).value_counts(sort=False)
     com_res = pd.cut(com_timeline, interval, right=False).value_counts(sort=False)
     data = [{'interval': str(item[0]), 'all': item[1]} for item in res.iteritems()]
     for i, c in enumerate(com_res.iteritems()):
-        data[i][name] = c[1]
-    return json.dumps(dict(columns=['interval', 'all', name], rows=data))
+        data[i][fname] = c[1]
+    return json.dumps(dict(columns=['interval', 'all', fname], rows=data))
 
 
 @app.route("/api/hdfs/getcalltree", methods=["GET"])
 def get_call_tree():
-    path = request.args["path"]
-    path = "./data/hdfs/trace.out"
+    bench_name = request.args["name"]
+    path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     func_name = request.args["func_name"]
     with mutex:
         cache = hdfs_cache.get_task_report(bench_name)
@@ -107,6 +129,21 @@ def get_call_tree():
     trees = [r['root'] for r in records if func_name in r['node']]
     res = dict(res=[all_trees[tree] for tree in trees])
     return json.dumps(res)
+
+
+@app.route("/api/hdfs/gettracedetail")
+def get_trace_detail():
+    bench_name = request.args["name"]
+    path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
+    with mutex:
+        cache = hdfs_cache.get_task_report(bench_name)
+        if cache is None:
+            cache = cache_hdfs_data(ps(path), bench_name)
+    return json.dumps({
+        'size': cache.size / (2**20),
+        'func_type': cache.func_type,
+        'tree_type': len(cache.call_tree.records)
+    })
 
 
 # spark 相关

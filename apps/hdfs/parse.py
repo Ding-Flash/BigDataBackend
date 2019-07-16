@@ -7,6 +7,7 @@ from collections import defaultdict
 
 from . import util
 
+
 def produce():
     return {
         'name': None,
