@@ -11,9 +11,9 @@ from flask import (
 from flask_cors import CORS
 import pandas as pd
 
-from mock import spark
+from mock import spark, bigroot
 from apps.hdfs.parse import Parse as ps
-from utils import cache_hdfs_data, change_xml
+from utils import cache_hdfs_data, change_xml, clean_bigroot_data
 from apps.store import (
     hdfs_cache,
     # spark_cache,
@@ -67,7 +67,7 @@ def refresh_bench_status():
     path = hdfs_cache.get_task_path(bench_name)
     res = {}
     if os.path.isfile(path+'/trace.out'):
-        hdfs_cache.status[bench_name] = "finshed"
+        hdfs_cache.status[bench_name] = "finished"
         res['status'] = 1
     else:
         res['status'] = 0
@@ -162,5 +162,18 @@ def get_cart_tree():
     return json.dumps(spark.cart_tree)
 
 
+# bigroot相关
+@app.route("/api/bigroot/getstraggler")
+def get_bigroot_straggler():
+    res = []
+    for slave, value in bigroot.data.items():
+        data = clean_bigroot_data(value)
+        data['host'] = slave
+        res.append(data)
+    return json.dumps({
+        "data": res
+    })
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8001, debug=True)

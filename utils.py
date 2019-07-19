@@ -60,3 +60,40 @@ def change_xml(conf):
 
     with open(core_file, 'w') as f:
         f.write(ans)
+
+
+def clean_bigroot_data(slave):
+    exe_time = max(len(slave['cpu']), len(slave['io']), len(slave['net']))
+    cpu, io, net = [0] * exe_time, [0] * exe_time, [0] * exe_time
+
+    for c in slave['cpu']:
+        cpu[int(c[0])] = c[1]
+    for i in slave['io']:
+        io[int(i[0])] = i[1]
+    for n in slave['net']:
+        net[int(n[0])] = n[1]
+
+    straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
+
+    tasks = []
+    for task in slave['tasks']:
+        scala = task[2]/straggler_scala
+        tasks.append([
+            {
+                'symbol': 'none',
+                'name': 'unkown' if task[3] == '{unkown}' else ','.join(task[3]),
+                'coord': [task[0], scala]
+            },
+            {
+                'symbol': 'none',
+                'coord': [task[1], scala]
+            }
+        ])
+    return {
+        'time': exe_time,
+        'cpu': list(map(lambda x: x/max(cpu), cpu)),
+        'io': list(map(lambda x: x/max(io), io)),
+        'net': list(map(lambda x: x/max(net), net)),
+        'tasks': tasks,
+        'scala': straggler_scala
+    }
