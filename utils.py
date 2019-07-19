@@ -77,11 +77,13 @@ def clean_bigroot_data(slave):
 
     tasks = []
     for task in slave['tasks']:
+        if task[3] == '{unkown}':
+            continue
         scala = task[2]/straggler_scala
         tasks.append([
             {
                 'symbol': 'none',
-                'name': 'unkown' if task[3] == '{unkown}' else ','.join(task[3]),
+                'name': ','.join(task[3]),
                 'coord': [task[0], scala]
             },
             {
@@ -89,11 +91,21 @@ def clean_bigroot_data(slave):
                 'coord': [task[1], scala]
             }
         ])
+
+    table = []
+    for task in slave['tasks']:
+        table.append({
+            'start': round(task[0],3),
+            'end': round(task[1],3),
+            'factor': round(task[2],3),
+            'root-cause': "unkown" if task[3] == '{unkown}' else ','.join(task[3])
+        })
     return {
         'time': exe_time,
         'cpu': list(map(lambda x: x/max(cpu), cpu)),
         'io': list(map(lambda x: x/max(io), io)),
         'net': list(map(lambda x: x/max(net), net)),
         'tasks': tasks,
-        'scala': straggler_scala
+        'scala': straggler_scala,
+        'table': table
     }
