@@ -1,22 +1,12 @@
 import os
 import re
 import socket
-import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-try:
-    slave_path = os.environ['BigData']
-    logging.info("slave_path: {}".format(slave_path))
-except KeyError:
-    print("请设置BigData环境变量")
-    exit(1)
-
-work_load = ""
+app_path = '/home/yangs/Bigdata/BigDataBackend/cmd'
+work_load = '$HIBENCH_WORKLOADS/ml/bayes/spark/run.sh'
 
 
-def get_slaves_name():
+def get_slaves_name():#Todo:检测slave是否正常
     slaves = []
     f = os.popen("cat $SPARK_HOME/conf/slaves")
     lines = f.read().split('\n')
@@ -26,8 +16,8 @@ def get_slaves_name():
     f.close()
     return slaves
 
-
-def get_slaves_ip():
+def  get_slaves_ip():
+    slaves_ip = []
     slaves_name = get_slaves_name()
     slaves_ip = []
     f = os.popen("cat /etc/hosts")
@@ -40,17 +30,14 @@ def get_slaves_ip():
     f.close()
     return slaves_ip
 
-
 def get_user():
     f = os.popen("whoami")
     name = f.read()[:-1]
     f.close()
     return name
 
-
 def get_master_name():
     return socket.gethostname()
-
 
 def get_master_ip():
     return socket.gethostbyname(get_master_name())

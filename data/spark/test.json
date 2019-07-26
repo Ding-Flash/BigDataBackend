@@ -1,0 +1,16 @@
+{"timeline":
+{"data":
+{"task_num": 2,
+  "operator_number": 34,
+  "stage_num": 18,
+  "stage_start_op_list": "0 4 6 10 12 14 18 22 24 26 28 30 46 56 58 62 64 66",
+  "hot_spot_op_list": "5 6 7 10 20 28",
+  "hot_spot_op_num": 6,
+  "straggler_op_num": 3,
+  "straggler_op_location_list": [[1, 10], [1, 20], [0, 28]],
+  "op_name_list": ["HadoopRDD_start", "HadoopRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "ShuffledRDD_start", "ShuffledRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "ZippedWithIndexRDD_start", "ZippedWithIndexRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "unknown_start", "unknown_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "ShuffledRDD_start", "ShuffledRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end", "unknown_start", "unknown_end", "MapPartitionsRDD_start", "MapPartitionsRDD_end"],
+  "op_list": [[4, 1, 3, 6, 1, 175, 174, 175, 1, 5, 499, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 0, 234, 0, 2, 0, 0, 3],
+    [4, 0, 3, 5, 0, 206, 186, 207, 0, 5, 1283, 0, 1, 0, 1, 0, 0, 0, 0, 107, 840, 26, 1, 1, 0, 4, 0, 0, 1, 1, 0, 0, 0, 3]]}}, "straggler": {"data": {"straggler_type": [{"task_number": 39, "feature_number": 1, "urgent_level": 1, "feature": [[13, "0.3489"]]}, {"task_number": 1, "feature_number": 2, "urgent_level": 0, "feature": [[2, "0.444"], [2, "0.492"]]}]}},
+  "cart_tree": {"name": "node 0", "label": ["executor_run_ime <= 0.444", "gini = 0.287", "samples = 230", "value = [190, 40]"], "childs": [{"name": "node 1", "label": ["net <= 3.489", "gini = 0.093", "samples = 41", "value = [2, 39]"], "childs": [{"name": "node 2", "label": ["gini = 0.0", "samples = 2", "value = [2, 0]"]}, {"name": "node 3", "label": ["gini = 0.0", "samples = 39", "value = [0, 39]"]}]}, {"name": "node 4", "label": ["executor_run_ime <= 0.511", "gini = 0.011", "samples = 189", "value = [188, 1]"],
+  "childs": [{"name": "node 5", "label": ["executor_run_ime <= 0.492", "gini = 0.444", "samples = 3", "value = [2, 1]"],
+  "childs": [{"name": "node 6", "label": ["gini = 0.0", "samples = 2", "value = [2, 0]"]}, {"name": "node 7", "label": ["gini = 0.0", "samples = 1", "value = [0, 1]"]}]}, {"name": "node 8", "label": ["gini = 0.0", "samples = 186", "value = [186, 0]"]}]}]}}

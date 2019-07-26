@@ -1,12 +1,10 @@
 import re
 import os
-import sys
-sys.path.append('..')
-from env_conf import *
+from straggler.env_conf import get_slaves_name, get_master_name
 
 slaves_name = get_slaves_name()
 master = get_master_name()
-
+cur_path = os.path.dirname(os.path.abspath(__file__)) + '/../../temp/spark/sample/'
 #rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   wait r_await w_await  svctm  %util
 
 
@@ -141,42 +139,44 @@ def do_refine_sar(sarfile, outfile):
         outline = [sar['time_stp_all'][i],' ',sar['rxkb_all'][i],' ',sar['txkb_all'][i],' ',sar['ifutil_all'][i],'\n']
         outfile.writelines(outline)
 
-iostatfile = open("iostat_log_"+master,"r")
-outfile = open("out_log/iostat_out_"+master,"w")
-do_refine_iostat(iostatfile,outfile)
-iostatfile.close()
-outfile.close()
 
-mpstatfile = open("mpstat_log_"+master,"r")
-outfile = open("out_log/mpstat_out_"+master,"w")
-do_refine_mpstat(mpstatfile, outfile)
-mpstatfile.close()
-outfile.close()
-
-sarfile = open("sar_log_"+master,"r")
-outfile = open("out_log/sar_out_"+master,"w")
-do_refine_sar(sarfile, outfile)
-sarfile.close()
-outfile.close()
-
-for slave in slaves_name:
-    iostatfile = open("iostat_log_"+slave,"r")
-    outfile = open("out_log/iostat_out_"+slave,"w")
+def analysis_log():
+    iostatfile = open(cur_path + "iostat_log_"+master,"r")
+    outfile = open(cur_path +"out_log/iostat_out_"+master,"w")
     do_refine_iostat(iostatfile,outfile)
     iostatfile.close()
     outfile.close()
 
-    mpstatfile = open("mpstat_log_"+slave,"r")
-    outfile = open("out_log/mpstat_out_"+slave,"w")
-    do_refine_mpstat(mpstatfile,outfile)
+    mpstatfile = open(cur_path +"mpstat_log_"+master,"r")
+    outfile = open(cur_path +"out_log/mpstat_out_"+master,"w")
+    do_refine_mpstat(mpstatfile, outfile)
     mpstatfile.close()
     outfile.close()
 
-    sarfile = open("sar_log_"+slave,"r")
-    outfile = open("out_log/sar_out_"+slave,"w")
+    sarfile = open(cur_path +"sar_log_"+master,"r")
+    outfile = open(cur_path +"out_log/sar_out_"+master,"w")
     do_refine_sar(sarfile, outfile)
     sarfile.close()
     outfile.close()
+
+    for slave in slaves_name:
+        iostatfile = open(cur_path +"iostat_log_"+slave,"r")
+        outfile = open(cur_path +"out_log/iostat_out_"+slave,"w")
+        do_refine_iostat(iostatfile,outfile)
+        iostatfile.close()
+        outfile.close()
+
+        mpstatfile = open(cur_path +"mpstat_log_"+slave,"r")
+        outfile = open(cur_path +"out_log/mpstat_out_"+slave,"w")
+        do_refine_mpstat(mpstatfile,outfile)
+        mpstatfile.close()
+        outfile.close()
+
+        sarfile = open(cur_path +"sar_log_"+slave,"r")
+        outfile = open(cur_path +"out_log/sar_out_"+slave,"w")
+        do_refine_sar(sarfile, outfile)
+        sarfile.close()
+        outfile.close()
 
 
 

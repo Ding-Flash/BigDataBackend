@@ -5,6 +5,8 @@ import pickle
 import pydotplus
 import os
 
+cur_path = os.path.dirname(os.path.abspath(__file__)) + '/../../temp/spark/analysis/'
+
 class Node:
     def __init__(self,node_num,node_str,**kwargs):
         self.attr=kwargs
@@ -53,7 +55,9 @@ class Node:
         return ' gini = '+str(self.gini)+ ' samples = '+\
                str(self.samples)+' values = '+str(self.value)
 
+
 def decode(filename='atree.dot'):
+    filename = cur_path + filename
     nodes={}
     for line in open(filename):
         if re.match(r'[0-9]+ -> [0-9]',line.strip()):
@@ -67,12 +71,13 @@ def decode(filename='atree.dot'):
         elif re.match(r'[0-9]+ \[[^\]]+\]',line.strip()):
             if len(open(filename).readlines()) < 5:
                 print("No Straggler Found!")
-                exit()
+                return
             # node
             num, desc=re.search(r'([0-9]+) \[([\s\S]+)\]',line).groups()
             num=int(num)
             nodes[num]=Node(num,desc)
     return nodes[0]
+
 
 def inference(tree,sample):
     node=tree
@@ -94,11 +99,13 @@ def inference(tree,sample):
         else:
             node=node.right_child
 
+
 def get_dataset(filename='dataset.dat'):
     handle=open(filename,'rb')
     dataset=pickle.load(handle)
     handle.close()
     return dataset
+
 
 def post_order_traversal(node,dataset,acc,sample=None,gini=None):
     left_acc,right_acc=0,0
@@ -117,6 +124,7 @@ def post_order_traversal(node,dataset,acc,sample=None,gini=None):
         else:
             return False,max(left_acc,right_acc)
     return False,acc
+
 
 # Reduced-Error pruning
 def pruning(node,dataset,acc,sample=None,gini=None):
@@ -146,6 +154,7 @@ def pruning(node,dataset,acc,sample=None,gini=None):
     node.right_child=right_child
     return False,acc
 
+
 def export(tree):
     def first_order_traversal(node):
         global out,i
@@ -173,6 +182,7 @@ def export(tree):
     out += 'digraph Tree {\nnode [shape=box] ;'
     first_order_traversal(tree)
     out+='\n}'
+
 
 def mypruning_traversal(node,sample=None,gini=None):
     if node==None:
@@ -202,6 +212,7 @@ def mypruning_traversal(node,sample=None,gini=None):
                 del left,right
         mypruning_traversal(node.left_child,sample,gini)
         mypruning_traversal(node.right_child,sample,gini)
+
 
 def stair_test_sample(tree,dataset,thresh,stair,gini=False):
     if gini:
@@ -236,6 +247,7 @@ def stair_test_sample(tree,dataset,thresh,stair,gini=False):
             i+=stair
     return coords
 
+
 def cal_acc(tree,test):
     count=0
     all=0
@@ -245,6 +257,7 @@ def cal_acc(tree,test):
             if inference(tree,sample)==sample['label']:
                 count+=1
     return count/all
+
 
 def ccp_pruning(tree,test):
     def find_opt_node(tree,test):
@@ -281,6 +294,7 @@ def ccp_pruning(tree,test):
         print(acc)
     return best_tree
 
+
 def loss_single_node(tree,test):
     error_count=0
     all=0
@@ -297,6 +311,7 @@ def loss_single_node(tree,test):
     return error_count/all
     return error_count/len(test)
 
+
 def count_leafs(tree):
     if tree.left_child:
         left_num=count_leafs(tree.left_child)
@@ -305,6 +320,7 @@ def count_leafs(tree):
     else:
         # leaf node
         return 1
+
 
 def loss(tree,test):
     # cal ccp loss given a subtree
@@ -364,12 +380,12 @@ def traversal(root,f,isRight=False):
 
 
 
-if __name__ == '__main__':
+def decode_tree():
     tree=decode()
     #traversal_stack = []
     #straggler_abnormal_feature_list = []
-    f = open('straggler_stack','w')
-    traversal(tree,f)
-    f.close
+    f = open(cur_path+'../straggler_stack','w')
+    traversal(tree, f)
+    f.close()
     #print('straggler_list')
     #print(straggler_abnormal_feature_list)

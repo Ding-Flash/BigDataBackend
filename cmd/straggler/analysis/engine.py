@@ -6,25 +6,28 @@ import sys
 import random
 # sys.path.append("/home/tsee/logtest/workspace-master")
 #import cluster_tool
-import decision_tree
+from . import decision_tree
 import sklearn
 sys.path.append('..')
-from env_conf import *
+from straggler.env_conf import *
 slaves_name = get_slaves_name()
 
 random.seed()
 SD = random.random()
 # ============== CONFIGURE ==================
 DELAY = 0
-LOG_DIR = os.path.pardir+'/sample'
+cur_path = os.path.dirname(os.path.abspath(__file__))
+LOG_DIR = cur_path + '/../../temp/spark/sample/'
 
 ips = get_slaves_ip()
+
 
 def getId(ip):
     for i in range(len(ips)):
         if ips[i] in ip:
             return i+1
     return 0
+
 
 def feed(filename):
     global SD
@@ -60,18 +63,15 @@ def feed(filename):
     print('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (                                                                                                                   
         len(tasks), len(stages), start_time_stamp))
 
-    f = open('app_task','w')
-    f.write(str(len(tasks)))
-    f.write('\n')
-    f.close()
-      
-#    os.system("cp /home/hadoop/WC/"+str(int(SD%2))+"log ./tree.dot")
+    # 没有读数据就注释了
+    # f = open('app_task','w')
+    # f.write(str(len(tasks)))
+    # f.write('\n')
+    # f.close()
 
     return start_time_stamp, tasks, stages
 
-#random.seed()
-#sd = random.random()
-#print task_seed
+
 def catch_exception(expression, default=0):
     try:
         return eval(expression)
@@ -80,9 +80,11 @@ def catch_exception(expression, default=0):
 
 
 def load_dict():
-    filename=os.path.pardir+'/app'
+    cur_path = os.path.dirname(os.path.abspath(__file__))
+    filename = cur_path + '/../../temp/spark/app'
     start_time_stamp, tasks, stages = feed(filename)
     return start_time_stamp, tasks, stages
+
 
 def load_dicts(dump_file_name='saved_raw_features'):
     for i in os.listdir(LOG_DIR):
@@ -90,7 +92,6 @@ def load_dicts(dump_file_name='saved_raw_features'):
             log_file = LOG_DIR + i
     start_time_stamp, tasks, stages = feed(log_file)
     return start_time_stamp, tasks, stages
-
 
 
 def analysis_features(tasks, stages):
@@ -226,10 +227,6 @@ def analysis_features(tasks, stages):
             else:
                 nodes[node_id] = [task_id]
         return nodes
-
-
-
-
 
     features = {}
     cal_stage_data_read(tasks, stages)
@@ -550,7 +547,7 @@ def regulize(mat):
                 mat[i][j] = 0
 
 
-if __name__ == '__main__':
+def start_analysis():
     
     start_time, tasks, stages = load_dict()
     features, node_features, stragglers = analysis_features(tasks, stages)
@@ -601,11 +598,11 @@ if __name__ == '__main__':
 
     accuracy, precision, recall = decision_tree.build_tree(dataset, labels, keys)
     print('accuracy,precision,recall=', accuracy, precision, recall)
-    exit()
-    # clean dataset
-    feature_values = {}
-    for key in dataset[0][0]:
-        feature_values[key] = []
-        for piece in dataset:
-            piece = piece[0]
-            feature_values.append(piece[key])
+    # exit()
+    # # clean dataset
+    # feature_values = {}
+    # for key in dataset[0][0]:
+    #     feature_values[key] = []
+    #     for piece in dataset:
+    #         piece = piece[0]
+    #         feature_values.append(piece[key])

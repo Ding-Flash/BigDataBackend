@@ -16,14 +16,6 @@ class Cache(metaclass=ABCMeta):
         self.status = dict()
 
     @abstractmethod
-    def get_task_path(self, name):
-        pass
-
-    @abstractmethod
-    def set_task_path(self, name):
-        pass
-
-    @abstractmethod
     def get_task_report(self, name):
         pass
 
@@ -89,6 +81,14 @@ class SparkCache(Cache):
 
     def __init__(self):
         super().__init__()
+        self.report = dict()
+
+    def get_task_report(self, name):
+        return self.report.get(name, None)
+
+    def set_task_report(self, name, report):
+        self.report[name] = report
+        self.status[name] = "finished"
 
 
 class BigDataCache(Cache):
@@ -96,8 +96,6 @@ class BigDataCache(Cache):
     def __init__(self):
         super().__init__()
 
-# spark_cache = SparkCache()
-# bigdata_cache = BigDataCache()
 
 try:
     file_path = store_path + 'hdfs/cache.pkl'
@@ -105,3 +103,10 @@ try:
         hdfs_cache = pickle.load(f)
 except FileNotFoundError:
     hdfs_cache = HdfsCache()
+
+try:
+    file_path = store_path + 'spark/cache.pkl'
+    with open(file_path, 'rb') as f:
+        spark_cache = pickle.load(f)
+except FileNotFoundError:
+    spark_cache = SparkCache()

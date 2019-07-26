@@ -4,6 +4,10 @@ import os
 import re
 
 straggler_num = 999
+s_info = []
+
+cur_path = os.path.dirname(os.path.abspath(__file__)) + '/../../temp/spark/sample/'
+
 
 def prepro():
     global straggler_num
@@ -14,12 +18,12 @@ def prepro():
     #print straggler_kind
 
     #f.seek(0)
-    if not os.path.exists('straggler_stack'):
+    if not os.path.exists(cur_path + '../straggler_stack'):
         straggler_num = 0
         print("No Straggler_stack")
         return
 
-    f = open('straggler_stack')
+    f = open(cur_path + '../straggler_stack')
     straggler_kind = len(f.readlines())
     f.seek(0)
     for i in range(0, straggler_kind):
@@ -40,7 +44,7 @@ def prepro():
             temp_s_list.append([feature, ar, straggler_num])
 
         s_info.append(temp_s_list)
-    
+    f.close()
     print(s_info)
     #return straggler_kind
 
@@ -123,7 +127,7 @@ def trans():
                 #print s_info
     '''
 
-    fw = open(os.path.pardir+'/task_data', 'w')
+    fw = open(cur_path+'../task_data', 'w')
     if(straggler_num == 0):
         fw.write('0')
         fw.write('\n')
@@ -157,12 +161,10 @@ def trans():
     fw.close()
 
 
+def detect():
+        #if(app_name == 'test_skew'):
+    #print app_name
+    prepro()
+    trans()
 
-
-    #if(app_name == 'test_skew'):
-s_info = []
-#print app_name
-prepro()
-trans()
-
-#print s_info
+    #print s_info

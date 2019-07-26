@@ -75,10 +75,26 @@ def clean_bigroot_data(slave):
 
     straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
 
-    tasks = []
+    tasks, table = [], []
+
+    pie_data = {}
+
     for task in slave['tasks']:
+
+        table.append({
+            'start': round(task[0],3),
+            'end': round(task[1],3),
+            'factor': round(task[2],3),
+            'root-cause': "unkown" if task[3] == '{unkown}' else ','.join(task[3])
+        })
+
         if task[3] == '{unkown}':
+            pie_data['unkown'] = pie_data.get('unkown', 0) + 1
             continue
+        else:
+            for cause in task[3]:
+                pie_data[cause] = pie_data.get(cause, 0) + 1
+
         scala = task[2]/straggler_scala
         tasks.append([
             {
@@ -92,14 +108,6 @@ def clean_bigroot_data(slave):
             }
         ])
 
-    table = []
-    for task in slave['tasks']:
-        table.append({
-            'start': round(task[0],3),
-            'end': round(task[1],3),
-            'factor': round(task[2],3),
-            'root-cause': "unkown" if task[3] == '{unkown}' else ','.join(task[3])
-        })
     return {
         'time': exe_time,
         'cpu': list(map(lambda x: x/max(cpu), cpu)),
@@ -107,5 +115,7 @@ def clean_bigroot_data(slave):
         'net': list(map(lambda x: x/max(net), net)),
         'tasks': tasks,
         'scala': straggler_scala,
-        'table': table
+        'table': table,
+        'cause': list(pie_data.keys()),
+        'pie_data': [{'name': key, 'value': val} for key, val in pie_data.items()]
     }
