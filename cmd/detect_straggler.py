@@ -2,6 +2,7 @@ import os
 import subprocess
 import logging
 import argparse
+from datetime import datetime
 
 from straggler import clean_all, get_time_alignment_deviation, get_trace_log, merge
 
@@ -90,7 +91,9 @@ def main():
 
         # - Write Report -
         report = merge.analysis_store()
+        spark_cache.set_conf(task_name, dict(time=datetime.now()))
         spark_cache.set_task_report(task_name, report)
+        spark_cache.status[task_name] = 'finished'
         spark_cache.store_pickle()
         break
 

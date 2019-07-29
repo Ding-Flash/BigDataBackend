@@ -14,6 +14,15 @@ class Cache(metaclass=ABCMeta):
         self.task_path = dict()
         self.report = Dict()
         self.status = dict()
+        self.conf = dict()
+
+    @abstractmethod
+    def get_conf(self, name):
+        pass
+
+    @abstractmethod
+    def set_conf(self, name, setting):
+        pass
 
     @abstractmethod
     def get_task_report(self, name):
@@ -30,7 +39,7 @@ class Cache(metaclass=ABCMeta):
         elif class_type == "SparkCache":
             file_name = store_path + 'spark/' + 'cache.pkl'
         else:
-            file_name = store_path + 'bigdata/' + 'cache.pkl'
+            file_name = store_path + 'bigroot/' + 'cache.pkl'
 
         with open(file_name, "wb") as f:
             pickle.dump(self, f)
@@ -40,7 +49,6 @@ class HdfsCache(Cache):
 
     def __init__(self):
         super().__init__()
-        self.conf = dict()
 
     def set_conf(self, name, setting):
         self.conf[name] = setting
@@ -81,13 +89,18 @@ class SparkCache(Cache):
 
     def __init__(self):
         super().__init__()
-        self.report = dict()
+
+    def get_conf(self, name):
+        return self.conf[name]
+
+    def set_conf(self, name, setting):
+        self.conf[name] = setting
 
     def get_task_report(self, name):
         return self.report.get(name, None)
 
     def set_task_report(self, name, report):
-        self.report[name] = report
+        self.report[name] = Dict(report)
         self.status[name] = "finished"
 
 
@@ -95,6 +108,19 @@ class BigDataCache(Cache):
     
     def __init__(self):
         super().__init__()
+
+    def get_conf(self, name):
+        return self.conf[name]
+
+    def set_conf(self, name, setting):
+        self.conf[name] = setting
+
+    def get_task_report(self, name):
+        return self.report.get(name, None)
+
+    def set_task_report(self, name, report):
+        self.report[name] = Dict(report)
+        self.status[name] = "finished"
 
 
 try:
@@ -110,3 +136,10 @@ try:
         spark_cache = pickle.load(f)
 except FileNotFoundError:
     spark_cache = SparkCache()
+
+try:
+    file_path = store_path + 'bigroot/cache.pkl'
+    with open(file_path, 'rb') as f:
+        bigroot_cache = pickle.load(f)
+except FileNotFoundError:
+    bigroot_cache = BigDataCache()

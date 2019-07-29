@@ -5,13 +5,13 @@ from bigroot.env_conf import *
 slaves_name = get_slaves_name()
 prefix=app_path
 
-def decode_vmstat(slave):
+def decode_vmstat(slave,log_dir):
     if slave == 0:
-        vmpath = prefix+"/temp/bigroot/logs/vmstat_log_master"
-        outpath = prefix+"/temp/bigroot/out/vmstat_out_master"
+        vmpath = log_dir+"/logs/vmstat_log_master"
+        outpath = log_dir+"/out/vmstat_out_master"
     else:
-        vmpath = prefix+"/temp/bigroot/logs/vmstat_log_"+slave
-        outpath = prefix+"/temp/bigroot/out/vmstat_out_"+slave
+        vmpath = log_dir+"/logs/vmstat_log_"+slave
+        outpath = log_dir+"/out/vmstat_out_"+slave
     if not os.path.exists(vmpath):
         return
     vmfile=open(vmpath)
@@ -72,13 +72,13 @@ def decode_vmstat(slave):
     vmfile.close()
 
 
-def decode_sar(slave):
+def decode_sar(slave, log_dir):
     if slave == 0:
-        sapath = prefix+"/temp/bigroot/logs/sar_log_master"
-        outpath = prefix+"/temp/bigroot/out/sar_out_master"
+        sapath = log_dir+"/logs/sar_log_master"
+        outpath = log_dir+"/out/sar_out_master"
     else:
-        sapath = prefix+"/temp/bigroot/logs/sar_log_"+slave
-        outpath = prefix+"/temp/bigroot/out/sar_out_"+slave
+        sapath = log_dir+"/logs/sar_log_"+slave
+        outpath = log_dir+"/out/sar_out_"+slave
     if not os.path.exists(sapath):
         return 
     safile=open(sapath)
@@ -111,13 +111,13 @@ def decode_sar(slave):
     outfile.close()
     safile.close()
 
-def decode_mpstat(slave):
+def decode_mpstat(slave, log_dir):
     if slave==0:
-        mppath = prefix+"/temp/bigroot/logs/mpstat_log_master"
-        outpath = prefix+"/temp/bigroot/out/mpstat_out_master"
+        mppath = log_dir+"/logs/mpstat_log_master"
+        outpath = log_dir+"/out/mpstat_out_master"
     else:
-        mppath = prefix+"/temp/bigroot/logs/mpstat_log_"+slave
-        outpath = prefix+"/temp/bigroot/out/mpstat_out_"+slave
+        mppath = log_dir+"/logs/mpstat_log_"+slave
+        outpath = log_dir+"/out/mpstat_out_"+slave
     if not os.path.exists(mppath):
         return
     mpfile=open(mppath)
@@ -166,14 +166,14 @@ def decode_mpstat(slave):
     outfile.close()
     mpfile.close()
 
-def decode_iostat(slave):
+def decode_iostat(slave, log_dir):
     if slave == 0:
-        iostatpath = prefix+"/temp/bigroot/logs/iostat_log_master"
+        iostatpath = log_dir+"/logs/iostat_log_master"
         # rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-        outpath = prefix+"/temp/bigroot/out/iostat_out_master"
+        outpath = log_dir+"/out/iostat_out_master"
     else:
-        iostatpath = prefix+"/temp/bigroot/logs/iostat_log_"+slave
-        outpath = prefix+"/temp/bigroot/out/iostat_out_"+slave
+        iostatpath = log_dir+"/logs/iostat_log_"+slave
+        outpath = log_dir+"/out/iostat_out_"+slave
     if not os.path.exists(iostatpath):
         return
     iostatfile=open(iostatpath)
@@ -239,14 +239,13 @@ def decode_iostat(slave):
     outfile.close()
     iostatfile.close()
 
-def decode():
-    os.system("cp /temp/bigroot/logs/anomaly* /temp/bigroot/out")
+def decode(slaves_name,log_dir):
+    os.system("cp "+log_dir+"/logs/anomaly* "+log_dir+"/out")
     for slave in slaves_name:
-        decode_sar(slave)
+        decode_sar(slave, log_dir)
     for slave in slaves_name:
-        decode_mpstat(slave)
+        decode_mpstat(slave, log_dir)
     for slave in slaves_name:
-        decode_iostat(slave)
+        decode_iostat(slave, log_dir)
 
-if __name__=='__main__':
-    decode()
+

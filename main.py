@@ -16,9 +16,8 @@ from apps.hdfs.parse import Parse as ps
 from utils import cache_hdfs_data, change_xml, clean_bigroot_data
 from apps.store import (
     hdfs_cache,
-    # spark_cache,
-    # bigdata_cache,
-    # tree_cache
+    spark_cache,
+    bigroot_cache,
 )
 
 app = Flask(__name__)
@@ -162,6 +161,19 @@ def get_cart_tree():
     return json.dumps(spark.cart_tree)
 
 
+@app.route("/api/spark/gettasklist")
+def get_spark_task_list():
+    l = []
+    for name, conf in spark_cache.conf.items():
+        l.append({
+            "name": name,
+            "time": str(conf['time'])[:19],
+            "desc": conf.get("desc", ""),
+            "status": spark_cache.status[name]
+        })
+    return json.dumps(dict(data=l[::-1]))
+
+
 # bigroot相关
 @app.route("/api/bigroot/getstraggler")
 def get_bigroot_straggler():
@@ -173,6 +185,18 @@ def get_bigroot_straggler():
     return json.dumps({
         "data": res
     })
+
+@app.route("/api/bigroot/gettasklist")
+def get_bigroot_task_list():
+    l = []
+    for name, conf in bigroot_cache.conf.items():
+        l.append({
+            "name": name,
+            "time": str(conf['time'])[:19],
+            "desc": conf.get("desc", ""),
+            "status": bigroot_cache.status[name]
+        })
+    return json.dumps(dict(data=l[::-1]))
 
 
 if __name__ == "__main__":

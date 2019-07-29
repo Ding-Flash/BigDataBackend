@@ -1,18 +1,10 @@
-import os.path
-import re
-
 import time
-
-from sklearn import preprocessing
-import os
-import json
 import sys
 sys.path.append('..')
 from straggler.env_conf import *
 
 slaves_name = get_slaves_name()
 slave_num = len(slaves_name)
-#from shapelets_lts.classification import LtsShapeletClassifier
 
 thread_count = 0
 
@@ -130,40 +122,10 @@ def analysis_store():
         f.close()
 
 
-    # SOLVE NO-VALUE PROBLEM (REPLACE BY AVERAGE VALUE)
-    # j STARTED FROM 2 BECAUSE OF THE 'SLAVE:*' AND 'THREAD:*' TOOK THE FIRST TWO PLACE
-
-    #for i in range(0,5):
-    #    for j in range(0,len(time_list[i])):
-    #        sample_value_sum = 0
-    #        none_zero_count = 0
-    #        for k in range(0,thread_count):
-    #            if(time_list[i*thread_count + k][j] != 0):
-    #                sample_value_sum = sample_value_sum + int(time_list[i*thread_count + k][j])
-    #                none_zero_count = none_zero_count + 1
-    #                average = int(sample_value_sum / none_zero_count)
-    #        for k in range(0,thread_count):
-    #            if(time_list[i*thread_count + k][j] == 0):
-    #                time_list[i*thread_count + k].pop(j)
-    #                time_list[i*thread_count + k].insert(j,average)
-
-
     #COUNT AND MARK HTE LOCATION OF EACH STAGE
 
     stage_count_list=[0]
     stage_count = 1
-    #i = 0
-
-    #for j in range(0,len(time_list[0]),2):
-    #    if(op_kind_list[0][j] == 'ShuffledRDD_start'):
-    #        stage_count_list.append(j)
-    #        stage_count = stage_count + 1
-    #    elif(j+2 < len(time_list[0])):
-    #        if((time_list[0][j] < time_list[0][j+2]) or (time_list[0][j+1] > time_list[0][j+4])):
-    #            stage_count_list.append(j+2)
-    #            stage_count = stage_count + 1
-        #elif(op_kind_list[0][j] == 'unknown'):
-            #i = i + 1
 
     for i in range(0,len(time_list[0]),2):
         if(i > 1):
@@ -177,24 +139,13 @@ def analysis_store():
                 print(time_list)
                 raise err
 
-    #print stage_count_list
-    #print stage_count
-
-    #print stage_count_list
-    #print stage_count
-
-
     time_duration_list = []
 
-    #print len(time_list)
-    #print thread_count
     min_length = 0
     for i in range(0,slave_num*thread_count):
         this_thread_time_duration_list = []
-    #    stage_start = 0
         for j in range(0,stage_count):
             stage_start = stage_count_list[j]
-            #this_stage_duration = time_list[i][stage_count_list[j]-1] -  time_list[i][stage_count_list[j]-2]
             duration_sum = 0
             if ( i > len(time_list) - 1 ):
                 for k in range(stage_start,min_length,2):
@@ -208,15 +159,10 @@ def analysis_store():
                         duration_sum = int(time_list[i][k + 1]) - int(time_list[i][k])
                 else:
                     for k in range(stage_start,stage_count_list[j+1],2):
-                #if(op_kind_list[i][k] == 'ShuffledRDD_start'):
-                    #this_thread_time_duration_list.append(int(time_list[i][k + 1]) - int(time_list[i][k]))
-                #else:
-
                         this_thread_time_duration_list.append(int(time_list[i][k + 1]) - int(time_list[i][k]) - duration_sum)
                         duration_sum = int(time_list[i][k + 1]) - int(time_list[i][k])
 
 
-    #        stage_start = stage_count_list[j]
 
         time_duration_list.append(this_thread_time_duration_list)
 
@@ -227,8 +173,7 @@ def analysis_store():
         for i in range(0, slave_num*thread_count):
             op_sum_for_aver = op_sum_for_aver + time_duration_list[i][j]
         aver_time_list.append(op_sum_for_aver/(slave_num*thread_count))
-    #print "aver_time_list"
-    #print aver_time_list
+
     ############# hot spot op ###########################
     if(len(time_duration_list[0]) < 5):
         hot_operator_length = 1
@@ -242,9 +187,6 @@ def analysis_store():
         hot_op_time_list.append(aver_time_list[i])
         hot_op_list.append(i)
 
-    #print "hot_op_time_list"
-    #print hot_op_time_list
-    start = 0
     for i in range(hot_operator_length, len(time_duration_list[0])):
         small = hot_op_time_list[0]
         small_loc = 0
@@ -258,8 +200,6 @@ def analysis_store():
 
 
     hot_op_list.sort()
-    #print "hot_op_list"
-    #print hot_op_list
     ################### straggler op ##########################
 
     straggler_op_list = []
@@ -267,16 +207,13 @@ def analysis_store():
     for j in range(0, len(time_duration_list[0])):
         op_sum_for_straggler = 0
         if j in hot_op_list:
-    #        print j
             for i in range(0, slave_num*thread_count):
                 op_sum_for_straggler = op_sum_for_straggler + time_duration_list[i][j]
             average_time = op_sum_for_straggler / (slave_num*thread_count)
-    #        print "op ",j,"average_time is ", average_time
             for i in range(0, slave_num*thread_count):
                 if (time_duration_list[i][j] > average_time * 1.3):
                     straggler_op_list.append([i ,j])
 
-    #print straggler_op_list
 
 
     ###########################################################
@@ -297,9 +234,9 @@ def analysis_store():
     f.writelines([str(task_num),'\n'])
     f.writelines([str(operator_number),'\n'])
     f.writelines([str(stage_num),'\n'])
-    f.writelines([stage_start_op_list,'\n'])
+    f.writelines([str(stage_start_op_list),'\n'])
     f.writelines([str(hot_spot_op_num),'\n'])
-    f.writelines([hot_spot_op_list,'\n'])
+    f.writelines([str(hot_spot_op_list),'\n'])
     f.writelines([str(straggler_op_num),'\n'])
     for i in range(0, straggler_op_num):
         f.writelines([" ".join(str(s) for s in straggler_op_location_list[i]),'\n'])

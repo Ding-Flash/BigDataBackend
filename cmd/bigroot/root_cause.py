@@ -3,12 +3,11 @@ import os
 import math
 import argparse
 import pickle
-from visualize import *
 import sys
 import time
 import prettytable as pt
 from IPython import embed
-from env_conf import *
+from bigroot.env_conf import *
 import json
 ''' Root cause detection
 2017/10/31:
@@ -183,14 +182,14 @@ class Engine:
         self.clock2task=[]
         self.straggler_thresh=straggler_thresh
         print('解析慢任务')
-        if os.path.exists('binary/stragglers.dat'):
-            self.node_features, self.features, self.stragglers, self.tasks, self.stages = pickle.load(open('binary/stragglers.dat', 'rb'))
+        if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+            self.node_features, self.features, self.stragglers, self.tasks, self.stages = pickle.load(open(prefix+'/bigroot/binary/stragglers.dat', 'rb'))
         else:
             start_time, self.tasks, self.stages = self.load_dicts()
             # Note: stragglers -> task_id : task
             self.features, self.node_features, self.stragglers = self.analysis_features(self.tasks, self.stages)
             self.wraper(self.tasks, start_time, self.features)
-            pickle.dump([self.node_features,self.features,self.stragglers,self.tasks,self.stages],open('binary/stragglers.dat','wb'))
+            pickle.dump([self.node_features,self.features,self.stragglers,self.tasks,self.stages],open(prefix+'/bigroot/binary/stragglers.dat','wb'))
         # 分析root
         print('分析根原因')
         self.run()
@@ -198,6 +197,7 @@ class Engine:
     def summary(self):
         root_dict=dict()
         correlation_dict=dict()
+        rets_dict = self.draw()
         for id in self.root:
             for feature in self.root[id]:
                 if feature not in root_dict:
@@ -208,21 +208,24 @@ class Engine:
                 if feature not in correlation_dict:
                     correlation_dict[feature]=0
                 correlation_dict[feature]+=1
-        print(self.root)
-        print('root_dict:',root_dict)
-        print('correlation_dict:',correlation_dict)
-        with open('../../data/bigdata/report.json','a') as f:
-            json.dump(self.root, f)
-            json.dump(root_dict, f)
-            json.dump(correlation_dict, f)
-        '''
-        print('TP,TN,FP,FN,fpr,tpr,acc:',self.TP,self.TN,self.FP,self.FN,self.FP/(self.FP+self.TN),self.TP/(self.TP+self.FN),(self.TP+self.TN)/(self.TP+self.TN+self.FP+self.FN))
-        print('corre_TN,corre_TP,corre_FN,corre_FP,corre_fpr,corre_tpr,corre_acc:', self.corre_TN, self.corre_TP,
-              self.corre_FN, self.corre_FP, self.corre_FP / (self.corre_FP + self.corre_TN),
-              self.corre_TP / (self.corre_TP + self.corre_FN),
-              (self.corre_TP+self.corre_TN)/(self.corre_TN+self.corre_TP+self.corre_FP+self.corre_FN)
-              )
-        '''
+        result_dict = {}
+        result_dict['root'] = root_dict
+        result_dict['correlation'] = correlation_dict
+        result_dict['rest'] = rets_dict
+        # print(self.root)
+        # print('root_dict:',root_dict)
+        # print('correlation_dict:',correlation_dict)
+        return result_dict
+        # with open('../../data/bigroot/report.json','w') as f:
+        #     json.dump(result_dict, f)
+        # '''
+        # print('TP,TN,FP,FN,fpr,tpr,acc:',self.TP,self.TN,self.FP,self.FN,self.FP/(self.FP+self.TN),self.TP/(self.TP+self.FN),(self.TP+self.TN)/(self.TP+self.TN+self.FP+self.FN))
+        # print('corre_TN,corre_TP,corre_FN,corre_FP,corre_fpr,corre_tpr,corre_acc:', self.corre_TN, self.corre_TP,
+        #       self.corre_FN, self.corre_FP, self.corre_FP / (self.corre_FP + self.corre_TN),
+        #       self.corre_TP / (self.corre_TP + self.corre_FN),
+        #       (self.corre_TP+self.corre_TN)/(self.corre_TN+self.corre_TP+self.corre_FP+self.corre_FN)
+        #       )
+        # '''
 
     def dump(self,filename):
         with open(filename,'a') as d:
@@ -288,9 +291,8 @@ class Engine:
         for slave in slaves_name:
             ret = self.export(slave)
             rets[slave] = ret
-        print(rets)
-        with open('../../data/bigdata/report.json','a') as f:
-            json.dump(rets, f)
+        #print(rets)
+        return rets
 
     def export(self,slave=5):
         ''' Export data for visualization.
@@ -383,14 +385,14 @@ class Engine:
                             dump.write(ano_str+'->'+str(int(start_id)) + '->' + str(int(end_id)) + '\n')
 
     def cal_correlation(self):
-        if os.path.exists('binary/stragglers.dat'):
-            node_features, features, stragglers, tasks, stages = pickle.load(open('binary/stragglers.dat', 'rb'))
+        if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+            node_features, features, stragglers, tasks, stages = pickle.load(open(prefix+'/bigroot/binary/stragglers.dat', 'rb'))
         else:
             start_time, tasks, stages = self.load_dicts()
             # Note: stragglers -> task_id : task
             features, node_features, stragglers = self.analysis_features(tasks, stages)
             self.wraper(tasks, start_time, features)
-            pickle.dump([node_features,features,stragglers,tasks,stages],open('binary/stragglers.dat','wb'))
+            pickle.dump([node_features,features,stragglers,tasks,stages],open(prefix+'/bigroot/binary/stragglers.dat','wb'))
         considered_features = [LocalityFeature('locality'), BytesFeature('bytes_read'),
                                BytesFeature('shuffle_read_bytes'),
                                BytesFeature('shuffle_write_bytes'), BytesFeature('JVM_time'), BytesFeature('cpu'),
@@ -412,14 +414,14 @@ class Engine:
             print(feature_name,':',correlation(x,y,returnValue=True))
 
     def verify_anomaly(self):
-        if os.path.exists('binary/stragglers.dat'):
-            node_features, features, stragglers, tasks, stages = pickle.load(open('binary/stragglers.dat', 'rb'))
+        if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+            node_features, features, stragglers, tasks, stages = pickle.load(open(prefix+'/bigroot/binary/stragglers.dat', 'rb'))
         else:
             start_time, tasks, stages = self.load_dicts()
             # Note: stragglers -> task_id : task
             features, node_features, stragglers = self.analysis_features(tasks, stages)
             self.wraper(tasks, start_time, features)
-            pickle.dump([node_features,features,stragglers,tasks,stages],open('binary/stragglers.dat','wb'))
+            pickle.dump([node_features,features,stragglers,tasks,stages],open(prefix+'/bigroot/binary/stragglers.dat','wb'))
         print('anomalies:',len(self.anomaly_ids))
         count_straggler=0
         count_anomaly=0
@@ -674,7 +676,7 @@ class Engine:
                     pass
                 self.corre_PN_detail[task_id]={'resource:':resource,'ano':task_anos}
 
-        print('strag host',strag_host)
+        # print('strag host',strag_host)
         # Dump root
         #print('###### ROOT ##############')
         #for id in sorted(root.keys()): print('task id:',id,'host:',self.features[id]['host'],'start_id:',self.tasks[id]['start_id'],'root:',root[id])
@@ -1279,132 +1281,144 @@ class Engine:
                 except:
                     mat[i][j] = 0
 
-def init():
+def init(log_dir):
     parser=argparse.ArgumentParser()
-    parser.add_argument('-dir',type=str,default='temp/bigroot/out/',help='specify your log dir')
+    parser.add_argument('-dir',type=str,default=log_dir+'/out/',help='specify your log dir')
     parser.add_argument('-disable_edge',action='store_true',help='disable edge detection')
     parser.add_argument('-pearson_thresh',type=float,default=1.5)
     parser.add_argument('-edge_width',type=int,default=5)
     parser.add_argument('-edge_scale',type=float,default=0.7)
     parser.add_argument('-correlation_thresh',type=float,default=0.8)
     parser.add_argument('-root_detect_thresh',type=float,default=1.5)
-    parser.add_argument('-dump',type=str,default='experiment/basic_info')
+    parser.add_argument('-dump',type=str,default=prefix+'/bigroot/experiment/basic_info')
     parser.add_argument('-quantile_thresh',type=float,default=0.5)
     return parser.parse_args()
 
-def roc():
-    flag_optimize=False #统计最优配置下模型评估
-    if flag_optimize:
-        optimized_data=dict()
-        optimized_data['root_with_edge']=dict()
-        optimized_data['correlation_root']=dict()
-        optimized_data['root_no_edge']=dict()
-        # no-edge && ca
-        disable_edge=True
-        root_detect_thresh=11*0.2
-        quantile_thresh=9*0.1
-        pearson_thresh=6*0.05
-        correlation_thresh=9*0.1
-        if os.path.exists('binary/stragglers.dat'):
-            os.remove('binary/stragglers.dat')
-        engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-        optimized_data['root_no_edge']['TN']=engine.TN
-        optimized_data['root_no_edge']['TP']=engine.TP
-        optimized_data['root_no_edge']['FN']=engine.FN
-        optimized_data['root_no_edge']['FP']=engine.FP
-        optimized_data['correlation_root']['TN']=engine.corre_TN
-        optimized_data['correlation_root']['TP']=engine.corre_TP
-        optimized_data['correlation_root']['FN']=engine.corre_FN
-        optimized_data['correlation_root']['FP']=engine.corre_FP
-        # root with edge
-        disable_edge=False
-        root_detect_thresh=8*0.2
-        quantile_thresh=9*0.1
-        if os.path.exists('binary/stragglers.dat'):
-            os.remove('binary/stragglers.dat')
-        engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-        optimized_data['root_with_edge']['TN']=engine.TN
-        optimized_data['root_with_edge']['TP']=engine.TP
-        optimized_data['root_with_edge']['FN']=engine.FN
-        optimized_data['root_with_edge']['FP']=engine.FP
-        optimized_data['root_with_edge']['filter_num']=engine.filter_edge
-        # dump data
-        with open('experiment/optimized_data','a') as d:
-            d.write(str(optimized_data)+'\n')
-        exit()
-    flag_ROC=False
-    #arg_opt=open('argopt','w')
-    if flag_ROC:
-        #------------------------------------------------------------------------#
-        # Calculate ROC
-        ROC=dict()
-        # disable edge detection
-        disable_edge=True
-        ROC['root_no_edge']={'TN':[],'TP':[],'FN':[],'FP':[]}
-        # change root_detection_thresh,1, 0.1 ,3
-        for i in range(20):
-            #break
-            root_detect_thresh=i*0.2
-            for j in range(10):
-                quantile_thresh=j*0.1
-                if os.path.exists('binary/stragglers.dat'):
-                    os.remove('binary/stragglers.dat')
-                engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-                ROC['root_no_edge']['TN'].append(engine.TN)
-                ROC['root_no_edge']['TP'].append(engine.TP)
-                ROC['root_no_edge']['FN'].append(engine.FN)
-                ROC['root_no_edge']['FP'].append(engine.FP)
-                arg_opt.write('no-edge,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.FP/(engine.FP+engine.TN),engine.TP/(engine.TP+engine.FN)))
-        disable_edge=False
-        ROC['root_with_edge']={'TN':[],'TP':[],'FN':[],'FP':[]}
-        # change root_detection_thresh,1, 0.1 ,3
-        for i in range(20):
-            #break
-            root_detect_thresh=i*0.2
-            for j in range(10):
-                quantile_thresh=j*0.1
-                if os.path.exists('binary/stragglers.dat'):
-                    os.remove('binary/stragglers.dat')
+# def roc():
+#     flag_optimize=False #统计最优配置下模型评估
+#     if flag_optimize:
+#         optimized_data=dict()
+#         optimized_data['root_with_edge']=dict()
+#         optimized_data['correlation_root']=dict()
+#         optimized_data['root_no_edge']=dict()
+#         # no-edge && ca
+#         disable_edge=True
+#         root_detect_thresh=11*0.2
+#         quantile_thresh=9*0.1
+#         pearson_thresh=6*0.05
+#         correlation_thresh=9*0.1
+#         if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#             os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#         engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#         optimized_data['root_no_edge']['TN']=engine.TN
+#         optimized_data['root_no_edge']['TP']=engine.TP
+#         optimized_data['root_no_edge']['FN']=engine.FN
+#         optimized_data['root_no_edge']['FP']=engine.FP
+#         optimized_data['correlation_root']['TN']=engine.corre_TN
+#         optimized_data['correlation_root']['TP']=engine.corre_TP
+#         optimized_data['correlation_root']['FN']=engine.corre_FN
+#         optimized_data['correlation_root']['FP']=engine.corre_FP
+#         # root with edge
+#         disable_edge=False
+#         root_detect_thresh=8*0.2
+#         quantile_thresh=9*0.1
+#         if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#             os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#         engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#         optimized_data['root_with_edge']['TN']=engine.TN
+#         optimized_data['root_with_edge']['TP']=engine.TP
+#         optimized_data['root_with_edge']['FN']=engine.FN
+#         optimized_data['root_with_edge']['FP']=engine.FP
+#         optimized_data['root_with_edge']['filter_num']=engine.filter_edge
+#         # dump data
+#         with open(prefix+'/bigroot/experiment/optimized_data','a') as d:
+#             d.write(str(optimized_data)+'\n')
+#         exit()
+#     flag_ROC=False
+#     #arg_opt=open('argopt','w')
+#     if flag_ROC:
+#         #------------------------------------------------------------------------#
+#         # Calculate ROC
+#         ROC=dict()
+#         # disable edge detection
+#         disable_edge=True
+#         ROC['root_no_edge']={'TN':[],'TP':[],'FN':[],'FP':[]}
+#         # change root_detection_thresh,1, 0.1 ,3
+#         for i in range(20):
+#             #break
+#             root_detect_thresh=i*0.2
+#             for j in range(10):
+#                 quantile_thresh=j*0.1
+#                 if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#                     os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#                 engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#                 ROC['root_no_edge']['TN'].append(engine.TN)
+#                 ROC['root_no_edge']['TP'].append(engine.TP)
+#                 ROC['root_no_edge']['FN'].append(engine.FN)
+#                 ROC['root_no_edge']['FP'].append(engine.FP)
+#                 arg_opt.write('no-edge,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.FP/(engine.FP+engine.TN),engine.TP/(engine.TP+engine.FN)))
+#         disable_edge=False
+#         ROC['root_with_edge']={'TN':[],'TP':[],'FN':[],'FP':[]}
+#         # change root_detection_thresh,1, 0.1 ,3
+#         for i in range(20):
+#             #break
+#             root_detect_thresh=i*0.2
+#             for j in range(10):
+#                 quantile_thresh=j*0.1
+#                 if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#                     os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#
+#                 engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#                 ROC['root_with_edge']['TN'].append(engine.TN)
+#                 ROC['root_with_edge']['TP'].append(engine.TP)
+#                 ROC['root_with_edge']['FN'].append(engine.FN)
+#                 ROC['root_with_edge']['FP'].append(engine.FP)
+#                 arg_opt.write('with-edge,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.FP/(engine.FP+engine.TN),engine.TP/(engine.TP+engine.FN)))
+#         # Correlation Root ROC
+#         ROC['correlation_root']={'TN':[],'TP':[],'FN':[],'FP':[]}
+#         # change root_detection_thresh,1, 0.1 ,3
+#         for i in range(20):
+#             #break
+#             #correlation_thresh=i*0.05
+#             pearson_thresh=i*0.05
+#             for j in range(11):
+#                 correlation_thresh=i*0.1
+#                 if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#                     os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#                 engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#                 ROC['correlation_root']['TN'].append(engine.corre_TN)
+#                 ROC['correlation_root']['TP'].append(engine.corre_TP)
+#                 ROC['correlation_root']['FN'].append(engine.corre_FN)
+#                 ROC['correlation_root']['FP'].append(engine.corre_FP)
+#                 arg_opt.write('ca,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.corre_FP/(engine.corre_FP+engine.corre_TN),engine.corre_TP/(engine.corre_TP+engine.corre_FN)))
+#
+#         print('ROC analysis done! dumping to experiment ROC.')
+#         with open(prefix+'/bigroot/experiment/ROC','a') as d:
+#             d.write(str(ROC)+'\n')
+#         arg_opt.close()
+#         exit()
+#         #------------------------------------------------------------------------#
+#     if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+#         os.remove(prefix+'/bigroot/binary/stragglers.dat')
+#     engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
+#     print('Stage num:',len(engine.stages))
+#     print(engine.root)
 
-                engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-                ROC['root_with_edge']['TN'].append(engine.TN)
-                ROC['root_with_edge']['TP'].append(engine.TP)
-                ROC['root_with_edge']['FN'].append(engine.FN)
-                ROC['root_with_edge']['FP'].append(engine.FP)
-                arg_opt.write('with-edge,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.FP/(engine.FP+engine.TN),engine.TP/(engine.TP+engine.FN)))
-        # Correlation Root ROC
-        ROC['correlation_root']={'TN':[],'TP':[],'FN':[],'FP':[]}
-        # change root_detection_thresh,1, 0.1 ,3
-        for i in range(20):
-            #break
-            #correlation_thresh=i*0.05
-            pearson_thresh=i*0.05
-            for j in range(11):
-                correlation_thresh=i*0.1
-                if os.path.exists('binary/stragglers.dat'):
-                    os.remove('binary/stragglers.dat')
-                engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-                ROC['correlation_root']['TN'].append(engine.corre_TN)
-                ROC['correlation_root']['TP'].append(engine.corre_TP)
-                ROC['correlation_root']['FN'].append(engine.corre_FN)
-                ROC['correlation_root']['FP'].append(engine.corre_FP)
-                arg_opt.write('ca,i=%d,j=%d,fpr=%.4f,tpr=%.4f\n'%(i,j,engine.corre_FP/(engine.corre_FP+engine.corre_TN),engine.corre_TP/(engine.corre_TP+engine.corre_FN)))
+def analysis(log_dir):
+    args=init(log_dir)
+    global filter_anomaly
+    global straggler_thresh
+    global pearson_thresh
+    global edge_width
+    global edge_scale
+    global correlation_thresh
+    global disable_edge
+    global use_median
+    global root_detect_thresh
+    global quantile_thresh
 
-        print('ROC analysis done! dumping to experiment ROC.')
-        with open('experiment/ROC','a') as d:
-            d.write(str(ROC)+'\n')
-        arg_opt.close()
-        exit()
-        #------------------------------------------------------------------------#
-    if os.path.exists('binary/stragglers.dat'):
-        os.remove('binary/stragglers.dat')
-    engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
-    print('Stage num:',len(engine.stages))
-    print(engine.root)
-
-if __name__ == '__main__':
-    args=init()
     filter_anomaly=False # 是否过滤异常产生和straggler产生的任务
+
     straggler_thresh=1.5
     pearson_thresh=args.pearson_thresh
     edge_width=args.edge_width
@@ -1417,10 +1431,11 @@ if __name__ == '__main__':
     quantile_thresh=args.quantile_thresh
     flag_summary=True
     if flag_summary:
-        if os.path.exists('binary/stragglers.dat'):
-            os.remove('binary/stragglers.dat')
+        if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
+            os.remove(prefix+'/bigroot/binary/stragglers.dat')
         disable_edge=True
         engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
         #print('Stage num:',len(engine.stages))
-        engine.summary()
-        engine.draw()
+        result = engine.summary()
+        print('完成分析！')
+        return result
