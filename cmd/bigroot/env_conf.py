@@ -16,8 +16,19 @@ def get_slaves_name():#Todo:检测slave是否正常
     f.close()
     return slaves
 
-def  get_slaves_ip():
-    slaves_ip = []
+
+def get_slaves_ip():
+    ip, dic = get_slaves()
+    return ip
+
+
+def name_to_ip(name):
+    ip, dic = get_slaves()
+    return dic[name]
+
+
+def get_slaves():
+    slaves_dict = {}
     slaves_name = get_slaves_name()
     slaves_ip = []
     f = os.popen("cat /etc/hosts")
@@ -26,9 +37,12 @@ def  get_slaves_ip():
     for slave_name in slaves_name:
         for host in hosts:
             if re.search(slave_name,host):
-                slaves_ip.append(pattern.search(host).group())
+                ip = pattern.search(host).group()
+                slaves_ip.append(ip)
+                slaves_dict[slave_name] = ip
     f.close()
-    return slaves_ip
+    return slaves_ip, slaves_dict
+
 
 def get_user():
     f = os.popen("whoami")
@@ -36,8 +50,10 @@ def get_user():
     f.close()
     return name
 
+
 def get_master_name():
     return socket.gethostname()
+
 
 def get_master_ip():
     return socket.gethostbyname(get_master_name())

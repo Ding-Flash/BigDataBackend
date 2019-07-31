@@ -1,13 +1,13 @@
 timeline = {
     "data":{
-       "task_number": 20,
+       "task_num": 20,
        "operator_number": 33,
        "stage_num": 18,
        "stage_start_op_list": [0,4,6,10,12,14,18,22,24,26,28,30,44,54,56,60,62,64],
        "hot_spot_op_num": 6,
        "hot_spot_op_list": [0,3,9,10,23,24],
        "straggler_op_num": 22,
-       "straggler_op_position_list": [[8, 0], [9, 0], [10, 0], [11, 0], [12, 0], [13, 0], [14, 0], [15, 0], [4, 3], [5, 3], [6, 3], [7, 3], [8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [14, 9], [15, 9], [12, 24], [15, 24]],
+       "straggler_op_location_list": [[8, 0], [9, 0], [10, 0], [11, 0], [12, 0], [13, 0], [14, 0], [15, 0], [4, 3], [5, 3], [6, 3], [7, 3], [8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [14, 9], [15, 9], [12, 24], [15, 24]],
        "op_list": [
            [20, 1, 206, 69, 0, 160, 747, 162, 7, 27, 1763, 2, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 94, 1196, 198, 4, 2, 5, 1, 196, 2, 0, 209], 
            [20, 1, 206, 79, 1, 66, 770, 67, 1, 38, 1788, 3, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 90, 1196, 193, 11, 5, 8, 7, 190, 2, 0, 210], 
@@ -30,7 +30,7 @@ timeline = {
            [65, 1, 220, 52, 1, 124, 194, 129, 2, 68, 1782, 3, 6, 1, 7, 0, 0, 0, 0, 0, 0, 0, 7, 50, 170, 5, 3, 11, 7, 202, 2, 0, 221], 
            [55, 1, 219, 43, 0, 88, 156, 88, 1, 65, 1880, 2, 1, 0, 1, 0, 0, 0, 0, 449, 1115, 39, 1, 55, 171, 4, 4, 5, 3, 205, 1, 0, 221]
         ],
-        "op_name_list":{0: 'HadoopRDD', 1: 'MapPartitionsRDD', 2: 'MapPartitionsRDD', 3: 'MapPartitionsRDD', 4: 'MapPartitionsRDD', 5: 'ShuffledRDD', 6: 'MapPartitionsRDD', 7: 'ZippedWithIndexRDD', 8: 'MapPartitionsRDD', 9: 'MapPartitionsRDD', 10: 'MapPartitionsRDD', 11: 'MapPartitionsRDD', 12: 'MapPartitionsRDD', 13: 'MapPartitionsRDD', 14: 'MapPartitionsRDD', 22: 'MapPartitionsRDD', 23: 'MapPartitionsRDD', 24: 'MapPartitionsRDD', 25: 'MapPartitionsRDD', 26: 'MapPartitionsRDD', 27: 'ShuffledRDD', 28: 'MapPartitionsRDD', 29: 'MapPartitionsRDD', 30: 'MapPartitionsRDD', 31: 'ZippedPartitionsRDD2', 32: 'MapPartitionsRDD', 19: 'MapPartitionsRDD', 20: 'MapPartitionsRDD', 21: 'MapPartitionsRDD'}
+        "op_name_list": {0: 'HadoopRDD', 1: 'MapPartitionsRDD', 2: 'MapPartitionsRDD', 3: 'MapPartitionsRDD', 4: 'MapPartitionsRDD', 5: 'ShuffledRDD', 6: 'MapPartitionsRDD', 7: 'ZippedWithIndexRDD', 8: 'MapPartitionsRDD', 9: 'MapPartitionsRDD', 10: 'MapPartitionsRDD', 11: 'MapPartitionsRDD', 12: 'MapPartitionsRDD', 13: 'MapPartitionsRDD', 14: 'MapPartitionsRDD', 22: 'MapPartitionsRDD', 23: 'MapPartitionsRDD', 24: 'MapPartitionsRDD', 25: 'MapPartitionsRDD', 26: 'MapPartitionsRDD', 27: 'ShuffledRDD', 28: 'MapPartitionsRDD', 29: 'MapPartitionsRDD', 30: 'MapPartitionsRDD', 31: 'ZippedPartitionsRDD2', 32: 'MapPartitionsRDD', 19: 'MapPartitionsRDD', 20: 'MapPartitionsRDD', 21: 'MapPartitionsRDD'}
     }
 }
 

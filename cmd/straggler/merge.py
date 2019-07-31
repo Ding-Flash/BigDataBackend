@@ -315,7 +315,7 @@ def analysis_store():
     data['hot_spot_op_num'] = hot_spot_op_num
     data['straggler_op_num'] = straggler_op_num
     data['straggler_op_location_list'] = straggler_op_location_list
-    data['op_name_list'] = op_kind_list[0]
+    data['op_name_list'] = {k: v for k, v in enumerate(op_kind_list[0])}
     data['op_list'] = op_list
     timeline['data'] = data
     ################################straggler#######################################

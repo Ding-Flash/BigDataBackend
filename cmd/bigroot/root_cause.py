@@ -325,7 +325,7 @@ class Engine:
         # tasks trace
         straggler_trace=[]
         for straggler in self.stragglers:
-            if self.tasks[straggler]['host'] == slave:
+            if self.tasks[straggler]['host'] == name_to_ip(slave):
                 t_trace=[]
                 t_trace.append(self.tasks[straggler]['Task Info']['Launch Time'] / 1000 - self.application_start_timestamp+self.DELAY)
                 t_trace.append(self.tasks[straggler]['Task Info']['Finish Time'] / 1000 - self.application_start_timestamp+self.DELAY)

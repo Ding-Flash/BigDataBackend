@@ -108,9 +108,15 @@ def clean_bigroot_data(slave):
             }
         ])
 
+    def normal_cpu(cpu):
+        if max(cpu) == 0:
+            return cpu
+        else:
+            return list(map(lambda x: x/max(cpu), cpu))
+
     return {
         'time': exe_time,
-        'cpu': list(map(lambda x: x/max(cpu), cpu)),
+        'cpu': normal_cpu(cpu),
         'io': list(map(lambda x: x/max(io), io)),
         'net': list(map(lambda x: x/max(net), net)),
         'tasks': tasks,

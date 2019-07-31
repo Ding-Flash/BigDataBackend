@@ -1,18 +1,8 @@
 import os
 import re
 import socket
-import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-try:
-    slave_path = os.environ['BigData']
-    logging.info("slave_path: {}".format(slave_path))
-except KeyError:
-    print("请设置BigData环境变量")
-    exit(1)
-
+slave_path = os.environ['BigData']
 work_load = ""
 
 

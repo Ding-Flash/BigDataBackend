@@ -13,7 +13,11 @@ import pandas as pd
 
 from mock import spark, bigroot
 from apps.hdfs.parse import Parse as ps
-from utils import cache_hdfs_data, change_xml, clean_bigroot_data
+from utils import (
+    cache_hdfs_data,
+    change_xml,
+    clean_bigroot_data
+)
 from apps.store import (
     hdfs_cache,
     spark_cache,
@@ -148,17 +152,25 @@ def get_trace_detail():
 # spark 相关
 @app.route("/api/spark/timeline")
 def get_spark_timeline():
-    return json.dumps(spark.timeline)
+    task_name = request.args['name']
+    if task_name == 'a':
+        return json.dumps(spark.timeline)
+    report = spark_cache.report[task_name]
+    return json.dumps(report.timeline)
 
 
 @app.route("/api/spark/straggler")
 def get_straggler():
-    return json.dumps(spark.straggler)
+    task_name = request.args['name']
+    report = spark_cache.report[task_name]
+    return json.dumps(report.straggler)
 
 
 @app.route("/api/spark/cart_tree")
 def get_cart_tree():
-    return json.dumps(spark.cart_tree)
+    task_name = request.args['name']
+    report = spark_cache.report[task_name]
+    return json.dumps(report.cart_tree)
 
 
 @app.route("/api/spark/gettasklist")
@@ -177,14 +189,17 @@ def get_spark_task_list():
 # bigroot相关
 @app.route("/api/bigroot/getstraggler")
 def get_bigroot_straggler():
+    name = request.args['name']
+    report = bigroot_cache.report[name]['rest']
     res = []
-    for slave, value in bigroot.data.items():
+    for slave, value in report.items():
         data = clean_bigroot_data(value)
         data['host'] = slave
         res.append(data)
     return json.dumps({
         "data": res
     })
+
 
 @app.route("/api/bigroot/gettasklist")
 def get_bigroot_task_list():
