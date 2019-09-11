@@ -153,8 +153,7 @@ def get_trace_detail():
 @app.route("/api/spark/timeline")
 def get_spark_timeline():
     task_name = request.args['name']
-    if task_name == 'a':
-        return json.dumps(spark.timeline)
+    return json.dumps(spark.timeline)
     report = spark_cache.report[task_name]
     return json.dumps(report.timeline)
 
@@ -163,14 +162,14 @@ def get_spark_timeline():
 def get_straggler():
     task_name = request.args['name']
     report = spark_cache.report[task_name]
-    return json.dumps(report.straggler)
+    return json.dumps(spark.straggler)
 
 
 @app.route("/api/spark/cart_tree")
 def get_cart_tree():
     task_name = request.args['name']
     report = spark_cache.report[task_name]
-    return json.dumps(report.cart_tree)
+    return json.dumps(spark.cart_tree)
 
 
 @app.route("/api/spark/gettasklist")

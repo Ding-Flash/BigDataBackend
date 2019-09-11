@@ -9,6 +9,9 @@ import prettytable as pt
 from IPython import embed
 from bigroot.env_conf import *
 import json
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 ''' Root cause detection
 2017/10/31:
 1.加入相关性分析
@@ -100,7 +103,7 @@ class BytesFeature(Feature):
                 #if cur>max_*thresh and cur>mean_*2:
                 if cur > mean_ * root_detect_thresh and cur>quantile:
                     if self.name=='bytes_read':
-                        print('Found bytes_read root:',cur,data)
+                        logging.info('Found bytes_read root:',cur,data)
                     return True
                 return False
             # # Round 2: cal variation.
@@ -148,7 +151,7 @@ class TimeFeature(BytesFeature):
 
 class Engine:
     def __init__(self,log_dir='out',embed_debug=False,sample_start=None,delay=7.75,straggler_thresh=1.5):
-        print('Initialize decode engine')
+        logging.info('Initialize decode engine')
         self.sample_start=sample_start
         self.DELAY=delay
         # auto get delay
@@ -171,7 +174,7 @@ class Engine:
         if os.path.exists(self.LOG_DIR+'delay'):
             with open(self.LOG_DIR+'delay') as f:
                 self.DELAY=float(f.readline())
-                print('Calibration delay:',self.DELAY)
+                logging.info('Calibration delay:',self.DELAY)
         self.host_list=slaves_ip
         self.anomaly_ids=[]
         self.embed_debug=embed_debug
@@ -181,7 +184,7 @@ class Engine:
         self.application_finish_timestamp=-1
         self.clock2task=[]
         self.straggler_thresh=straggler_thresh
-        print('解析慢任务')
+        logging.info('解析慢任务')
         if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
             self.node_features, self.features, self.stragglers, self.tasks, self.stages = pickle.load(open(prefix+'/bigroot/binary/stragglers.dat', 'rb'))
         else:
@@ -239,7 +242,7 @@ class Engine:
         correlation_ids=list(self.correlation_root.keys())
         all_ids=set(root_ids+correlation_ids)
         table=pt.PrettyTable(['task id','task duration','straggler scale','cpu','io','net','AG','BigRoots','Correlation Roots'])
-        print('task id','task duration','straggler scale','cpu','io','net','AG','BigRoots','Correlation Roots','\\\\\\hline',sep='&')
+        logging.info('task id','task duration','straggler scale','cpu','io','net','AG','BigRoots','Correlation Roots','\\\\\\hline',sep='&')
         for id in all_ids:
             # ID为straggler id
             task=self.tasks[id]
@@ -278,10 +281,10 @@ class Engine:
                 s_correlation_roots='-'
             table.add_row([id,round(task_duration,2),round(straggler_scale,2),round(cpu,2),round(io,2),round(net,2),
                            AG,s_big_roots,s_correlation_roots])
-            print(round(task_duration,2),round(straggler_scale,2),round(cpu,2),round(io,2),round(net,2),
+            logging.info(round(task_duration,2),round(straggler_scale,2),round(cpu,2),round(io,2),round(net,2),
                   AG,s_big_roots,s_correlation_roots,sep='&',end='')
-            print('\\\\\\hline')
-        print(table)
+            logging.info('\\\\\\hline')
+        logging.info(table)
 
     def draw(self):
         '''
@@ -364,7 +367,7 @@ class Engine:
         out_dir=self.LOG_DIR
         for i in os.listdir(out_dir):
             if i.startswith('anomaly') and (not i.endswith('decoded')):
-                print('decoding',i,'...')
+                logging.info('decoding',str(i),'...')
                 with open(out_dir+i+'_decoded','w') as dump:
                     with open(out_dir+i,'r') as file:
                         start_time = float(file.readline())
@@ -410,8 +413,8 @@ class Engine:
             if False and feature_name=='shuffle_write_bytes':
                 sum_straggler=sum([x[i] for i in range(len(x)) if y[i]==1])
                 sum_normal=sum([x[i] for i in range(len(x)) if y[i]==0])
-                print('shuffle write bytes: sum_straggler:',sum_straggler,'sum_normal:',sum_normal)
-            print(feature_name,':',correlation(x,y,returnValue=True))
+                logging.info('shuffle write bytes: sum_straggler:',str(sum_straggler),'sum_normal:',str(sum_normal))
+            logging.info(feature_name,':',correlation(x,y,returnValue=True))
 
     def verify_anomaly(self):
         if os.path.exists(prefix+'/bigroot/binary/stragglers.dat'):
@@ -422,7 +425,7 @@ class Engine:
             features, node_features, stragglers = self.analysis_features(tasks, stages)
             self.wraper(tasks, start_time, features)
             pickle.dump([node_features,features,stragglers,tasks,stages],open(prefix+'/bigroot/binary/stragglers.dat','wb'))
-        print('anomalies:',len(self.anomaly_ids))
+        logging.info('anomalies:',str(len(self.anomaly_ids)))
         count_straggler=0
         count_anomaly=0
         for task_id in stragglers:
@@ -430,7 +433,7 @@ class Engine:
             task=tasks[task_id]
             if 'anomaly' in task:
                 count_anomaly+=1
-        print('count_straggler',count_straggler,'count_anomaly',count_anomaly)
+        logging.info('count_straggler',str(count_straggler),'count_anomaly',str(count_anomaly))
 
     def run(self):
         '''
@@ -449,7 +452,7 @@ class Engine:
                              BytesFeature('memory_bytes_spilled'),BytesFeature('disk_bytes_spilled')]
         # 加入全局分位点检测
         # 算法： 统计每个任务的特征大小，并进行分位点探测，定位的时候进行边缘探测
-        print('正在获取全局特征信息...')
+        logging.info('正在获取全局特征信息...')
         global_features=dict()
         for task_id in self.tasks:
             for feature in considered_features:
@@ -457,7 +460,7 @@ class Engine:
                 if name not in global_features:
                     global_features[name]=[]
                 global_features[name].append(self.features[task_id][name])
-        print('正在获取分位点...')
+        logging.info('正在获取分位点...')
         global_quantile=dict()
         # 数据结构: feature name -> quantile name -> value
         for feature_name in global_features:
@@ -523,7 +526,7 @@ class Engine:
                         else: raise NotImplementedError
                     except:
                         break
-                        print('embed because rearange resource into edge info')
+                        logging.info('embed because rearange resource into edge info')
                         embed()
                 edge_resource[resource_name].append(head_mean/edge_width)
                 edge_resource[resource_name].append(tail_mean/edge_width)
@@ -554,39 +557,39 @@ class Engine:
                 if feature.anomaty(self.features[task_id][feature.name],data,assist_data=assist_data,straggler_scale=straggler_scale,
                                    quantile=global_quantile[feature.name]['high']):
                     if feature.name=='bytes_read':
-                        print('task_id=',task_id,',stage_id=',self.tasks[task_id]['Stage ID'])
+                        logging.info('task_id=',task_id,',stage_id=',self.tasks[task_id]['Stage ID'])
 
                     bingo=True
                     if task_id not in root:
                         root[task_id]=set()
                     root[task_id].add(feature.name)
                     if feature.name=='io' and True and self.features[task_id].get('anomaly')=='io':
-                        print('algo.1 detect io anomaly, please check anomaly feature')
+                        logging.info('algo.1 detect io anomaly, please check anomaly feature')
                         embed()
                     if debug_embed:
-                        print('agorithm 1 ->',feature.name,'->',self.features[task_id][feature.name],'->',data)
+                        logging.info('agorithm 1 ->',feature.name,'->',self.features[task_id][feature.name],'->',data)
                         embed()
                 # 过滤人为造成异常的异常任务，便于检查准确率
                 if filter_anomaly and 'anomaly' in cur_feature and feature.name in cur_feature['anomaly'] and not bingo :
                 #if filter_anomaly and 'anomaly' in cur_feature
-                    print('embed because met anomaly')
-                    print('feature.anomaly:',cur_feature['anomaly'])
-                    print('data:',data)
-                    print('cur:',cur_feature[feature.name])
-                    print('duration %.2f -> %.2f'%(cur_task['start_id']+self.DELAY,cur_task['finish_id']+self.DELAY))
-                    print('bingo:',bingo)
+                    logging.info('embed because met anomaly')
+                    logging.info('feature.anomaly:',cur_feature['anomaly'])
+                    logging.info('data:',data)
+                    logging.info('cur:',cur_feature[feature.name])
+                    logging.info('duration %.2f -> %.2f'%(cur_task['start_id']+self.DELAY,cur_task['finish_id']+self.DELAY))
+                    logging.info('bingo:',bingo)
                     embed();exit()
                 # filter these damn stragglers
                 #if abs(cur_task['start_id']-86)<2:print('embed because those damn straggler');embed()
 
                 if feature.name=='net' and False and self.tasks[task_id]['host']==4 and self.tasks[task_id]['finish_id']-self.tasks[task_id]['start_id']>5:
-                    print('stop because met ',feature.name)
-                    print('anomaly:',self.features[task_id].get('anomaly'))
-                    print('straggler scale:',self.features[task_id].get('straggler'))
-                    print('start id:',self.tasks[task_id].get('start_id')+self.DELAY)
-                    print('feature val:',self.features[task_id][feature.name])
-                    print('feature data:',data)
-                    print('host:',self.tasks[task_id]['host'])
+                    logging.info('stop because met ',feature.name)
+                    logging.info('anomaly:',self.features[task_id].get('anomaly'))
+                    logging.info('straggler scale:',self.features[task_id].get('straggler'))
+                    logging.info('start id:',self.tasks[task_id].get('start_id')+self.DELAY)
+                    logging.info('feature val:',self.features[task_id][feature.name])
+                    logging.info('feature data:',data)
+                    logging.info('host:',self.tasks[task_id]['host'])
                     embed()
             # Algo.2
             for feature in considered_features:
@@ -614,12 +617,12 @@ class Engine:
                 if feature.anomaty(self.features[task_id][feature.name],data,assist_data=assist_data,straggler_scale=straggler_scale,
                                    quantile=global_quantile[feature.name]['high']):
                     if feature.name=='bytes_read':
-                        print('task_id=',task_id,',stage_id=',self.tasks[task_id]['Stage ID'])
+                        logging.info('task_id=',task_id,',stage_id=',self.tasks[task_id]['Stage ID'])
                     if task_id not in root:
                         root[task_id]=set()
                     root[task_id].add(feature.name)
                     if debug_embed:
-                        print('algo 2 find strag')
+                        logging.info('algo 2 find strag')
                         embed()
             # Algo.3
             # Note: we need to distinguish two kinds of tasks.
@@ -632,7 +635,7 @@ class Engine:
                             root[task_id]=set()
                         root[task_id].add(feature.name)
                         if debug_embed:
-                            print('algo 3 find strag')
+                            logging.info('algo 3 find strag')
                             embed()
             # 搜集统计信息
             # 搜集统计信息
@@ -708,7 +711,7 @@ class Engine:
                 try:
                     event = eval(line)
                 except:
-                    print('event resolution error,event:\n\t', line)
+                    logging.info('event resolution error,event:\n\t', line)
                     continue
                 if event['Event'] == 'SparkListenerTaskEnd':
                     event['host']=event['Task Info']['Host']
@@ -726,7 +729,7 @@ class Engine:
                 elif event['Event']=='SparkListenerApplicationEnd':
                     self.application_finish_timestamp=float(event['Timestamp'])/1000
                 line_num+=1
-        print('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (
+        logging.info('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (
             len(tasks), len(stages), self.application_start_timestamp))
         return self.application_start_timestamp, tasks, stages
 
@@ -752,7 +755,7 @@ class Engine:
     def analysis_features(self,tasks, stages):
         host_list=self.host_list
         assert self.application_start_timestamp!=-1 and self.application_finish_timestamp!=-1
-        print('application duration=',self.application_finish_timestamp-self.application_start_timestamp)
+        logging.info('application duration='+str(self.application_finish_timestamp-self.application_start_timestamp))
         if self.sample_start!=None:
             self.DELAY=self.application_start_timestamp-self.sample_start
         self.clock2task=[0]*(int((self.application_finish_timestamp-self.application_start_timestamp))+10)
@@ -842,7 +845,7 @@ class Engine:
                         #print('times:',task_duration / stage_avg_duration)
                         stragglers[task_id] = tasks[task_id]
                         features[task_id]['straggler'] = task_duration / median
-            print('find %d stragglers' % (len(stragglers)))
+            logging.info('find %d stragglers' % (len(stragglers)))
             # for k in stragglers:
             #     print('straggler:',stragglers[k])
             #     break
@@ -1110,7 +1113,7 @@ class Engine:
                 rt.append([float(values[index]) for index in [timestamp, *features]])
                 line = log.readline()
         if len(rt)==0:
-            print('rt:',rt,'filename=',filename)
+            logging.info('rt:',rt,'filename=',filename)
             embed()
         return rt
 
@@ -1165,7 +1168,7 @@ class Engine:
                     pass
                     #print(task_id,name)
                 if False and name=='cpu' and task_id==8:
-                    print('after expand cpu features:',task_id,name);embed();exit()
+                    logging.info('after expand cpu features:',task_id,name);embed();exit()
                 #if name=='cpu':print('avg=',avg,'task_id=',task_id);embed();exit()
 
     def wraper(self,tasks, start_time, extracted_features):
@@ -1251,7 +1254,7 @@ class Engine:
             feature = features[task_id]
             for k in feature:
                 v = feature[k]
-                print(k, '->', v)
+                logging.info(k, '->', v)
             break
 
     def regulize(self,mat):
@@ -1437,5 +1440,5 @@ def analysis(log_dir):
         engine=Engine(args.dir,embed_debug=False,delay=8.62,straggler_thresh=straggler_thresh)
         #print('Stage num:',len(engine.stages))
         result = engine.summary()
-        print('完成分析！')
+        logging.info('完成分析！')
         return result

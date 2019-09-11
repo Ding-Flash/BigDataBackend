@@ -4,6 +4,9 @@ import os
 import pickle
 import sys
 import random
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 # sys.path.append("/home/tsee/logtest/workspace-master")
 #import cluster_tool
 from . import decision_tree
@@ -50,7 +53,7 @@ def feed(filename):
             try:
                 event = eval(line)
             except:
-                print('event resolution error,event:\n\t', line)
+                logging.info('event resolution error,event:\n\t', line)
                 continue
             if event['Event'] == 'SparkListenerTaskEnd':
                 tasks[event['Task Info']['Task ID']] = event
@@ -60,7 +63,7 @@ def feed(filename):
                 application_start_flag = False
                 # note that start_time_stamp is int variable
                 start_time_stamp = event['Submission Time']
-    print('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (                                                                                                                   
+    logging.info('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (
         len(tasks), len(stages), start_time_stamp))
 
     # 没有读数据就注释了
@@ -515,7 +518,7 @@ def visualize(features):
         feature = features[task_id]
         for k in feature:
             v = feature[k]
-            print(k, '->', v)
+            logging.info(k, '->', v)
         break
 
 
@@ -597,7 +600,7 @@ def start_analysis():
         dataset.append(row)
 
     accuracy, precision, recall = decision_tree.build_tree(dataset, labels, keys)
-    print('accuracy,precision,recall=', accuracy, precision, recall)
+    logging.info('accuracy,precision,recall = '+str(accuracy)+', '+str(precision)+', '+str(recall))
     # exit()
     # # clean dataset
     # feature_values = {}

@@ -2,7 +2,9 @@ import random
 import sys
 import os
 import re
-
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 straggler_num = 999
 s_info = []
 
@@ -20,7 +22,7 @@ def prepro():
     #f.seek(0)
     if not os.path.exists(cur_path + '../straggler_stack'):
         straggler_num = 0
-        print("No Straggler_stack")
+        logging.info("No Straggler_stack")
         return
 
     f = open(cur_path + '../straggler_stack')
@@ -45,7 +47,7 @@ def prepro():
 
         s_info.append(temp_s_list)
     f.close()
-    print(s_info)
+    logging.info(s_info)
     #return straggler_kind
 
 
@@ -157,7 +159,7 @@ def trans():
             fw.write('\n')
 
     fw.write(str(straggler_sum))
-    print(("Find "+str(straggler_sum)+" stragglers root-cause !"))
+    logging.info(("Find "+str(straggler_sum)+" stragglers root-cause !"))
     fw.close()
 
 

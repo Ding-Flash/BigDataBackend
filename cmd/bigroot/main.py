@@ -77,7 +77,7 @@ def start(res):
         # for i in ano_slaves:
         #     t = threading.Thread(target = start_anomaly_slave,args=(i,res.last,res.ano,res.ip))
         #     t.start()
-        print('ready to start workload,timestamp=',time.time())
+        logging.info('ready to start workload,timestamp=',time.time())
         pin_benchmark_start_time=time.time()
         try:
             subprocess.check_call(cmd, shell=True)
@@ -87,8 +87,8 @@ def start(res):
             cmd = input()
             continue
     # start_benchmark(cmd)
-    print('benchmark done! timestamp=',time.time())
-    print('ready to collect logs')
+    logging.info('benchmark done! timestamp=',time.time())
+    logging.info('ready to collect logs')
     pin_benmark_end_time=time.time()
     collect_logs()
     pin_collect_log_time=time.time()
@@ -163,7 +163,7 @@ def init():
         os.system("ssh "+slave+" python "+prefix+"lib/kill_samp.py")
 
     os.system("rm /home/zhg/spark/tsee_log/*")
-    print('clear old logs in salves')
+    logging.info('clear old logs in salves')
     for slave in slaves_name:
         os.system('ssh '+slave+' "rm %slogs/*"'%(prefix))
 
@@ -196,7 +196,7 @@ res=parser.parse_args()
 if res.run:
     ### luice comment
     pin_global_start_time=time.time()
-    print('[INFO]init system status')
+    logging.info('init system status')
     init()
     pin_global_init_time=time.time()
     start(res)

@@ -1,5 +1,8 @@
 import threading
 from straggler.env_conf import *
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 slaves_name = get_slaves_name()
 user = get_user()
@@ -27,7 +30,7 @@ def start_sar(time):
         
 
 def start_sample(time=5000):
-        print('Sampling start ! Sample time = '+str(time)+"s")
+        logging.info('Sampling start ! Sample time = '+str(time)+"s")
         t0 = threading.Thread(target=start_iostat(time))
         t0.start()
         t1 = threading.Thread(target=start_mpstat(time))

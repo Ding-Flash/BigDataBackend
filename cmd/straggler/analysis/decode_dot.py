@@ -4,6 +4,9 @@ import re
 import pickle
 import pydotplus
 import os
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 cur_path = os.path.dirname(os.path.abspath(__file__)) + '/../../temp/spark/analysis/'
 
@@ -70,7 +73,7 @@ def decode(filename='atree.dot'):
             nodes[int(child)].parent=nodes[int(parent)]
         elif re.match(r'[0-9]+ \[[^\]]+\]',line.strip()):
             if len(open(filename).readlines()) < 5:
-                print("No Straggler Found!")
+                logging.info("No Straggler Found!")
                 return
             # node
             num, desc=re.search(r'([0-9]+) \[([\s\S]+)\]',line).groups()
@@ -94,7 +97,7 @@ def inference(tree,sample):
             if node.left_child!=None:
                 node=node.left_child
             else:
-                print('unknown error occurs, exit... ')
+                logging.info('unknown error occurs, exit... ')
                 return
         else:
             node=node.right_child
@@ -281,8 +284,8 @@ def ccp_pruning(tree,test):
         node.right_child=None
         ccp_trees.append([alpha,tree_])
         tree=tree_
-        print('leaf node num:',count_leafs(tree))
-    print('there are',len(ccp_trees),'subtrees')
+        logging.info('leaf node num:',count_leafs(tree))
+    logging.info('there are',len(ccp_trees),'subtrees')
     # find optimal subtree
     best=0
     for i,item in enumerate(ccp_trees):
@@ -291,7 +294,7 @@ def ccp_pruning(tree,test):
         if acc>=best:
             best=acc
             best_tree=item[1]
-        print(acc)
+        logging.info(acc)
     return best_tree
 
 
@@ -359,7 +362,7 @@ def traversal(root,f,isRight=False):
             #print('stack')
             #print(traversal_stack)
             if(len(traversal_stack) > 0):
-                print(root.value[1])
+                logging.info(root.value[1])
                 for i in range(0, len(traversal_stack)):
                     f.write(str(traversal_stack[i][0])+','+str(traversal_stack[i][1])+','+str(root.samples)+' ')
                 f.write('\n')
