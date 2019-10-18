@@ -63,7 +63,7 @@ def feed(filename):
                 application_start_flag = False
                 # note that start_time_stamp is int variable
                 start_time_stamp = event['Submission Time']
-    logging.info('log analysis finished!\n\tfind %d tasks, %d stages, application started at %d' % (
+    logging.info('Find %d tasks, %d stages, application started at %d' % (
         len(tasks), len(stages), start_time_stamp))
 
     # 没有读数据就注释了

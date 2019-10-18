@@ -161,12 +161,12 @@ def trans():
     fw.write(str(straggler_sum))
     logging.info(("Find "+str(straggler_sum)+" stragglers root-cause !"))
     fw.close()
-
+    return straggler_sum
 
 def detect():
         #if(app_name == 'test_skew'):
     #print app_name
     prepro()
-    trans()
+    return trans()
 
     #print s_info

@@ -294,7 +294,7 @@ def ccp_pruning(tree,test):
         if acc>=best:
             best=acc
             best_tree=item[1]
-        logging.info(acc)
+        # logging.info(acc)
     return best_tree
 
 
@@ -362,7 +362,7 @@ def traversal(root,f,isRight=False):
             #print('stack')
             #print(traversal_stack)
             if(len(traversal_stack) > 0):
-                logging.info(root.value[1])
+                # logging.info(root.value[1])
                 for i in range(0, len(traversal_stack)):
                     f.write(str(traversal_stack[i][0])+','+str(traversal_stack[i][1])+','+str(root.samples)+' ')
                 f.write('\n')

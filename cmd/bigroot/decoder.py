@@ -1,6 +1,6 @@
 import re
 import os
-from IPython import embed
+# from IPython import embed
 from bigroot.env_conf import *
 slaves_name = get_slaves_name()
 prefix=app_path

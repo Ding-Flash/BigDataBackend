@@ -6,7 +6,7 @@ import pickle
 import sys
 import time
 import prettytable as pt
-from IPython import embed
+# from IPython import embed
 from bigroot.env_conf import *
 import json
 import logging
@@ -527,7 +527,7 @@ class Engine:
                     except:
                         break
                         logging.info('embed because rearange resource into edge info')
-                        embed()
+                        # embed()
                 edge_resource[resource_name].append(head_mean/edge_width)
                 edge_resource[resource_name].append(tail_mean/edge_width)
             # Algo.1
@@ -565,10 +565,10 @@ class Engine:
                     root[task_id].add(feature.name)
                     if feature.name=='io' and True and self.features[task_id].get('anomaly')=='io':
                         logging.info('algo.1 detect io anomaly, please check anomaly feature')
-                        embed()
+                        # embed()
                     if debug_embed:
                         logging.info('agorithm 1 ->',feature.name,'->',self.features[task_id][feature.name],'->',data)
-                        embed()
+                        # embed()
                 # 过滤人为造成异常的异常任务，便于检查准确率
                 if filter_anomaly and 'anomaly' in cur_feature and feature.name in cur_feature['anomaly'] and not bingo :
                 #if filter_anomaly and 'anomaly' in cur_feature

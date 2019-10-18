@@ -1,4 +1,5 @@
 import sys
+import os
 from datetime import datetime
 import threading
 import time
@@ -18,7 +19,7 @@ slaves_name = get_slaves_name()
 
 
 def start_samp_slave(slave,log_dir):
-    os.system("ssh "+slave+" python3 "+prefix+"/bigroot/samp_run.py "+log_dir)
+    os.system("ssh "+slave+" python3 "+prefix+"/bigroot/samp_run.py "+log_dir + " >/dev/null 2>&1")
 # 去掉异常生成器的调用
 # def start_anomaly_slave(slave,last,t,ip):
 #     os.system('ssh '+slave+' python3 '+prefix+'anomaly_generator.py -t '+t+' -last '+str(last)+' -tnum '+str(res.tnum)+' ')
@@ -145,26 +146,26 @@ def collect_logs(log_dir):
     #     os.system("scp "+slave+":"+log_dir+"/logs/anomaly_log.txt "+log_dir+"/logs/anomaly_"+slave)
 
 
-def init(work_dir):
+def init_root(work_dir):
     log_dir = prefix + "/temp/bigroot/" + work_dir
     if os.path.exists(log_dir):
-        os.system("rm "+log_dir+"/logs/* "+log_dir+"/out/* bigroot/experiment/*")
+        os.system("rm "+log_dir+"/logs/* "+log_dir+"/out/* bigroot/experiment/* >/dev/null 2>&1")
     else:
         os.system("mkdir -p "+log_dir+"/logs "+log_dir+"/out")
     for slave in slaves_name:
-        os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py")
+        os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py >/dev/null 2>&1")
 
-    os.system("rm $SPARK_HOME/tsee_log/*")
+    os.system("rm $SPARK_HOME/tsee_log/* >/dev/null 2>&1")
     logging.info('clear old logs in salves')
     for slave in slaves_name:
         os.system("ssh "+slave+" mkdir -p " + log_dir + "/logs " + log_dir + "/out")
-        os.system("ssh "+slave+" rm " + log_dir + "/logs/* " + log_dir + "/out/* bigroot/experiment/*")
+        os.system("ssh "+slave+" rm " + log_dir + "/logs/* " + log_dir + "/out/* bigroot/experiment/* >/dev/null 2>&1")
 
     return log_dir
 
 
 def decode(log_dir):
-    os.system("cp "+log_dir+"/logs/anomaly* "+log_dir+"/out")
+    # os.system("cp "+log_dir+"/logs/anomaly* "+log_dir+"/out")
     for slave in slaves_name:
         decoder.decode_sar(slave,log_dir)
     for slave in slaves_name:
@@ -175,7 +176,7 @@ def decode(log_dir):
 
 def kill():
     for slave in slaves_name:
-        os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py")
+        os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py >/dev/null 2>&1")
 
 
 parser=argparse.ArgumentParser()

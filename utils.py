@@ -90,7 +90,8 @@ def clean_xml():
 
 
 def clean_bigroot_data(slave):
-    exe_time = max(len(slave['cpu']), len(slave['io']), len(slave['net']))
+    exe_time = max(len(slave['cpu']), len(slave['io']), len(slave['net'])) + 1
+
     cpu, io, net = [0] * exe_time, [0] * exe_time, [0] * exe_time
 
     for c in slave['cpu']:

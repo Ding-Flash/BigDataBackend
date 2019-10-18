@@ -40,8 +40,8 @@ def start_sample(time=5000):
 
 
 def stop_sample():
-        os.system("ps aux|grep \"iostat\"|awk \'{print $2}\'|xargs kill $1")
-        os.system("ps aux|grep \"mpstat\"|awk \'{print $2}\'|xargs kill $1")
-        os.system("ps aux|grep \"sar\"|awk \'{print $2}\'|xargs kill $1")
+        os.system("ps aux|grep \"iostat\"|awk \'{print $2}\'|xargs kill $1 >/dev/null 2>&1")
+        os.system("ps aux|grep \"mpstat\"|awk \'{print $2}\'|xargs kill $1 >/dev/null 2>&1")
+        os.system("ps aux|grep \"sar\"|awk \'{print $2}\'|xargs kill $1 >/dev/null 2>&1")
         for slave in slaves_name:
-                os.system("ssh "+user+"@"+slave + " python3 " + slave_path + "/../BigDataBackend/cmd/bigroot/kill_samp.py")
+                os.system("ssh "+user+"@"+slave + " python3 " + slave_path + "/../BigDataBackend/cmd/bigroot/kill_samp.py >/dev/null 2>&1")
