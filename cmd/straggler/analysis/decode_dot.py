@@ -384,7 +384,7 @@ def traversal(root,f,isRight=False):
 
 
 def decode_tree():
-    tree=decode()
+    tree = decode()
     #traversal_stack = []
     #straggler_abnormal_feature_list = []
     f = open(cur_path+'../straggler_stack','w')

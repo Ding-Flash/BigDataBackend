@@ -9,7 +9,9 @@ from straggler import clean_all, get_time_alignment_deviation, get_trace_log, me
 from straggler.sample import samp_run, get_logs, log_exe
 from straggler.analysis import engine, decode_dot, do_straggler
 
-from apps.store import spark_cache
+from apps.store import SparkCache
+
+sparkcache = SparkCache()
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -20,7 +22,10 @@ def main():
 
     task_name = None
 
+    global spark_cache
+
     while True:
+        spark_cache = sparkcache.update_from_pickle()
         logging.info("请给执行任务指定一个任务名称")
         task_name = input()
         if spark_cache.get_task_report(task_name):
@@ -29,6 +34,7 @@ def main():
         break
 
     while True:
+        spark_cache = sparkcache.update_from_pickle()
         logging.info("请输入执行任务指令")
         cmd = input()
 
@@ -63,7 +69,7 @@ def main():
             spark_home = os.environ['SPARK_HOME']
         except KeyError:
             logging.info("请设置SPARK_HOME环境变量")
-            continue
+            break
 
         try:
             cur_path = os.path.dirname(os.path.abspath(__file__))
@@ -88,7 +94,6 @@ def main():
         engine.start_analysis()
         decode_dot.decode_tree()
         do_straggler.detect()
-
         # - Write Report -
         report = merge.analysis_store()
         spark_cache.set_conf(task_name, dict(time=datetime.now()))

@@ -16,6 +16,21 @@ class Cache(metaclass=ABCMeta):
         self.status = dict()
         self.conf = dict()
 
+    def update_from_pickle(self):
+        class_type = self.__class__.__name__
+        if class_type == "HdfsCache":
+            file_name = store_path + 'hdfs/'+'cache.pkl'
+        elif class_type == "SparkCache":
+            file_name = store_path + 'spark/' + 'cache.pkl'
+        else:
+            file_name = store_path + 'bigroot/' + 'cache.pkl'
+
+        if os.path.exists(file_name):
+            with open(file_name, 'rb') as f:
+                cache = pickle.load(f)
+            return cache
+        return self
+
     @abstractmethod
     def get_conf(self, name):
         pass
@@ -40,7 +55,6 @@ class Cache(metaclass=ABCMeta):
             file_name = store_path + 'spark/' + 'cache.pkl'
         else:
             file_name = store_path + 'bigroot/' + 'cache.pkl'
-
         with open(file_name, "wb") as f:
             pickle.dump(self, f)
 
@@ -103,6 +117,15 @@ class SparkCache(Cache):
         self.report[name] = Dict(report)
         self.status[name] = "finished"
 
+    def delete_task(self, name):
+        if name in self.conf:
+            del self.conf[name]
+        if name in self.status:
+            del self.status[name]
+        if name in self.report:
+            del self.report[name]
+        self.store_pickle()
+
 
 class BigDataCache(Cache):
     
@@ -122,21 +145,31 @@ class BigDataCache(Cache):
         self.report[name] = Dict(report)
         self.status[name] = "finished"
 
+    def delete_task(self, name):
+        if name in self.conf:
+            del self.conf[name]
+        if name in self.status:
+            del self.status[name]
+        if name in self.report:
+            del self.report[name]
+        self.store_pickle()
 
-try:
-    file_path = store_path + 'hdfs/cache.pkl'
-    with open(file_path, 'rb') as f:
-        hdfs_cache = pickle.load(f)
-except FileNotFoundError:
-    hdfs_cache = HdfsCache()
 
-try:
-    file_path = store_path + 'spark/cache.pkl'
-    with open(file_path, 'rb') as f:
-        spark_cache = pickle.load(f)
-except FileNotFoundError:
-    spark_cache = SparkCache()
+# try:
+#     file_path = store_path + 'hdfs/cache.pkl'
+#     with open(file_path, 'rb') as f:
+#         hdfs_cache = pickle.load(f)
+# except FileNotFoundError:
+#     hdfs_cache = HdfsCache()
 
+# try:
+#     file_path = store_path + 'spark/cache.pkl'
+#     with open(file_path, 'rb') as f:
+#         spark_cache = pickle.load(f)
+# except FileNotFoundError:
+#     spark_cache = SparkCache()
+
+## TODO 记得去掉
 try:
     file_path = store_path + 'bigroot/cache.pkl'
     with open(file_path, 'rb') as f:

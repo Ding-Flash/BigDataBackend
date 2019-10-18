@@ -6,12 +6,12 @@ import os.path
 
 from flask import (
     Flask,
+    render_template,
     request
 )
 from flask_cors import CORS
 import pandas as pd
 
-from mock import spark, bigroot
 from apps.hdfs.parse import Parse as ps
 from utils import (
     cache_hdfs_data,
@@ -19,10 +19,15 @@ from utils import (
     clean_bigroot_data
 )
 from apps.store import (
-    hdfs_cache,
-    spark_cache,
-    bigroot_cache,
+    HdfsCache,
+    SparkCache,
+    BigDataCache,
 )
+
+hdfscache = HdfsCache()
+sparkcache = SparkCache()
+bigrootcache = BigDataCache()
+
 
 app = Flask(__name__)
 CORS(app)
@@ -31,28 +36,31 @@ mutex = Lock()
 
 
 @app.route("/")
-def hello_world():
-    return "nothing~~~~"
+def index():
+    return render_template("index.html")
 
 
 # htrace 相关
 @app.route("/api/hdfs/createtask", methods=["GET"])
 def create_hdfs_task():
     r = request.args.to_dict()
+    print(r)
     name = r['name']
+    hdfs_cache = hdfscache.update_from_pickle()
     if hdfs_cache.get_task_path(name):
         return json.dumps({'status': 2})
     r['time'] = datetime.now()
     hdfs_cache.set_conf(name, r)
     hdfs_cache.set_task_path(name)
-    change_xml(r)
     hdfs_cache.store_pickle()
+    change_xml(r)
     return json.dumps({'status': 0})
 
 
 @app.route("/api/hdfs/gettasklist")
 def get_task_list():
     l = []
+    hdfs_cache = hdfscache.update_from_pickle()
     for name, conf in hdfs_cache.conf.items():
         l.append({
             "name": name,
@@ -67,10 +75,12 @@ def get_task_list():
 @app.route("/api/hdfs/refresh")
 def refresh_bench_status():
     bench_name = request.args['name']
+    hdfs_cache = hdfscache.update_from_pickle()
     path = hdfs_cache.get_task_path(bench_name)
     res = {}
     if os.path.isfile(path+'/trace.out'):
         hdfs_cache.status[bench_name] = "finished"
+        hdfs_cache.store_pickle()
         res['status'] = 1
     else:
         res['status'] = 0
@@ -80,6 +90,7 @@ def refresh_bench_status():
 @app.route("/api/hdfs/delete")
 def delete_hdfs_task():
     bench_name = request.args['name']
+    hdfs_cache = hdfscache.update_from_pickle()
     hdfs_cache.delete_task(bench_name)
     return json.dumps({
         'status': 0
@@ -89,6 +100,7 @@ def delete_hdfs_task():
 @app.route("/api/hdfs/getfuncfeature", methods=["GET"])
 def get_func_feature():
     bench_name = request.args["name"]
+    hdfs_cache = hdfscache.update_from_pickle()
     path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     with mutex:
         cache = hdfs_cache.get_task_report(bench_name)
@@ -99,6 +111,7 @@ def get_func_feature():
 
 @app.route("/api/hdfs/gettimeline", methods=["GET"])
 def get_time_line():
+    hdfs_cache = hdfscache.update_from_pickle()
     get_args = itemgetter("name", "count", "func_name")
     bench_name, count, fname = get_args(request.args)
     path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
@@ -120,6 +133,7 @@ def get_time_line():
 
 @app.route("/api/hdfs/getcalltree", methods=["GET"])
 def get_call_tree():
+    hdfs_cache = hdfscache.update_from_pickle()
     bench_name = request.args["name"]
     path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     func_name = request.args["func_name"]
@@ -137,6 +151,7 @@ def get_call_tree():
 @app.route("/api/hdfs/gettracedetail")
 def get_trace_detail():
     bench_name = request.args["name"]
+    hdfs_cache = hdfscache.update_from_pickle()
     path = hdfs_cache.get_task_path(bench_name) + '/trace.out'
     with mutex:
         cache = hdfs_cache.get_task_report(bench_name)
@@ -153,7 +168,7 @@ def get_trace_detail():
 @app.route("/api/spark/timeline")
 def get_spark_timeline():
     task_name = request.args['name']
-    return json.dumps(spark.timeline)
+    spark_cache = sparkcache.update_from_pickle()
     report = spark_cache.report[task_name]
     return json.dumps(report.timeline)
 
@@ -161,20 +176,23 @@ def get_spark_timeline():
 @app.route("/api/spark/straggler")
 def get_straggler():
     task_name = request.args['name']
+    spark_cache = sparkcache.update_from_pickle()
     report = spark_cache.report[task_name]
-    return json.dumps(spark.straggler)
+    return json.dumps(report.straggler)
 
 
 @app.route("/api/spark/cart_tree")
 def get_cart_tree():
     task_name = request.args['name']
+    spark_cache = sparkcache.update_from_pickle()
     report = spark_cache.report[task_name]
-    return json.dumps(spark.cart_tree)
+    return json.dumps(report.cart_tree)
 
 
 @app.route("/api/spark/gettasklist")
 def get_spark_task_list():
     l = []
+    spark_cache = sparkcache.update_from_pickle()
     for name, conf in spark_cache.conf.items():
         l.append({
             "name": name,
@@ -185,10 +203,21 @@ def get_spark_task_list():
     return json.dumps(dict(data=l[::-1]))
 
 
+@app.route("/api/spark/delete")
+def delete_spark_task():
+    bench_name = request.args['name']
+    spark_cache = sparkcache.update_from_pickle()
+    spark_cache.delete_task(bench_name)
+    return json.dumps({
+        'status': 0
+    })
+
+
 # bigroot相关
 @app.route("/api/bigroot/getstraggler")
 def get_bigroot_straggler():
     name = request.args['name']
+    bigroot_cache = bigrootcache.update_from_pickle()
     report = bigroot_cache.report[name]['rest']
     res = []
     for slave, value in report.items():
@@ -203,6 +232,7 @@ def get_bigroot_straggler():
 @app.route("/api/bigroot/gettasklist")
 def get_bigroot_task_list():
     l = []
+    bigroot_cache = bigrootcache.update_from_pickle()
     for name, conf in bigroot_cache.conf.items():
         l.append({
             "name": name,
@@ -211,6 +241,16 @@ def get_bigroot_task_list():
             "status": bigroot_cache.status[name]
         })
     return json.dumps(dict(data=l[::-1]))
+
+
+@app.route("/api/bigroot/delete")
+def delete_bigroot_task():
+    bench_name = request.args['name']
+    bigroot_cache = bigrootcache.update_from_pickle()
+    bigroot_cache.delete_task(bench_name)
+    return json.dumps({
+        'status': 0
+    })
 
 
 if __name__ == "__main__":

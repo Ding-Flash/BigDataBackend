@@ -13,7 +13,6 @@ completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer'], ignore_case=True
 
 
 class fake():
-
     def __iter__(self):
         return (i for i in range(10))
 

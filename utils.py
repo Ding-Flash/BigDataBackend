@@ -1,4 +1,4 @@
-from apps.store import hdfs_cache
+from apps.store import HdfsCache
 import xmltodict as xd
 
 from config import HADOOP_HOME
@@ -19,6 +19,8 @@ def cache_hdfs_data(bench, name):
     :param name: task name
     :return: bench_data
     """
+    hdfs_cache = HdfsCache()
+    hdfs_cache = hdfs_cache.update_from_pickle()
     hdfs_cache.set_task_report(name, {
         "size": bench.size,
         "func_feature": bench.get_func_feature(),
@@ -26,11 +28,15 @@ def cache_hdfs_data(bench, name):
         "time_line": bench.get_time_line(),
         "func_type": len(bench.names)
     })
+    hdfs_cache.store_pickle()
     return hdfs_cache.get_task_report(name)
 
 
 # 修改xml文件
 def change_xml(conf):
+    hdfs_cache = HdfsCache()
+    hdfs_cache = hdfs_cache.update_from_pickle()
+
     conf_map = {}
 
     def find_name(target):
@@ -56,6 +62,27 @@ def change_xml(conf):
         target[conf_map['hadoop.htrace.sampler.bucketSize']]['value'] = conf['bsize']
         target[conf_map['hadoop.htrace.sampler.increaseStep']]['value'] = conf['brate']
 
+    ans = xd.unparse(core, pretty=True)
+
+    with open(core_file, 'w') as f:
+        f.write(ans)
+
+
+# 清理core-site.xml 新启动一个任务就清理一遍
+def clean_xml():
+    conf_map = {}
+
+    def find_name(target):
+        for idx, t in enumerate(target):
+            conf_map[t['name']] = idx
+
+    with open(core_file) as f:
+        core = f.read()
+
+    core = xd.parse(core)
+    target = core['configuration']['property']
+    find_name(target)
+    target[conf_map['hadoop.htrace.sampler.classes']]['value'] = ""
     ans = xd.unparse(core, pretty=True)
 
     with open(core_file, 'w') as f:

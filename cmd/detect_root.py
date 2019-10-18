@@ -80,7 +80,7 @@ def start(res, log_dir):
         # for i in ano_slaves:
         #     t = threading.Thread(target = start_anomaly_slave,args=(i,res.last,res.ano,res.ip))
         #     t.start()
-        print('ready to start workload,timestamp=',time.time())
+        logging.info('ready to start workload,timestamp='+str(time.time()))
         pin_benchmark_start_time=time.time()
         try:
             subprocess.check_call(cmd, shell=True)
@@ -90,8 +90,8 @@ def start(res, log_dir):
             cmd = input()
             continue
     # start_benchmark(cmd)
-    print('benchmark done! timestamp=',time.time())
-    print('ready to collect logs')
+    logging.info('benchmark done! timestamp='+str(time.time()))
+    logging.info('ready to collect logs')
     pin_benmark_end_time=time.time()
     collect_logs(log_dir)
     pin_collect_log_time=time.time()
@@ -155,7 +155,7 @@ def init(work_dir):
         os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py")
 
     os.system("rm $SPARK_HOME/tsee_log/*")
-    print('clear old logs in salves')
+    logging.info('clear old logs in salves')
     for slave in slaves_name:
         os.system("ssh "+slave+" mkdir -p " + log_dir + "/logs " + log_dir + "/out")
         os.system("ssh "+slave+" rm " + log_dir + "/logs/* " + log_dir + "/out/* bigroot/experiment/*")
@@ -195,13 +195,13 @@ res=parser.parse_args()
 if __name__ == '__main__':
     ### luice comment
     while True:
-        print('请为任务命名')
+        logging.info('请为任务命名')
         task_name = input()
-        if bigroot_cache.get_task_report(task_name):
-            print("task_name existed")
-            continue
+        # if bigroot_cache.get_task_report(task_name):
+        #     print("task_name existed")
+        #     continue
         pin_global_start_time=time.time()
-        print('[INFO]init system status')
+        logging.info('init system status')
         log_dir = init(task_name)
         pin_global_init_time=time.time()
         start(res, log_dir)
