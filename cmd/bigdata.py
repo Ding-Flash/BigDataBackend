@@ -5,9 +5,11 @@ from prompt_toolkit import prompt
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-from tqdm import tqdm
+import xmltodict as xd
+
 import os
 import sys
+
 sys.path.append('../')
 from utils import clean_xml
 # from prompt_toolkit.lexers import PygmentsLexer
@@ -25,12 +27,31 @@ from bigroot.env_conf import app_path, get_master_ip, get_slaves_name
 from bigroot.root_cause import analysis
 from apps.store import bigroot_cache
 
+from config import HADOOP_HOME
+core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
+
 completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer'], ignore_case=True)
 
 
 class fake():
     def __iter__(self):
         return (i for i in range(10))
+
+def clean_xml():
+    with open(core_file) as f:
+        core = f.read()
+    core = xd.parse(core)
+    conf_map = {}
+    def find_name(target):
+        for idx, t in enumerate(target):
+            conf_map[t['name']] = idx
+    target = core['configuration']['property']
+    find_name(target)
+    target[conf_map['hadoop.htrace.local.file.span.receiver.path']]['value'] = ""
+    target[conf_map['hadoop.htrace.sampler.classes']]['value'] = ""
+    ans = xd.unparse(core, pretty=True)
+    with open(core_file, 'w') as f:
+        f.write(ans)
 
 
 def spark(session):
@@ -178,20 +199,25 @@ def main():
     class_ +="A Fine-grained Performance Bottleneck Analysis Method for HDFS".center(120, " ")+"\n"
     print(Fore.GREEN + class_)
     
-    tourist = "please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer; type quit to EXIT"
+    tourist = "please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer; type quit or CTRL+C to EXIT"
     print(Style.DIM + tourist)
     session = PromptSession()
 
-    while True:
-        text = session.prompt("mode > ",completer=completer, auto_suggest=AutoSuggestFromHistory())
-        if text == 'quit':
-            break
-        if text == 'BigRoot':
+    try:
+        while True:
             clean_xml()
-            bigroot(session)
-        if text == 'SparkTree':
-            clean_xml()
-            spark(session)
-        if text == 'ASTracer':
-            htrace(session)
+            text = session.prompt("mode > ",completer=completer, auto_suggest=AutoSuggestFromHistory())
+            if text == 'quit':
+                break
+            if text == 'BigRoot':
+                clean_xml()
+                bigroot(session)
+            if text == 'SparkTree':
+                clean_xml()
+                spark(session)
+            if text == 'ASTracer':
+                htrace(session)
+    except KeyboardInterrupt:
+        pass
+
 main()
