@@ -1,4 +1,4 @@
 data_path = "./data"
-
+import os
 ## HADOOP_HOME
-HADOOP_HOME = "/home/yangs/env/hadoop-2.8.3"
+HADOOP_HOME = os.environ["HADOOP_HOME"]
