@@ -19,23 +19,21 @@ from straggler import clean_all, get_time_alignment_deviation, get_trace_log, me
 from straggler.sample import samp_run, get_logs, log_exe
 from straggler.analysis import engine, decode_dot, do_straggler
 from datetime import datetime
-from apps.store import SparkCache
-sparkcache = SparkCache()
+from apps.store import SparkCache, AliLoadCache
 
-from detect_root import start_samp_slave, start, collect_logs, init_root, decode, kill
+from detect_root import start_samp_slave, start, collect_logs, collect_load_logs, init_root, decode, kill
 from bigroot.env_conf import app_path, get_master_ip, get_slaves_name
 from bigroot.root_cause import analysis
 from apps.store import bigroot_cache
+from common import extract_stat
 
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
 
-completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer'], ignore_case=True)
+completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad'], ignore_case=True)
 
-
-# class fake():
-#     def __iter__(self):
-#         return (i for i in range(10))
+sparkcache = SparkCache()
+alicache = AliLoadCache()
 
 def clean_xml():
     with open(core_file) as f:
@@ -183,6 +181,45 @@ def htrace(session):
         break 
 
 
+def alicloud(session):
+
+    global ali_cache
+    slaves_name = get_slaves_name()
+    while True:
+        ali_cache = alicache.update_from_pickle()
+        print(Fore.YELLOW+"You are in AliLoad mode, please set parameters:")
+        task_rate = session.prompt("AliLoad (rate)> ", auto_suggest=AutoSuggestFromHistory())
+        task_start = session.prompt("AliLoad (start_time)> ", auto_suggest=AutoSuggestFromHistory())
+        task_end = session.prompt("AliLoad (end_time)> ", auto_suggest=AutoSuggestFromHistory())
+
+        task_name = "aliload" + "-" + "rate" + "-" + task_rate + "-" + "start" + "-" + task_start + "-" + "end" + "-" +  task_end
+
+        print(Fore.BLUE + "Initializing...".upper())
+        log_dir = init_root(task_name)
+
+        print(Fore.BLUE+"Sampling Start".upper())
+        for slave in slaves_name:
+            t = threading.Thread(target=start_samp_slave, args=(slave, log_dir))
+            t.start()
+
+        cmd = "hadoop  jar ../aliload/AliCloud.jar Test.AliCloudLoad " + task_rate + " "  + task_start + " " + task_end
+        os.system(cmd)
+
+        print(Fore.BLUE+"Sampling stop".upper())
+        kill()
+
+        print(Fore.BLUE+"Collecting logs...".upper())
+        collect_load_logs(log_dir)
+
+        print(Fore.BLUE+"Decoding logs...".upper())
+        decode(log_dir)
+        res = extract_stat(log_dir)
+        ali_cache.set_conf(task_name, dict(rate=task_rate, start=task_start, end=task_end))
+        ali_cache.set_task_report(task_name, dict(data=res))
+        ali_cache.store_pickle()
+        break
+
+
 def main():
     init(autoreset=True)
     soft_info = "BigData Analysis Software \nVersion: 1.0\n"
@@ -217,6 +254,8 @@ def main():
                 spark(session)
             if text == 'ASTracer':
                 htrace(session)
+            if text == "AliLoad":
+                alicloud(session)
     except KeyboardInterrupt:
         pass
 

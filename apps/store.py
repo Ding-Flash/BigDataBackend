@@ -22,9 +22,10 @@ class Cache(metaclass=ABCMeta):
             file_name = store_path + 'hdfs/'+'cache.pkl'
         elif class_type == "SparkCache":
             file_name = store_path + 'spark/' + 'cache.pkl'
-        else:
+        elif class_type == "BigDataCache":
             file_name = store_path + 'bigroot/' + 'cache.pkl'
-
+        elif class_type == "AliLoadCache":
+            file_name = store_path + 'aliload/' + 'cache.pkl'
         if os.path.exists(file_name):
             with open(file_name, 'rb') as f:
                 cache = pickle.load(f)
@@ -53,8 +54,10 @@ class Cache(metaclass=ABCMeta):
             file_name = store_path + 'hdfs/'+'cache.pkl'
         elif class_type == "SparkCache":
             file_name = store_path + 'spark/' + 'cache.pkl'
-        else:
+        elif class_type == "BigDataCache":
             file_name = store_path + 'bigroot/' + 'cache.pkl'
+        elif class_type == "AliLoadCache":
+            file_name = store_path + 'aliload/' + 'cache.pkl'
         with open(file_name, "wb") as f:
             pickle.dump(self, f)
 
@@ -100,6 +103,34 @@ class HdfsCache(Cache):
 
 
 class SparkCache(Cache):
+
+    def __init__(self):
+        super().__init__()
+
+    def get_conf(self, name):
+        return self.conf[name]
+
+    def set_conf(self, name, setting):
+        self.conf[name] = setting
+
+    def get_task_report(self, name):
+        return self.report.get(name, None)
+
+    def set_task_report(self, name, report):
+        self.report[name] = Dict(report)
+        self.status[name] = "finished"
+
+    def delete_task(self, name):
+        if name in self.conf:
+            del self.conf[name]
+        if name in self.status:
+            del self.status[name]
+        if name in self.report:
+            del self.report[name]
+        self.store_pickle()
+
+
+class AliLoadCache(Cache):
 
     def __init__(self):
         super().__init__()

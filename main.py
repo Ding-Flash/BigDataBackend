@@ -22,11 +22,13 @@ from apps.store import (
     HdfsCache,
     SparkCache,
     BigDataCache,
+    AliLoadCache
 )
 
 hdfscache = HdfsCache()
 sparkcache = SparkCache()
 bigrootcache = BigDataCache()
+alicache = AliLoadCache()
 
 
 app = Flask(__name__)
@@ -252,6 +254,15 @@ def delete_bigroot_task():
         'status': 0
     })
 
+@app.route("/api/aliload/gettasklist")
+def get_aliload_task_list():
+    l = []
+    ali_cache = alicache.update_from_pickle()
+    for name, conf in ali_cache.conf.items():
+        l.append({
+            "name": name,
+            "rate": conf['rate']
+        })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8001, debug=True)

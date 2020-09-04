@@ -146,6 +146,20 @@ def collect_logs(log_dir):
     #     os.system("scp "+slave+":"+log_dir+"/logs/anomaly_log.txt "+log_dir+"/logs/anomaly_"+slave)
 
 
+def collect_load_logs(log_dir):
+    for slave in slaves_name:
+        os.system("scp "+slave+":"+log_dir+"/logs/iostat_log_master "+log_dir+"/logs/iostat_log_"+slave)
+
+    for slave in slaves_name:
+        os.system("scp "+slave+":"+log_dir+"/logs/vmstat_log_master "+log_dir+"/logs/vmstat_log_"+slave)
+
+    for slave in slaves_name:
+        os.system("scp "+slave+":"+log_dir+"/logs/mpstat_log_master "+log_dir+"/logs/mpstat_log_"+slave)
+
+    for slave in slaves_name:
+        os.system("scp "+slave+":"+log_dir+"/logs/sar_log_master "+log_dir+"/logs/sar_log_"+slave)
+
+
 def init_root(work_dir):
     log_dir = prefix + "/temp/bigroot/" + work_dir
     if os.path.exists(log_dir):
