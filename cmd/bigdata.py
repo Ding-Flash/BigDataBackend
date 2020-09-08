@@ -12,8 +12,6 @@ import sys
 
 sys.path.append('../')
 from utils import clean_xml
-# from prompt_toolkit.lexers import PygmentsLexer
-# from pygments.lexers.shell import BashLexer
 import subprocess
 from straggler import clean_all, get_time_alignment_deviation, get_trace_log, merge
 from straggler.sample import samp_run, get_logs, log_exe
@@ -214,7 +212,7 @@ def alicloud(session):
         print(Fore.BLUE+"Decoding logs...".upper())
         decode(log_dir)
         res = extract_stat(log_dir)
-        ali_cache.set_conf(task_name, dict(rate=task_rate, start=task_start, end=task_end))
+        ali_cache.set_conf(task_name, dict(rate=task_rate, start=task_start, end=task_end, time=datetime.now()))
         ali_cache.set_task_report(task_name, dict(data=res))
         ali_cache.store_pickle()
         break

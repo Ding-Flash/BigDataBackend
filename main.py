@@ -254,6 +254,7 @@ def delete_bigroot_task():
         'status': 0
     })
 
+
 @app.route("/api/aliload/gettasklist")
 def get_aliload_task_list():
     l = []
@@ -261,8 +262,29 @@ def get_aliload_task_list():
     for name, conf in ali_cache.conf.items():
         l.append({
             "name": name,
-            "rate": conf['rate']
+            "rate": conf['rate'],
+            "start": conf['start'],
+            "end": conf["end"]
         })
+    return json.dumps(dict(data=l[::-1]))
+
+
+@app.route("/api/aliload/delete")
+def delete_aliload_task():
+    task_name = request.args['name']
+    ali_cache = alicache.update_from_pickle()
+    ali_cache.delete_task(task_name)
+    return json.dumps({
+        'status': 0
+    })
+
+
+@app.route("/api/aliload/getstatus")
+def get_aliload_status():
+    name = request.args['name']
+    ali_cache = alicache.update_from_pickle()
+    res = ali_cache.get_task_report(name)
+    return json.dumps(dict(data=res.data))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8001, debug=True)
