@@ -174,4 +174,5 @@ def parseAndSubmit(command, threshold_size, model_name, program, resubmit):
 
 def callcommand(tunecommand):
     print(Fore.BLUE + "start spark job")
-    os.system(tunecommand)
+    res = os.system(tunecommand)
+    return res

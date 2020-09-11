@@ -1,5 +1,6 @@
-from bigroot.env_conf import get_slaves_name
+from bigroot.env_conf import get_slaves_name, app_path
 import numpy as np
+import os
 
 def extract_iostat(slaves,log_dir):
     slaves_ior = []
