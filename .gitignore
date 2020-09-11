@@ -114,3 +114,4 @@ venv.bak/
 *.out
 *.txt
 *.pkl
+/cmd/taskOpt/datagen/BigDataGeneratorSuite/*
