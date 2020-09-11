@@ -1,0 +1,245 @@
+{
+  "pagerank": {
+    "sample_standard_list": [
+      {
+        "parameter": "driMem",
+        "low-bound": 4,
+        "high-bound": 10,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "driCor",
+        "low-bound": 3,
+        "high-bound": 8,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeMem",
+        "low-bound": 4,
+        "high-bound": 10,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeCor",
+        "low-bound": 3,
+        "high-bound": 8,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "defPlsm",
+        "low-bound": 5,
+        "high-bound": 12,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "memFra",
+        "low-bound": 0.4,
+        "high-bound": 0.8,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "memStFra",
+        "low-bound": 0.3,
+        "high-bound": 0.7,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "redMSIF",
+        "low-bound": 10,
+        "high-bound": 128,
+        "interval": 5,
+        "type": "float"
+      },
+      {
+        "parameter": "shuffleFB",
+        "low-bound": 16,
+        "high-bound": 128,
+        "interval": 16,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleIMR",
+        "low-bound": 1,
+        "high-bound": 10,
+        "interval": 2,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleINCPP",
+        "low-bound": 1,
+        "high-bound": 4,
+        "interval": 1,
+        "type": "int"
+      }
+    ]
+  },
+  "wordcount": {
+    "sample_standard_list": [
+      {
+        "parameter": "driMem",
+        "low-bound": 1,
+        "high-bound": 5,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "driCor",
+        "low-bound": 1,
+        "high-bound": 6,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeMem",
+        "low-bound": 1,
+        "high-bound": 5,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeCor",
+        "low-bound": 1,
+        "high-bound": 4,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "defPlsm",
+        "low-bound": 1,
+        "high-bound": 5,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "memFra",
+        "low-bound": 0.4,
+        "high-bound": 0.8,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "memStFra",
+        "low-bound": 0.3,
+        "high-bound": 0.7,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "redMSIF",
+        "low-bound": 10,
+        "high-bound": 128,
+        "interval": 5,
+        "type": "float"
+      },
+      {
+        "parameter": "shuffleFB",
+        "low-bound": 16,
+        "high-bound": 128,
+        "interval": 16,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleIMR",
+        "low-bound": 1,
+        "high-bound": 10,
+        "interval": 2,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleINCPP",
+        "low-bound": 1,
+        "high-bound": 4,
+        "interval": 1,
+        "type": "int"
+      }
+    ]
+  },
+  "sort": {
+    "sample_standard_list": [
+      {
+        "parameter": "driMem",
+        "low-bound": 5,
+        "high-bound": 10,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "driCor",
+        "low-bound": 4,
+        "high-bound": 8,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeMem",
+        "low-bound": 5,
+        "high-bound": 10,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "exeCor",
+        "low-bound": 4,
+        "high-bound": 8,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "defPlsm",
+        "low-bound": 5,
+        "high-bound": 12,
+        "interval": 1,
+        "type": "int"
+      },
+      {
+        "parameter": "memFra",
+        "low-bound": 0.4,
+        "high-bound": 0.8,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "memStFra",
+        "low-bound": 0.3,
+        "high-bound": 0.7,
+        "interval": 0.05,
+        "type": "float"
+      },
+      {
+        "parameter": "redMSIF",
+        "low-bound": 10,
+        "high-bound": 128,
+        "interval": 5,
+        "type": "float"
+      },
+      {
+        "parameter": "shuffleFB",
+        "low-bound": 16,
+        "high-bound": 128,
+        "interval": 16,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleIMR",
+        "low-bound": 1,
+        "high-bound": 10,
+        "interval": 2,
+        "type": "int"
+      },
+      {
+        "parameter": "shuffleINCPP",
+        "low-bound": 1,
+        "high-bound": 4,
+        "interval": 1,
+        "type": "int"
+      }
+    ]
+  }
+}

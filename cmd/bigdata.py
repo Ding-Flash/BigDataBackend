@@ -10,6 +10,9 @@ import xmltodict as xd
 import os
 import sys
 
+from taskOpt.opt_utils.tuneParameters import callcommand
+from taskOpt.para_opt_main import task_opt_api_init, task_opt_api_main
+
 sys.path.append('../')
 from utils import clean_xml
 import subprocess
@@ -28,7 +31,7 @@ from common import extract_stat
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
 
-completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad'], ignore_case=True)
+completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt'], ignore_case=True)
 
 sparkcache = SparkCache()
 alicache = AliLoadCache()
@@ -159,7 +162,7 @@ def bigroot(session):
 
         print(Fore.GREEN+"analysis success!".upper())
         print(Style.DIM+"please open your browser to look your report")
-        break 
+        break
 
 
 def htrace(session):
@@ -176,7 +179,7 @@ def htrace(session):
         print(Fore.BLUE+"Analysis Start...".upper())
         print(Fore.GREEN+"analysis success!".upper())
         print(Style.DIM+"please open your browser to look your report")
-        break 
+        break
 
 
 def alicloud(session):
@@ -218,13 +221,35 @@ def alicloud(session):
         break
 
 
+def task_opt(session):
+    while True:
+        print(Fore.YELLOW + "You are in TaskOpt mode, please input task name:")
+        jar_path = session.prompt("TaskOpt (jar absolute path)> ", auto_suggest=AutoSuggestFromHistory()).strip()
+        main_class = session.prompt("TaskOpt (main class)> ", auto_suggest=AutoSuggestFromHistory()).strip()
+        args = session.prompt("TaskOpt (program args)> ", auto_suggest=AutoSuggestFromHistory()).strip()
+        times = session.prompt("TaskOpt (Train Data Execute Times)> ", auto_suggest=AutoSuggestFromHistory()).strip()
+        model_name = session.prompt("TaskOpt (Model Name[Ext, Xgb])> ", auto_suggest=AutoSuggestFromHistory()).strip()
+
+        print(Fore.BLUE + "Initializing...".upper())
+        task_opt_api_init()
+        print(Fore.BLUE + "Start...".upper())
+        tunecommand, command_args_dict = task_opt_api_main(jar_path, main_class, args, times, model_name)
+        if tunecommand is None:
+            print(Fore.BLUE + "Program {main_class} lacks load generator program, please connect administrator".format(
+                main_class=main_class))
+            break
+        # 执行优化后的参数
+        callcommand(tunecommand)
+        os.system('rm trace*')
+        break
+
 def main():
     init(autoreset=True)
     soft_info = "BigData Analysis Software \nVersion: 1.0\n"
     print(Style.DIM + soft_info)
 
     introduce = "BigData Analysis Software can be used to analyze big data program performance and visualize the results through the web side.\nThis software has three functions for performance analysis of big data programs, they are:\n"
-    
+
     print(Fore.CYAN + introduce)
     class_ = "1. BigRoot".center(120, " ") + "\n"
     class_ += "An Effective Approach for Root-cause Analysis of Stragglers in Big Data System".center(120, " ")+"\n\n"
@@ -232,8 +257,10 @@ def main():
     class_ += "Data Mining Based Root-Cause Analysis of Performance Bottleneck for Big Data Workload".center(120, " ")+" \n\n"
     class_ += "3. ASTracer".center(120, " ") + "\n"
     class_ +="A Fine-grained Performance Bottleneck Analysis Method for HDFS".center(120, " ")+"\n"
+    class_ += "4. TaskOpt".center(120, " ") + "\n"
+    class_ +="A parameter optimization program for Spark".center(120, " ")+"\n\n"
     print(Fore.GREEN + class_)
-    
+
     tourist = "please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer; type quit or CTRL+C to EXIT"
     print(Style.DIM + tourist)
     session = PromptSession()
@@ -254,6 +281,8 @@ def main():
                 htrace(session)
             if text == "AliLoad":
                 alicloud(session)
+            if text == "TaskOpt":
+                task_opt(session)
     except KeyboardInterrupt:
         pass
 
