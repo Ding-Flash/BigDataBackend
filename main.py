@@ -268,7 +268,7 @@ def get_aliload_task_list():
             "rate": conf['rate'],
             "start": conf['start'],
             "end": conf["end"],
-            "time": str(conf['time'])[:19],
+            "time": str(conf.get("time", ""))[:19],
         })
     return json.dumps(dict(data=l[::-1]))
 
