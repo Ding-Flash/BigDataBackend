@@ -232,7 +232,8 @@ def alicloud(session):
             t = threading.Thread(target=start_samp_slave, args=(slave, log_dir))
             t.start()
 
-        cmd = "hadoop  jar ../aliload/AliCloud.jar Test.AliCloudLoad " + task_rate + " "  + task_start + " " + task_end
+        cmd = "hadoop  jar ../aliload/AliCloud.jar Test.AliCloudLoad " + task_rate + " "  + task_start + " " + task_end + " >/dev/null 2>&1"
+        print("aliload running....")
         res = os.system(cmd)
 
         if res != 0:
@@ -363,6 +364,8 @@ def main():
     except KeyboardInterrupt:
         clean_xml()
         pass
+    except Exception:
+        print("Unrecognized error")
 
 
 if __name__ == "__main__":
