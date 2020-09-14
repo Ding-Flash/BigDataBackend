@@ -31,7 +31,7 @@ from common import extract_stat
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
 
-completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt'], ignore_case=True)
+completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt', '00:00:00'], ignore_case=True)
 
 sparkcache = SparkCache()
 alicache = AliLoadCache()
@@ -338,7 +338,7 @@ def main():
     class_ += "Simulate Alibaba Cloud load".center(120, " ")+"\n\n"
     print(Fore.GREEN + class_)
 
-    tourist = "please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer; type quit or CTRL+C to EXIT"
+    tourist = "Please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer, TaskOpt, AliLoad; type quit or CTRL+C to EXIT"
     print(Style.DIM + tourist)
     session = PromptSession()
 
@@ -361,6 +361,7 @@ def main():
             if text == "TaskOpt":
                 task_opt(session)
     except KeyboardInterrupt:
+        clean_xml()
         pass
 
 
