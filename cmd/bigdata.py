@@ -112,15 +112,25 @@ def spark(session):
         engine.start_analysis()
         res = decode_dot.decode_tree()
 
-        straggler_num = do_straggler.detect()
+        straggler_num = 0
+
+        try:
+            straggler_num = do_straggler.detect()
+        except:
+            print(Fore.RED + "No straggler! Please Try Again")
+            break
+
         print(Fore.GREEN+"analysis complete!".upper())
 
-        report = merge.analysis_store()
-        spark_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))
-        spark_cache.set_task_report(task_name, report)
-        spark_cache.status[task_name] = 'finished'
-        spark_cache.store_pickle()
-        print(Style.DIM+"please open your browser to look your report")
+        if straggler_num > 0:
+            report = merge.analysis_store()
+            spark_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))
+            spark_cache.set_task_report(task_name, report)
+            spark_cache.status[task_name] = 'finished'
+            spark_cache.store_pickle()
+            print(Style.DIM+"please open your browser to look your report")
+        else:
+            print(Fore.RED + "No straggler! Please Try Again")
         break
 
 
