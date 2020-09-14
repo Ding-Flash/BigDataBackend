@@ -31,7 +31,7 @@ def extract_mpstat(slaves, log_dir):
             while line:
                 cpus = line.split()
                 if cpus[1] == "all":
-                    cpus.append(cpus[2])
+                    cpu.append(cpus[2])
                 else:
                     cpu.append(cpus[1])
                 line = f.readline()
