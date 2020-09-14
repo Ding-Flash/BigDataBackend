@@ -148,7 +148,7 @@ def analysis_features(tasks, stages):
                 except:
                     pass
     # def find_straggler(tasks,stages,features,threshold=0.7):
-    def find_straggler(tasks, stages, features, threshold=1.2):
+    def find_straggler(tasks, stages, features, threshold=0.7):
         # straggler->task_duration/stage_duration>threshold
         stragglers = {}
         for stage_id in stages:
@@ -158,6 +158,7 @@ def analysis_features(tasks, stages):
             for task_id in stage['tasks']:
                 task_duration = task['Task Info']['Finish Time'] - task['Task Info']['Launch Time']
                 # if task_duration/stage_duration>=threshold:
+                # print(task_duration / stage_avg_duration)
                 if task_duration / stage_avg_duration >= threshold:
                     stragglers[task_id] = tasks[task_id]
                     features[task_id]['straggler'] = 1

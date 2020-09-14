@@ -110,17 +110,17 @@ def spark(session):
         print(Fore.BLUE+"Analysis Start...".upper())
         log_exe.analysis_log()
         engine.start_analysis()
-        decode_dot.decode_tree()
+        res = decode_dot.decode_tree()
+
         straggler_num = do_straggler.detect()
         print(Fore.GREEN+"analysis complete!".upper())
 
-        if straggler_num > 0:
-            report = merge.analysis_store()
-            spark_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))
-            spark_cache.set_task_report(task_name, report)
-            spark_cache.status[task_name] = 'finished'
-            spark_cache.store_pickle()
-            print(Style.DIM+"please open your browser to look your report")
+        report = merge.analysis_store()
+        spark_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))
+        spark_cache.set_task_report(task_name, report)
+        spark_cache.status[task_name] = 'finished'
+        spark_cache.store_pickle()
+        print(Style.DIM+"please open your browser to look your report")
         break
 
 
