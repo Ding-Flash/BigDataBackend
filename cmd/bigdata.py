@@ -199,11 +199,6 @@ def htrace(session):
         print(Fore.BLUE+"Sampling Start".upper())
         res = os.system(cmd)
 
-        # if res != 0:
-        #     print(Fore.RED+"Task Run Error, Please Try Again")
-        #     print(Fore.BLUE + "Sampling stop".upper())
-        #     continue
-
         print(Fore.BLUE+"Sampling stop".upper())
         print(Fore.BLUE+"Analysis Start...".upper())
         print(Fore.GREEN+"analysis success!".upper())
@@ -218,9 +213,9 @@ def alicloud(session):
     while True:
         ali_cache = alicache.update_from_pickle()
         print(Fore.YELLOW+"You are in AliLoad mode, please set parameters:")
-        task_rate = session.prompt("AliLoad (rate)> ", auto_suggest=AutoSuggestFromHistory())
-        task_start = session.prompt("AliLoad (start_time)> ", auto_suggest=AutoSuggestFromHistory())
-        task_end = session.prompt("AliLoad (end_time)> ", auto_suggest=AutoSuggestFromHistory())
+        task_rate = session.prompt("AliLoad (rate 0-1)> ", auto_suggest=AutoSuggestFromHistory())
+        task_start = session.prompt("AliLoad (start_time eg. 00:00:00)> ", auto_suggest=AutoSuggestFromHistory())
+        task_end = session.prompt("AliLoad (end_time eg. 00:00:03)> ", auto_suggest=AutoSuggestFromHistory())
 
         task_name = "aliload" + "-" + "rate" + "-" + task_rate + "-" + "start" + "-" + task_start + "-" + "end" + "-" +  task_end
 
@@ -255,6 +250,7 @@ def alicloud(session):
         ali_cache.set_task_report(task_name, dict(data=res))
         ali_cache.store_pickle()
         print(Fore.YELLOW+"Finished")
+        print(Style.DIM + "please open your browser to look your report")
         break
 
 
@@ -317,6 +313,7 @@ def task_opt(session):
         opt_cache.store_pickle()
         os.system('rm trace*')
         print(Fore.YELLOW+"Finished")
+        print(Style.DIM + "please open your browser to look your report")
         break
 
 def main():
@@ -364,7 +361,7 @@ def main():
     except KeyboardInterrupt:
         clean_xml()
         pass
-    except Exception:
+    except Exception as e:
         print("Unrecognized error")
 
 
