@@ -23,7 +23,6 @@ def analysis_store():
     # GET THE TIME LIST
     for i in range(1,slave_num+1):
         f = open(cur_path+"tracelog_"+slaves_name[i-1])
-
         thread_count = 0
         min_thread = 9999
         operator_count = 0
@@ -80,7 +79,6 @@ def analysis_store():
                         op_id  = int(re.findall("\d+",line[10])[0])
                         time_stamp = int(line[8])
                         op_kind = re.findall("[a-z,A-Z]+",line[10])[0]
-
                         this_thread_start_time_list.pop( op_id )
                         this_thread_start_time_list.insert( op_id , time_stamp )
                         if(this_thread_opkind_list[op_id] == 'unknown'):

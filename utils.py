@@ -101,7 +101,10 @@ def clean_bigroot_data(slave):
     for n in slave['net']:
         net[int(n[0])] = n[1]
 
-    straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
+    try:
+        straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
+    except:
+        straggler_scala = 0
 
     tasks, table = [], []
 

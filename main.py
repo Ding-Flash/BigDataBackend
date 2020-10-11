@@ -224,6 +224,7 @@ def get_bigroot_straggler():
     bigroot_cache = bigrootcache.update_from_pickle()
     report = bigroot_cache.report[name]['rest']
     res = []
+
     for slave, value in report.items():
         data = clean_bigroot_data(value)
         data['host'] = slave

@@ -31,7 +31,7 @@ from common import extract_stat
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
 
-completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt', '00:00:00'], ignore_case=True)
+completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt', '00:00:00', "quit"], ignore_case=True)
 
 sparkcache = SparkCache()
 alicache = AliLoadCache()
@@ -346,23 +346,25 @@ def main():
             text = session.prompt("mode > ",completer=completer, auto_suggest=AutoSuggestFromHistory())
             if text == 'quit':
                 break
-            if text == 'BigRoot':
+            elif text == 'BigRoot':
                 clean_xml()
                 bigroot(session)
-            if text == 'SparkTree':
+            elif text == 'SparkTree':
                 clean_xml()
                 spark(session)
-            if text == 'ASTracer':
+            elif text == 'ASTracer':
                 htrace(session)
-            if text == "AliLoad":
+            elif text == "AliLoad":
                 alicloud(session)
-            if text == "TaskOpt":
+            elif text == "TaskOpt":
                 task_opt(session)
+            else:
+                print(Style.DIM + "Error mode! Please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer, TaskOpt, AliLoad")
     except KeyboardInterrupt:
         clean_xml()
         pass
     except Exception as e:
-        print("Unrecognized error")
+        print("Unrecognized error", e)
 
 
 if __name__ == "__main__":
