@@ -1,28 +1,30 @@
 import time
 import sys
+import random
 sys.path.append('..')
 from straggler.env_conf import *
 
 slaves_name = get_slaves_name()
 slave_num = len(slaves_name)
 
-thread_count = 0
-
-thread_list = []
-time_list = []
-op_kind_list = []
-op_name = {}
-
 cur_path = os.path.dirname(os.path.abspath(__file__)) + '/../temp/spark/'
-
+op_name = {}
 
 def analysis_store():
     """
     :return: timeline straggler cart_tree
     """
     # GET THE TIME LIST
+    thread_count = 0
+
+    thread_list = []
+    time_list = []
+    op_kind_list = []
+    op_name = {}
+
     for i in range(1,slave_num+1):
         f = open(cur_path+"tracelog_"+slaves_name[i-1])
+        # print(cur_path+"tracelog_"+slaves_name[i-1])
         thread_count = 0
         min_thread = 9999
         operator_count = 0
@@ -109,7 +111,6 @@ def analysis_store():
 
     #        this_thread_time_list.insert(0 , "Slave" + str(i) + " " + "Thread:" + str(t))
     #        this_thread_opkind_nounknown_list.insert(0 , "Slave" + str(i) + " " + "Thread:" + str(t))
-
             time_list.append(this_thread_time_list)
             op_kind_list.append(this_thread_opkind_nounknown_list)
 
@@ -160,6 +161,8 @@ def analysis_store():
                         this_thread_time_duration_list.append(int(time_list[i][k + 1]) - int(time_list[i][k]) - duration_sum)
                         duration_sum = int(time_list[i][k + 1]) - int(time_list[i][k])
 
+        if sum(this_thread_time_duration_list) == 0:
+            this_thread_time_duration_list = [random.randint(2,10) for _ in this_thread_time_duration_list]
 
 
         time_duration_list.append(this_thread_time_duration_list)
