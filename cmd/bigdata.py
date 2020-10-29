@@ -6,6 +6,7 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 import xmltodict as xd
+import numpy as np
 
 import os
 import sys
@@ -26,7 +27,7 @@ from detect_root import start_samp_slave, start, collect_logs, collect_load_logs
 from bigroot.env_conf import app_path, get_master_ip, get_slaves_name
 from bigroot.root_cause import analysis
 from apps.store import bigroot_cache
-from common import extract_stat
+from common import extract_stat, bigroot_extract_mpstat
 
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
@@ -176,6 +177,10 @@ def bigroot(session):
 
         print(Fore.BLUE+"Analysis Start...".upper())
         res = analysis(log_dir)
+        cpu = bigroot_extract_mpstat(slaves_name, log_dir)
+
+        for slave in slaves_name:
+            res['rest'][slave]['cpu'] = cpu[slave]
 
         print(Fore.BLUE+"log analysis finished".upper())
         bigroot_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))

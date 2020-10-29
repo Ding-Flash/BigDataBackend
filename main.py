@@ -223,6 +223,7 @@ def get_bigroot_straggler():
     name = request.args['name']
     bigroot_cache = bigrootcache.update_from_pickle()
     report = bigroot_cache.report[name]['rest']
+    print(report.keys())
     res = []
 
     for slave, value in report.items():

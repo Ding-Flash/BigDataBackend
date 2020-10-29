@@ -93,7 +93,6 @@ def clean_bigroot_data(slave):
     exe_time = max(len(slave['cpu']), len(slave['io']), len(slave['net'])) + 1
 
     cpu, io, net = [0] * exe_time, [0] * exe_time, [0] * exe_time
-
     for c in slave['cpu']:
         cpu[int(c[0])] = c[1]
     for i in slave['io']:
