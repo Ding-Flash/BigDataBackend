@@ -134,7 +134,7 @@ def optiConf(model, N, command, program):
 '''
 
 
-def parseAndSubmit(command, threshold_size, model_name, program, resubmit):
+def parseAndSubmit(command, threshold_size, model_name, program, resubmit, times=1):
     funcnames = {'cn.ac.ict.bigdatabench.Sort': 'BigDataBench Sort',
                  'cn.ac.ict.bigdatabench.WordCount': 'BigDataBench WordCount',
                  'cn.ac.ict.bigdatabench.PageRank': 'BigDataBench PageRank'}  # 做个字典,有几个任务，就做几个大小的字典
@@ -153,6 +153,21 @@ def parseAndSubmit(command, threshold_size, model_name, program, resubmit):
             print(Fore.BLUE + "start tunning")
             newN = round(float(N) / 10 ** 9, 4)
             tunecommand, command_args_dict = optiConf(model, newN, command, program)
+
+            if 'PageRank' in main_class:
+                _split_tunecommand = tunecommand.split(' ')
+                _tunecommand = _split_tunecommand[:-1]
+                _tunecommand.append(str(times))
+                _tunecommand.append(_split_tunecommand[-1])
+                tunecommand = " ".join(_tunecommand)
+
+                _args = command_args_dict.get('args')
+                _split_args = _args.split(' ')
+                _new_args = _split_args[:-1]
+                _new_args.append(str(times))
+                _new_args.append(_split_args[-1])
+                _args = " ".join(_new_args)
+
             print(Fore.BLUE + "{:-^30}".format("优化参数生成完成"))
             print(Fore.BLUE + "tuned configuration parameters:")
             print(Fore.BLUE + tunecommand)

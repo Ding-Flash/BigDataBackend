@@ -94,7 +94,7 @@ def run_para_opt_main(program: str, main_class, jar_path, args, model, times, mo
         check_mysql(main_class)
         # 根据提交的任务，得出最优参数
         tunecommand, command_args_dict = parseAndSubmit([main_class, jar_path, *io_path, args], 100000, model, program,
-                                                        resubmit)
+                                                        resubmit, times)
         return tunecommand, command_args_dict
 
 
