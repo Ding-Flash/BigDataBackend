@@ -94,7 +94,7 @@ def decode_sar(slave, log_dir):
     count = 0
     period=7;pos=2;
     while line:
-        if 'em1' in line:  # eth0
+        if 'eno1' in line:  # eth0
             line_list = line.split()
             if len(line_list)<9:
                 break

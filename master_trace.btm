@@ -56,7 +56,7 @@ CLASS org.apache.spark.deploy.SparkSubmit
 METHOD main
 AT ENTRY
 IF true
-DO traceOpen("org.apache.spark.deploy.SparkSubmit","/home/yangs/Bigdata/qwc_trace/tracelog_master");
+DO traceOpen("org.apache.spark.deploy.SparkSubmit","/home/lsy/Bigdata/qwc_trace/tracelog_master");
    traceln("org.apache.spark.deploy.SparkSubmit","BR:Entering Sparksubmit main. time:" + System.currentTimeMillis() + " thread id: " + Thread.currentThread().getId() + " name : " + Thread.currentThread().getName());
    traceClose("org.apache.spark.deploy.SparkSubmit");
 ENDRULE
@@ -66,7 +66,7 @@ CLASS org.apache.spark.deploy.SparkSubmit
 METHOD main
 AT EXIT
 IF true
-DO traceOpen("org.apache.spark.deploy.SparkSubmit","/home/yangs/Bigdata/qwc_trace/tracelog_master");
+DO traceOpen("org.apache.spark.deploy.SparkSubmit","/home/lsy/Bigdata/qwc_trace/tracelog_master");
    traceln("org.apache.spark.deploy.SparkSubmit","BR:Ending Sparksubmit main. time:" + System.currentTimeMillis() + " thread id: " + Thread.currentThread().getId() + " name : " + Thread.currentThread().getName());
    traceClose("org.apache.spark.deploy.SparkSubmit");
 ENDRULE
@@ -167,7 +167,7 @@ ENDRULE
 #METHOD runTask
 #AT ENTRY
 #IF true
-#DO traceOpen("ResultTask" + Thread.currentThread().getId(),"/home/yangs/Bigdata/qwc_trace/task_tracelog");
+#DO traceOpen("ResultTask" + Thread.currentThread().getId(),"/home/lsy/Bigdata/qwc_trace/task_tracelog");
 #   traceln("ResultTask"+Thread.currentThread().getId(),"BR: Starting a task id: " + Thread.currentThread().getId() + " time: " + System.currentTimeMillis());
 #   traceClose("ResultTask" + Thread.currentThread().getId())
 #ENDRULE

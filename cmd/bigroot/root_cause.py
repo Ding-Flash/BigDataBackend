@@ -6,7 +6,7 @@ import pickle
 import sys
 import time
 import prettytable as pt
-# from IPython import embed
+from IPython import embed
 from bigroot.env_conf import *
 import json
 import logging
