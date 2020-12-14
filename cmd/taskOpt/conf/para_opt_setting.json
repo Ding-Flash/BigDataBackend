@@ -1,20 +1,20 @@
 {
-  "参数调优程序路径": "",
+  "parameter_tuning_program_path": "",
   "bdbench_home": "BigDataBackend/taskOpt",
-  "HDFS根路径": "",
+  "HDFSRootPath": "",
   "hdfs_path": "/tune/spark",
 
   "hadoop": {
-    "host": "115.25.138.211",
+    "host": "10.251.1.10",
     "web_ui_port": "52070",
     "hdfs_port": "58021"
   },
   "spark": {
-    "host": "115.25.138.211",
+    "host": "10.251.1.10",
     "history_server_port": "28085"
   },
   "mysql": {
-    "host": "115.25.138.211",
+    "host": "10.251.1.10",
     "port": "3306",
     "user": "root",
     "passwd": "root",

@@ -55,6 +55,7 @@ def build_tree(X,Y,feature_names,test_partion=0.2):
     # draw decision tree
     
     dot_data=tree.export_graphviz(clf,out_file=None,feature_names=feature_names)
+    print("write to "+ cur_path+"atree.dot")
     with open(cur_path+"atree.dot",'w')as f:
         f.write(dot_data)
     graph=pydotplus.graph_from_dot_data(dot_data)

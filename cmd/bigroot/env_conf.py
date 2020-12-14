@@ -2,7 +2,7 @@ import os
 import re
 import socket
 
-app_path = '/home/yangs/Bigdata/BigDataBackend/cmd'
+app_path = '/home/lsy/Bigdata/BigDataBackend/cmd'
 work_load = '$HIBENCH_WORKLOADS/ml/bayes/spark/run.sh'
 
 

@@ -6,7 +6,7 @@ import pickle
 import sys
 import time
 import prettytable as pt
-# from IPython import embed
+from IPython import embed
 from bigroot.env_conf import *
 import json
 import logging
@@ -1190,7 +1190,7 @@ class Engine:
             cpu_files.append(self.LOG_DIR + 'mpstat_out_' + slave)
         self.cpu_features = []
         for file_id in range(len(cpu_files)):
-            self.cpu_features.append(self.read_hardware_log(cpu_files[file_id], features=[2]))
+            self.cpu_features.append(self.read_hardware_log(cpu_files[file_id], features=[1]))
             #print('decode cpu info,',self.cpu_features[-1]);embed()
             # io_t=[]
             # cpu_t=[]

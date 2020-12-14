@@ -61,6 +61,7 @@ class Node:
 
 def decode(filename='atree.dot'):
     filename = cur_path + filename
+    print("read from "+filename)
     nodes={}
     for line in open(filename):
         if re.match(r'[0-9]+ -> [0-9]',line.strip()):
@@ -385,6 +386,8 @@ def traversal(root,f,isRight=False):
 
 def decode_tree():
     tree = decode()
+    if tree is None:
+        return None
     #traversal_stack = []
     #straggler_abnormal_feature_list = []
     f = open(cur_path+'../straggler_stack','w')

@@ -6,6 +6,7 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 import xmltodict as xd
+import numpy as np
 
 import os
 import sys
@@ -20,21 +21,22 @@ from straggler import clean_all, get_time_alignment_deviation, get_trace_log, me
 from straggler.sample import samp_run, get_logs, log_exe
 from straggler.analysis import engine, decode_dot, do_straggler
 from datetime import datetime
-from apps.store import SparkCache, AliLoadCache
+from apps.store import SparkCache, AliLoadCache, TaskOptCache
 
 from detect_root import start_samp_slave, start, collect_logs, collect_load_logs, init_root, decode, kill
 from bigroot.env_conf import app_path, get_master_ip, get_slaves_name
 from bigroot.root_cause import analysis
 from apps.store import bigroot_cache
-from common import extract_stat
+from common import extract_stat, bigroot_extract_mpstat
 
 from config import HADOOP_HOME
 core_file = HADOOP_HOME + "/etc/hadoop/core-site.xml"
 
-completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt'], ignore_case=True)
+completer = WordCompleter(['BigRoot', 'SparkTree', 'ASTracer', 'AliLoad','TaskOpt', '00:00:00', "quit"], ignore_case=True)
 
 sparkcache = SparkCache()
 alicache = AliLoadCache()
+optcache = TaskOptCache()
 
 def clean_xml():
     with open(core_file) as f:
@@ -76,7 +78,13 @@ def spark(session):
         print(Fore.BLUE+"Sampling Start".upper())
         samp_run.start_sample()
 
-        os.system(cmd)
+        res = os.system(cmd)
+
+        if res != 0:
+            print(Fore.RED+"Task Run Error, Please Try Again")
+            print(Fore.BLUE + "Sampling stop".upper())
+            samp_run.stop_sample()
+            continue
 
         print(Fore.BLUE+"Sampling stop".upper())
         samp_run.stop_sample()
@@ -103,8 +111,16 @@ def spark(session):
         print(Fore.BLUE+"Analysis Start...".upper())
         log_exe.analysis_log()
         engine.start_analysis()
-        decode_dot.decode_tree()
-        straggler_num = do_straggler.detect()
+        res = decode_dot.decode_tree()
+
+        straggler_num = 0
+
+        try:
+            straggler_num = do_straggler.detect()
+        except:
+            print(Fore.RED + "No straggler! Please Try Again")
+            break
+
         print(Fore.GREEN+"analysis complete!".upper())
 
         if straggler_num > 0:
@@ -114,6 +130,8 @@ def spark(session):
             spark_cache.status[task_name] = 'finished'
             spark_cache.store_pickle()
             print(Style.DIM+"please open your browser to look your report")
+        else:
+            print(Fore.RED + "No straggler! Please Try Again")
         break
 
 
@@ -140,7 +158,13 @@ def bigroot(session):
             t = threading.Thread(target=start_samp_slave, args=(slave, log_dir))
             t.start()
 
-        os.system(cmd)
+        res = os.system(cmd)
+
+        if res != 0:
+            print(Fore.RED+"Task Run Error, Please Try Again")
+            print(Fore.BLUE + "Sampling stop".upper())
+            kill()
+            continue
 
         print(Fore.BLUE+"Sampling stop".upper())
         kill()
@@ -153,6 +177,10 @@ def bigroot(session):
 
         print(Fore.BLUE+"Analysis Start...".upper())
         res = analysis(log_dir)
+        cpu = bigroot_extract_mpstat(slaves_name, log_dir)
+
+        for slave in slaves_name:
+            res['rest'][slave]['cpu'] = cpu[slave]
 
         print(Fore.BLUE+"log analysis finished".upper())
         bigroot_cache.set_conf(task_name, dict(time=datetime.now(), desc=describe))
@@ -174,7 +202,8 @@ def htrace(session):
         print(Fore.YELLOW+"You are in ASTracer mode, please input cmd:")
         cmd = session.prompt("ASTracer (cmd)> ", auto_suggest=AutoSuggestFromHistory())
         print(Fore.BLUE+"Sampling Start".upper())
-        os.system(cmd)
+        res = os.system(cmd)
+
         print(Fore.BLUE+"Sampling stop".upper())
         print(Fore.BLUE+"Analysis Start...".upper())
         print(Fore.GREEN+"analysis success!".upper())
@@ -189,9 +218,9 @@ def alicloud(session):
     while True:
         ali_cache = alicache.update_from_pickle()
         print(Fore.YELLOW+"You are in AliLoad mode, please set parameters:")
-        task_rate = session.prompt("AliLoad (rate)> ", auto_suggest=AutoSuggestFromHistory())
-        task_start = session.prompt("AliLoad (start_time)> ", auto_suggest=AutoSuggestFromHistory())
-        task_end = session.prompt("AliLoad (end_time)> ", auto_suggest=AutoSuggestFromHistory())
+        task_rate = session.prompt("AliLoad (rate 0-1)> ", auto_suggest=AutoSuggestFromHistory())
+        task_start = session.prompt("AliLoad (start_time eg. 00:00:00)> ", auto_suggest=AutoSuggestFromHistory())
+        task_end = session.prompt("AliLoad (end_time eg. 00:00:03)> ", auto_suggest=AutoSuggestFromHistory())
 
         task_name = "aliload" + "-" + "rate" + "-" + task_rate + "-" + "start" + "-" + task_start + "-" + "end" + "-" +  task_end
 
@@ -203,8 +232,15 @@ def alicloud(session):
             t = threading.Thread(target=start_samp_slave, args=(slave, log_dir))
             t.start()
 
-        cmd = "hadoop  jar ../aliload/AliCloud.jar Test.AliCloudLoad " + task_rate + " "  + task_start + " " + task_end
-        os.system(cmd)
+        cmd = "hadoop  jar ../aliload/AliCloud.jar Test.AliCloudLoad " + task_rate + " "  + task_start + " " + task_end + " >/dev/null 2>&1"
+        print("aliload running....")
+        res = os.system(cmd)
+
+        if res != 0:
+            print(Fore.RED+"Task Run Error, Please Try Again")
+            print(Fore.BLUE + "Sampling stop".upper())
+            kill()
+            continue
 
         print(Fore.BLUE+"Sampling stop".upper())
         kill()
@@ -218,12 +254,18 @@ def alicloud(session):
         ali_cache.set_conf(task_name, dict(rate=task_rate, start=task_start, end=task_end, time=datetime.now()))
         ali_cache.set_task_report(task_name, dict(data=res))
         ali_cache.store_pickle()
+        print(Fore.YELLOW+"Finished")
+        print(Style.DIM + "please open your browser to look your report")
         break
 
 
 def task_opt(session):
+    global opt_cache
+    slaves_name = get_slaves_name()
     while True:
+        opt_cache = optcache.update_from_pickle()
         print(Fore.YELLOW + "You are in TaskOpt mode, please input task name:")
+        task_name = session.prompt("TaskOpt (task name)> ", auto_suggest=AutoSuggestFromHistory()).strip()
         jar_path = session.prompt("TaskOpt (jar absolute path)> ", auto_suggest=AutoSuggestFromHistory()).strip()
         main_class = session.prompt("TaskOpt (main class)> ", auto_suggest=AutoSuggestFromHistory()).strip()
         args = session.prompt("TaskOpt (program args)> ", auto_suggest=AutoSuggestFromHistory()).strip()
@@ -239,8 +281,44 @@ def task_opt(session):
                 main_class=main_class))
             break
         # 执行优化后的参数
-        callcommand(tunecommand)
+        print(Fore.YELLOW + "ReSubmit {task_name}...".format(task_name=task_name))
+
+        log_dir = init_root("opt_"+task_name)
+        print(Fore.BLUE+"Sampling Start".upper())
+        for slave in slaves_name:
+            t = threading.Thread(target=start_samp_slave, args=(slave, log_dir))
+            t.start()
+
+        res = callcommand(tunecommand)
+
+        if res != 0:
+            print(Fore.RED+"Task Run Error, Please Try Again")
+            print(Fore.BLUE + "Sampling stop".upper())
+            kill()
+            continue
+
+        print(Fore.BLUE+"Sampling stop".upper())
+        kill()
+
+        print(Fore.BLUE+"Collecting logs...".upper())
+        collect_load_logs(log_dir)
+
+        print(Fore.BLUE+"Decoding logs...".upper())
+        decode(log_dir)
+        res = extract_stat(log_dir)
+
+        opt_cache.set_conf(task_name, {
+            "class": main_class,
+            "train_time": times,
+            "model": model_name,
+            "time": datetime.now(),
+        })
+
+        opt_cache.set_task_report(task_name, dict(data=res, tune=command_args_dict, cmd=tunecommand))
+        opt_cache.store_pickle()
         os.system('rm trace*')
+        print(Fore.YELLOW+"Finished")
+        print(Style.DIM + "please open your browser to look your report")
         break
 
 def main():
@@ -256,12 +334,14 @@ def main():
     class_ += "2. SparkTree".center(120, " ") + "\n"
     class_ += "Data Mining Based Root-Cause Analysis of Performance Bottleneck for Big Data Workload".center(120, " ")+" \n\n"
     class_ += "3. ASTracer".center(120, " ") + "\n"
-    class_ +="A Fine-grained Performance Bottleneck Analysis Method for HDFS".center(120, " ")+"\n"
+    class_ += "A Fine-grained Performance Bottleneck Analysis Method for HDFS".center(120, " ")+"\n\n"
     class_ += "4. TaskOpt".center(120, " ") + "\n"
-    class_ +="A parameter optimization program for Spark".center(120, " ")+"\n\n"
+    class_ += "A parameter optimization program for Spark".center(120, " ")+"\n\n"
+    class_ += "5. AliLoad".center(120, " ") + "\n"
+    class_ += "Simulate Alibaba Cloud load".center(120, " ")+"\n\n"
     print(Fore.GREEN + class_)
 
-    tourist = "please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer; type quit or CTRL+C to EXIT"
+    tourist = "Please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer, TaskOpt, AliLoad; type quit or CTRL+C to EXIT"
     print(Style.DIM + tourist)
     session = PromptSession()
 
@@ -271,19 +351,26 @@ def main():
             text = session.prompt("mode > ",completer=completer, auto_suggest=AutoSuggestFromHistory())
             if text == 'quit':
                 break
-            if text == 'BigRoot':
+            elif text == 'BigRoot':
                 clean_xml()
                 bigroot(session)
-            if text == 'SparkTree':
+            elif text == 'SparkTree':
                 clean_xml()
                 spark(session)
-            if text == 'ASTracer':
+            elif text == 'ASTracer':
                 htrace(session)
-            if text == "AliLoad":
+            elif text == "AliLoad":
                 alicloud(session)
-            if text == "TaskOpt":
+            elif text == "TaskOpt":
                 task_opt(session)
+            else:
+                print(Style.DIM + "Error mode! Please type the analysis mode you want e.g: BigRoot, SparkTree, ASTracer, TaskOpt, AliLoad")
     except KeyboardInterrupt:
+        clean_xml()
         pass
+    except Exception as e:
+        print("Unrecognized error", e)
 
-main()
+
+if __name__ == "__main__":
+    main()

@@ -107,7 +107,7 @@ def getJobs(start):
     try:
         cs_url = url[:len(url) - 1] + '?startTimeEpoch=' + str(start)  # url为全局变量
         print(Fore.BLUE + cs_url)
-        print(Fore.BLUE + start)
+        print(Fore.BLUE + str(start))
         print(Fore.BLUE + "{:-^29}".format("-"))
         r = requests.get(cs_url)
         data = r.json()  # data 是list结构数据，但是data[0]是字典结构数据，data[0]['attempts']是list结构数据，data[0]['attempts'][0]是个字典结构

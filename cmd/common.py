@@ -1,5 +1,6 @@
-from bigroot.env_conf import get_slaves_name
+from bigroot.env_conf import get_slaves_name, app_path
 import numpy as np
+import os
 
 def extract_iostat(slaves,log_dir):
     slaves_ior = []
@@ -29,11 +30,35 @@ def extract_mpstat(slaves, log_dir):
             line = f.readline()
             while line:
                 cpus = line.split()
-                cpu.append(cpus[1])
+                if cpus[1] == "all":
+                    cpu.append(cpus[2])
+                else:
+                    cpu.append(cpus[1])
                 line = f.readline()
         slaves_cpu.append(cpu)
     return slaves_cpu
 
+def bigroot_extract_mpstat(slaves, log_dir):
+    slaves_cpu = {}
+    for slave in slaves:
+        cpu = []
+        file = log_dir+ "/out/mpstat_out_"+slave
+        with open(file) as f:
+            line = f.readline()
+            while line:
+                cpus = line.split()
+                if cpus[1] == "all":
+                    cpu.append(cpus[2])
+                else:
+                    cpu.append(cpus[1])
+                line = f.readline()
+
+        times = len(cpu)
+        cpu_res = []
+        for i in range(times):
+            cpu_res.append([i+1, float(cpu[i])])
+        slaves_cpu[slave] = cpu_res
+    return slaves_cpu
 
 def extract_sar(slaves, log_dir):
     slaves_rx = []
