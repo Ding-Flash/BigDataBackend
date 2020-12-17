@@ -15,6 +15,8 @@ python para_opt_main.py --model Xgb --times 15 sort cn.ac.ict.bigdatabench.Sort 
 '''
 # logging.basicConfig(level=print)
 # /tune/spark/sort/data /tune/spark/sort/result
+# /tune/spark/pagerank/data/Google_genGraph_15.txt /tune/spark/pagerank/result
+
 conf = None
 main_class_dict = {'cn.ac.ict.bigdatabench.Sort': 'sort',
                    'cn.ac.ict.bigdatabench.WordCount': 'wordcount',

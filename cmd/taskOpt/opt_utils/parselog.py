@@ -1,4 +1,3 @@
-
 import logging
 import requests
 import pymysql
@@ -18,8 +17,8 @@ Wantedconf = ['spark.driver.memory', 'spark.driver.cores', 'spark.executor.memor
 # url权限
 url = None
 
-# logging level
 
+# logging level
 
 
 def init_parse(conf):
@@ -83,7 +82,15 @@ def getInput(jobid):
 
 def get_job_main_class(jobid):
     class_url = url + str(jobid) + '/environment'
+    print(Fore.BLUE + '获取:' + class_url)
     r = requests.get(class_url)
+    r = requests.get(class_url)
+    if r is None:
+        print(Fore.BLUE + '重新获取' + class_url)
+        r = requests.get(class_url)
+    if r is None:
+        logging.error("无法获得任务{jobid}信息".format(jobid=jobid))
+        raise Exception
     data = r.json()
     for d in data['systemProperties']:
         if d[0] == 'sun.java.command':
@@ -107,7 +114,7 @@ def getJobs(start):
     try:
         cs_url = url[:len(url) - 1] + '?startTimeEpoch=' + str(start)  # url为全局变量
         print(Fore.BLUE + cs_url)
-        print(Fore.BLUE + str(start))
+        # print(Fore.BLUE + str(start))
         print(Fore.BLUE + "{:-^29}".format("-"))
         r = requests.get(cs_url)
         data = r.json()  # data 是list结构数据，但是data[0]是字典结构数据，data[0]['attempts']是list结构数据，data[0]['attempts'][0]是个字典结构
