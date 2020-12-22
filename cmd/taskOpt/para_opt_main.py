@@ -15,8 +15,8 @@ python para_opt_main.py --model Xgb --times 15 sort cn.ac.ict.bigdatabench.Sort 
 '''
 # logging.basicConfig(level=print)
 # /tune/spark/sort/data /tune/spark/sort/result
-# /tune/spark/pagerank/data/Google_genGraph_15.txt /tune/spark/pagerank/result
-
+# /tune/spark/pagerank/data/Google_genGraph_21.txt /tune/spark/pagerank/result
+# spark-submit --class cn.ac.ict.bigdatabench.Sort --conf spark.driver.memory=30g --conf spark.driver.cores=4 --conf spark.executor.memory=10g --conf spark.executor.cores=4 --conf spark.default.parallelism=6 --conf spark.memory.fraction=0.6499999999999999 --conf spark.memory.storageFraction=0.49999999999999983 --conf spark.reducer.maxSizeInFlight=118mb --conf spark.shuffle.file.buffer=96kb --conf spark.shuffle.io.maxRetries=8 --conf spark.shuffle.io.numConnectionsPerPeer=2 /home/lsy/Bigdata/BigDataBackend/example_jars/bigdatabench-spark_1.3.0-hadoop_1.0.4.jar hdfs://10.251.1.10:58021/tune/spark/sort/data hdfs://10.251.1.10:58021/tune/spark/sort/result
 conf = None
 main_class_dict = {'cn.ac.ict.bigdatabench.Sort': 'sort',
                    'cn.ac.ict.bigdatabench.WordCount': 'wordcount',
@@ -83,7 +83,7 @@ def run_para_opt_main(program: str, main_class, jar_path, args, model, times, mo
     # 运行模式判断
     # ###############################
     if mode == 'run_all' or mode == 'gen_train_data':
-        print(Fore.BLUE + "execute train command times: {times}")
+        print(Fore.BLUE + f"execute train command times: {times}")
         # 生成随机参数命令脚本
         random_pro_file = generate_random_program(times, program, main_class, jar_path, args_list, hdfs_loc_path,
                                                   conf.get('bdbench_home'), lpf, wpl)

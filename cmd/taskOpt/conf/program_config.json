@@ -3,8 +3,8 @@
     "sample_standard_list": [
       {
         "parameter": "driMem",
-        "low-bound": 4,
-        "high-bound": 10,
+        "low-bound": 25,
+        "high-bound": 40,
         "interval": 1,
         "type": "int"
       },
@@ -17,8 +17,8 @@
       },
       {
         "parameter": "exeMem",
-        "low-bound": 4,
-        "high-bound": 10,
+        "low-bound": 6,
+        "high-bound": 15,
         "interval": 1,
         "type": "int"
       },
@@ -84,8 +84,8 @@
     "sample_standard_list": [
       {
         "parameter": "driMem",
-        "low-bound": 1,
-        "high-bound": 5,
+        "low-bound": 25,
+        "high-bound": 40,
         "interval": 1,
         "type": "int"
       },
@@ -98,8 +98,8 @@
       },
       {
         "parameter": "exeMem",
-        "low-bound": 1,
-        "high-bound": 5,
+        "low-bound": 6,
+        "high-bound": 15,
         "interval": 1,
         "type": "int"
       },
@@ -165,29 +165,29 @@
     "sample_standard_list": [
       {
         "parameter": "driMem",
-        "low-bound": 5,
-        "high-bound": 10,
+        "low-bound": 30,
+        "high-bound": 80,
         "interval": 1,
         "type": "int"
       },
       {
         "parameter": "driCor",
         "low-bound": 4,
-        "high-bound": 8,
+        "high-bound": 30,
         "interval": 1,
         "type": "int"
       },
       {
         "parameter": "exeMem",
-        "low-bound": 5,
-        "high-bound": 10,
+        "low-bound": 6,
+        "high-bound": 15,
         "interval": 1,
         "type": "int"
       },
       {
         "parameter": "exeCor",
         "low-bound": 4,
-        "high-bound": 8,
+        "high-bound": 30,
         "interval": 1,
         "type": "int"
       },

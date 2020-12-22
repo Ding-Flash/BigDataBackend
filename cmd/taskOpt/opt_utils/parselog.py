@@ -1,4 +1,6 @@
 import logging
+import time
+
 import requests
 import pymysql
 from colorama import Fore
@@ -84,14 +86,20 @@ def get_job_main_class(jobid):
     class_url = url + str(jobid) + '/environment'
     print(Fore.BLUE + '获取:' + class_url)
     r = requests.get(class_url)
-    r = requests.get(class_url)
-    if r is None:
-        print(Fore.BLUE + '重新获取' + class_url)
-        r = requests.get(class_url)
-    if r is None:
-        logging.error("无法获得任务{jobid}信息".format(jobid=jobid))
-        raise Exception
-    data = r.json()
+    get_num = 0
+    max_try_times = 5
+    while True:
+        try:
+            data = r.json()
+            break
+        except Exception as e:
+            print(Fore.BLUE + '重新获取：' + class_url)
+            time.sleep(1)
+            r = requests.get(class_url)
+            if get_num > max_try_times:
+                logging.error("无法获得任务{jobid}信息".format(jobid=jobid))
+                raise Exception
+
     for d in data['systemProperties']:
         if d[0] == 'sun.java.command':
             submit_command: str = d[1]

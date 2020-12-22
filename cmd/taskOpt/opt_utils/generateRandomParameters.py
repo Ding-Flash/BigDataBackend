@@ -13,15 +13,15 @@ import random
 
 def generate_random_parameters(program):
     defPlsm = random.randrange(1, 5, 1)  # spark.default.parallelism
-    memFra = 0.05 * random.randint(0, 8) + 0.4  # spark.memory.fraction 0.6
+    memFra = 0.05 * random.randint(0, 8) + 0.3  # spark.memory.fraction 0.6
     memStFra = 0.05 * random.randint(0, 8) + 0.3  # spark.memory.storageFraction  0.5
     redMSIF = random.randrange(10, 128, 5)  # spark.reducer.maxSizeInFlight 48m
     shuffleFB = random.randrange(16, 128, 16)  # spark.shuffle.file.buffer 32k
     shuffleIMR = random.randrange(2, 16, 2)  # spark.shuffle.io.maxRetries   3
     shuffleINCPP = random.randrange(1, 4, 1)  # spark.shuffle.io.numConnectionsPerPeer    1
-    exeMem = random.randrange(2, 15, 1)  # spark.executor.memory 1g
+    exeMem = random.randrange(5, 15, 1)  # spark.executor.memory 1g
     # driMem = random.randrange(2, 30, 1)  # spark.driver.memory   1g
-    driMem = 3 * exeMem
+    driMem = 4 * exeMem
     if program.lower() == 'pagerank':
         iterations = random.randrange(15, 22, 1)  # data size :
         driCor = random.randrange(3, 20, 1)  # spark.driver.cores    1
