@@ -93,7 +93,6 @@ def clean_bigroot_data(slave):
     exe_time = max(len(slave['cpu']), len(slave['io']), len(slave['net'])) + 1
 
     cpu, io, net = [0] * exe_time, [0] * exe_time, [0] * exe_time
-
     for c in slave['cpu']:
         cpu[int(c[0])] = c[1]
     for i in slave['io']:
@@ -101,7 +100,10 @@ def clean_bigroot_data(slave):
     for n in slave['net']:
         net[int(n[0])] = n[1]
 
-    straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
+    try:
+        straggler_scala = max(slave['tasks'], key=lambda x: x[2])[2]
+    except:
+        straggler_scala = 0
 
     tasks, table = [], []
 

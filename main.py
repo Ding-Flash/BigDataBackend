@@ -22,13 +22,15 @@ from apps.store import (
     HdfsCache,
     SparkCache,
     BigDataCache,
-    AliLoadCache
+    AliLoadCache,
+    TaskOptCache,
 )
 
 hdfscache = HdfsCache()
 sparkcache = SparkCache()
 bigrootcache = BigDataCache()
 alicache = AliLoadCache()
+optcache = TaskOptCache()
 
 
 app = Flask(__name__)
@@ -221,7 +223,9 @@ def get_bigroot_straggler():
     name = request.args['name']
     bigroot_cache = bigrootcache.update_from_pickle()
     report = bigroot_cache.report[name]['rest']
+    print(report.keys())
     res = []
+
     for slave, value in report.items():
         data = clean_bigroot_data(value)
         data['host'] = slave
@@ -255,6 +259,7 @@ def delete_bigroot_task():
     })
 
 
+# aliload 相关
 @app.route("/api/aliload/gettasklist")
 def get_aliload_task_list():
     l = []
@@ -264,7 +269,8 @@ def get_aliload_task_list():
             "name": name,
             "rate": conf['rate'],
             "start": conf['start'],
-            "end": conf["end"]
+            "end": conf["end"],
+            "time": str(conf.get("time", ""))[:19],
         })
     return json.dumps(dict(data=l[::-1]))
 
@@ -285,6 +291,46 @@ def get_aliload_status():
     ali_cache = alicache.update_from_pickle()
     res = ali_cache.get_task_report(name)
     return json.dumps(dict(data=res.data))
+
+
+# taskopt相关
+@app.route("/api/taskopt/gettasklist")
+def get_opt_list():
+    l = []
+    opt_cache = optcache.update_from_pickle()
+    for name, conf in opt_cache.conf.items():
+        l.append({
+            "name": name,
+            "class": conf["class"],
+            "train_time": conf["train_time"],
+            "model": conf["model"],
+            "time": str(conf['time'])[:19],
+        })
+    return json.dumps(dict(data=l[::-1]))
+
+
+@app.route("/api/taskopt/delete")
+def delete_opt_task():
+    task_name = request.args['name']
+    opt_cache = optcache.update_from_pickle()
+    opt_cache.delete_task(task_name)
+    return json.dumps({
+        'status': 0
+    })
+
+
+@app.route("/api/taskopt/getstatus")
+def get_opt_status():
+    task_name = request.args['name']
+    opt_cache = optcache.update_from_pickle()
+    res = opt_cache.get_task_report(task_name)
+    return json.dumps({
+        "data": {
+            "status": res.data,
+            "tune": res.tune,
+            "cmd": res.cmd,
+        }
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8001, debug=True)
