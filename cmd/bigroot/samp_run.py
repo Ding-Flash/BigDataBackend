@@ -9,16 +9,16 @@ logger = logging.getLogger(__name__)
 
 def start_iostat_local(log_dir):
     os.system("iostat -d -x -k 1 5400 >> " +log_dir+"/logs/iostat_log_master")
-
+    print('start_iostat_local:'+log_dir)
 def start_vmstat_local(log_dir):
     os.system("vmstat 1 5400 >> " +log_dir+"/logs/vmstat_log_master")
-
+    print('start_vmstat_local:'+log_dir)
 def start_mpstat_local(log_dir):
     os.system("mpstat -P ALL 1 5400 >> " +log_dir+"/logs/mpstat_log_master")
-
+    print('start_mpstat_local'+log_dir)
 def start_sar_local(log_dir):
     os.system("sar -n DEV 1 5400 >> " +log_dir+"/logs/sar_log_master")
-
+    print('start_sar_local'+log_dir)
 def main(log_dir):
     logging.info('Sampling start')
     t0 = threading.Thread(target=start_iostat_local,args={log_dir,})

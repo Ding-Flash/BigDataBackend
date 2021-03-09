@@ -1,5 +1,6 @@
-
 import logging
+import time
+
 import requests
 import pymysql
 from colorama import Fore
@@ -18,8 +19,8 @@ Wantedconf = ['spark.driver.memory', 'spark.driver.cores', 'spark.executor.memor
 # url权限
 url = None
 
-# logging level
 
+# logging level
 
 
 def init_parse(conf):
@@ -83,8 +84,22 @@ def getInput(jobid):
 
 def get_job_main_class(jobid):
     class_url = url + str(jobid) + '/environment'
+    print(Fore.BLUE + '获取:' + class_url)
     r = requests.get(class_url)
-    data = r.json()
+    get_num = 0
+    max_try_times = 5
+    while True:
+        try:
+            data = r.json()
+            break
+        except Exception as e:
+            print(Fore.BLUE + '重新获取：' + class_url)
+            time.sleep(1)
+            r = requests.get(class_url)
+            if get_num > max_try_times:
+                logging.error("无法获得任务{jobid}信息".format(jobid=jobid))
+                raise Exception
+
     for d in data['systemProperties']:
         if d[0] == 'sun.java.command':
             submit_command: str = d[1]
@@ -107,7 +122,7 @@ def getJobs(start):
     try:
         cs_url = url[:len(url) - 1] + '?startTimeEpoch=' + str(start)  # url为全局变量
         print(Fore.BLUE + cs_url)
-        print(Fore.BLUE + start)
+        # print(Fore.BLUE + str(start))
         print(Fore.BLUE + "{:-^29}".format("-"))
         r = requests.get(cs_url)
         data = r.json()  # data 是list结构数据，但是data[0]是字典结构数据，data[0]['attempts']是list结构数据，data[0]['attempts'][0]是个字典结构

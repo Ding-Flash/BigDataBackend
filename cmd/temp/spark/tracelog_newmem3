@@ -1,0 +1,800 @@
+BR: actural rdd computing thread id: 151 time: 1612796802991 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 154 time: 1612796802991 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 156 time: 1612796802966 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 153 time: 1612796802988 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 155 time: 1612796802993 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 152 time: 1612796802993 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 151 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 155 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 152 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 154 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 153 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 156 time: 1612796803001 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 152 time: 1612796803003 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 151 time: 1612796803004 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 155 time: 1612796803004 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 154 time: 1612796803023 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 153 time: 1612796803022 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 156 time: 1612796803023 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 154 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 153 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 156 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 152 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 155 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 151 time: 1612796804290 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 154 time: 1612796804292 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 152 time: 1612796804292 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 151 time: 1612796804292 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 156 time: 1612796804293 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 155 time: 1612796804292 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 153 time: 1612796804292 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 156 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 155 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 151 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 152 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 153 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 154 time: 1612796804294 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 151 time: 1612796805042 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 153 time: 1612796805042 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 151 time: 1612796805043 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 153 time: 1612796805045 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 151 time: 1612796805043 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 153 time: 1612796805047 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 156 time: 1612796805049 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 152 time: 1612796805049 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 152 time: 1612796805051 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 156 time: 1612796805051 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing thread id: 152 time: 1612796805053 class: HadoopRDD[0] at 
+BR: actural rdd computing thread id: 156 time: 1612796805055 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 153 time: 1612796805171 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 152 time: 1612796805172 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 156 time: 1612796805172 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 152 time: 1612796805172 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 152 time: 1612796805172 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 156 time: 1612796805172 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 156 time: 1612796805173 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 153 time: 1612796805172 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 153 time: 1612796805174 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing end thread id: 151 time: 1612796805180 class: HadoopRDD[0] at 
+BR: actural rdd computing end thread id: 151 time: 1612796805181 class: MapPartitionsRDD[1] at 
+BR: actural rdd computing end thread id: 151 time: 1612796805181 class: MapPartitionsRDD[2] at 
+BR: actural rdd computing thread id: 152 time: 1612796806108 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 153 time: 1612796806108 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 154 time: 1612796806108 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 151 time: 1612796806108 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 156 time: 1612796806109 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 155 time: 1612796806109 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 154 time: 1612796806109 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 153 time: 1612796806109 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 152 time: 1612796806109 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 151 time: 1612796806110 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 156 time: 1612796806110 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 153 time: 1612796806110 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796806111 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796806111 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 151 time: 1612796806111 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 154 time: 1612796806111 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 155 time: 1612796806111 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 155 time: 1612796806113 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 151 time: 1612796806113 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 155 time: 1612796806114 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 154 time: 1612796806114 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 156 time: 1612796806114 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 153 time: 1612796806114 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 152 time: 1612796806116 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806221 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796806221 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806222 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806221 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796806221 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806221 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806222 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806222 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806223 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 154 time: 1612796806222 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806223 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796806223 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806618 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806620 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806622 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806622 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 154 time: 1612796806625 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806626 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 154 time: 1612796806626 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806626 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806630 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 156 time: 1612796806630 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806631 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 156 time: 1612796806631 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 153 time: 1612796806908 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 153 time: 1612796806908 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 153 time: 1612796806908 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796806909 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806912 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806912 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 155 time: 1612796806917 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 155 time: 1612796806917 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 155 time: 1612796806918 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 155 time: 1612796806918 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 151 time: 1612796806919 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 151 time: 1612796806922 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 151 time: 1612796806922 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 151 time: 1612796806922 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806924 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796806925 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796806927 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 152 time: 1612796806928 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 152 time: 1612796806928 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796806928 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806929 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796806931 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806932 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796806932 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806956 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 153 time: 1612796806956 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807011 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807012 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807012 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807012 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807013 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807013 class: MapPartitionsRDD[12] at 
+BR: actural rdd computing thread id: 154 time: 1612796807054 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 156 time: 1612796807054 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 154 time: 1612796807054 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796807055 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 154 time: 1612796807055 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 156 time: 1612796807055 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807060 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807061 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807061 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807062 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807063 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807063 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 153 time: 1612796807064 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 153 time: 1612796807068 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796807068 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807083 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807085 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807085 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 155 time: 1612796807120 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 155 time: 1612796807121 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 155 time: 1612796807121 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 152 time: 1612796807121 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 152 time: 1612796807121 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796807121 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807123 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807123 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807124 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807125 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807125 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807125 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 154 time: 1612796807140 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 154 time: 1612796807140 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 154 time: 1612796807141 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807148 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807148 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807148 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 153 time: 1612796807186 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 153 time: 1612796807187 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796807187 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 151 time: 1612796807187 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 156 time: 1612796807188 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 151 time: 1612796807188 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796807188 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 151 time: 1612796807188 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 156 time: 1612796807189 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807194 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807194 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807194 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807194 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807195 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807195 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807196 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807196 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807196 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 152 time: 1612796807202 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 152 time: 1612796807203 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796807203 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807216 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807217 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807217 class: MapPartitionsRDD[5] at 
+BR: actural rdd computing thread id: 155 time: 1612796807635 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 152 time: 1612796807635 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 154 time: 1612796807636 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 153 time: 1612796807636 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 155 time: 1612796807636 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 151 time: 1612796807636 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 156 time: 1612796807636 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 153 time: 1612796807637 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 152 time: 1612796807637 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 154 time: 1612796807637 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 151 time: 1612796807637 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 156 time: 1612796807638 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807950 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807950 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807950 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807950 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807950 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 151 time: 1612796807950 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 154 time: 1612796807950 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 156 time: 1612796807950 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 152 time: 1612796807950 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 155 time: 1612796807951 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807952 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 153 time: 1612796807952 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 151 time: 1612796808157 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 155 time: 1612796808157 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 153 time: 1612796808158 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 155 time: 1612796808158 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 151 time: 1612796808158 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 153 time: 1612796808158 class: ShuffledRDD[6] at 
+BR: actural rdd computing thread id: 156 time: 1612796808159 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 156 time: 1612796808159 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 151 time: 1612796808211 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 151 time: 1612796808211 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 155 time: 1612796808212 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 155 time: 1612796808212 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 153 time: 1612796808230 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 153 time: 1612796808230 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing end thread id: 156 time: 1612796808231 class: ShuffledRDD[6] at 
+BR: actural rdd computing end thread id: 156 time: 1612796808231 class: MapPartitionsRDD[7] at 
+BR: actural rdd computing thread id: 152 time: 1612796808640 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 156 time: 1612796808641 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 154 time: 1612796808641 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 153 time: 1612796808641 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 155 time: 1612796808641 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 151 time: 1612796808641 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 156 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 155 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 152 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 151 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 153 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 154 time: 1612796808655 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 151 time: 1612796808656 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 152 time: 1612796808656 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 155 time: 1612796808656 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 153 time: 1612796808657 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 154 time: 1612796808656 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 156 time: 1612796808656 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 151 time: 1612796808663 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 151 time: 1612796808664 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 151 time: 1612796808664 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 152 time: 1612796808664 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 154 time: 1612796808664 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 152 time: 1612796808664 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 154 time: 1612796808664 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 153 time: 1612796808664 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 155 time: 1612796808664 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 156 time: 1612796808665 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 152 time: 1612796808665 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 154 time: 1612796808665 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 156 time: 1612796808666 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 155 time: 1612796808666 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 153 time: 1612796808666 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 156 time: 1612796808666 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 155 time: 1612796808666 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 153 time: 1612796808666 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 155 time: 1612796808692 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 153 time: 1612796808693 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 151 time: 1612796808693 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 152 time: 1612796808693 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 154 time: 1612796808693 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 156 time: 1612796808693 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 155 time: 1612796808833 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 151 time: 1612796808834 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 154 time: 1612796808837 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 153 time: 1612796808839 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 152 time: 1612796808840 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 156 time: 1612796808841 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809007 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809014 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809023 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809023 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809024 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 153 time: 1612796809025 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 156 time: 1612796809026 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809027 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809027 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 153 time: 1612796809029 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 156 time: 1612796809031 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809032 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 151 time: 1612796809295 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 152 time: 1612796809295 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 152 time: 1612796809296 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 152 time: 1612796809297 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 151 time: 1612796809297 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 151 time: 1612796809297 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809300 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 151 time: 1612796809300 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809300 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 151 time: 1612796809300 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 154 time: 1612796809300 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 152 time: 1612796809301 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 152 time: 1612796809301 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 154 time: 1612796809302 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 154 time: 1612796809302 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809304 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 154 time: 1612796809306 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 154 time: 1612796809306 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809307 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809314 class: ShuffledRDD[13] at 
+BR: actural rdd computing thread id: 155 time: 1612796809315 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 155 time: 1612796809317 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing thread id: 155 time: 1612796809318 class: ShuffledRDD[11] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809319 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809320 class: ShuffledRDD[11] at 
+BR: actural rdd computing thread id: 155 time: 1612796809321 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing thread id: 155 time: 1612796809321 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809324 class: ShuffledRDD[13] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809331 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809338 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809343 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809345 class: MapPartitionsRDD[14] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809411 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809413 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809413 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809415 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809417 class: ZippedPartitionsRDD2[15] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809417 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809417 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809420 class: MapPartitionsRDD[20] at 
+BR: actural rdd computing thread id: 155 time: 1612796809950 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 153 time: 1612796809951 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 152 time: 1612796809951 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 151 time: 1612796809951 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 155 time: 1612796809951 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796809952 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 152 time: 1612796809952 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796809951 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 154 time: 1612796809953 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796809953 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 151 time: 1612796809953 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 153 time: 1612796809953 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 155 time: 1612796809954 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796809954 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796809954 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 155 time: 1612796809954 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 152 time: 1612796809955 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 155 time: 1612796809955 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796809955 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 155 time: 1612796809955 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 154 time: 1612796809955 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 154 time: 1612796809956 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 156 time: 1612796809956 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 151 time: 1612796809956 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 153 time: 1612796809956 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 154 time: 1612796809956 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796809956 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 151 time: 1612796809957 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 153 time: 1612796809957 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 151 time: 1612796809957 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 154 time: 1612796809957 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 156 time: 1612796809957 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796809957 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796809958 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 151 time: 1612796809958 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 153 time: 1612796809958 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809965 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796809965 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 151 time: 1612796809965 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 153 time: 1612796809966 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809966 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796809966 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796809966 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809966 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809966 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796809967 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 152 time: 1612796809967 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 155 time: 1612796809967 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810098 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810099 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 156 time: 1612796810105 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810110 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810113 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810116 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810127 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810127 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810127 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810127 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810128 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810128 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810128 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810129 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810130 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810130 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796810131 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 153 time: 1612796810131 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 155 time: 1612796810134 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 151 time: 1612796810134 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 154 time: 1612796810134 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810144 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810144 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810144 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810144 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810144 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810144 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810146 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810146 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810146 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810146 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810147 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810147 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810147 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810147 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810147 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 156 time: 1612796810598 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 156 time: 1612796810598 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796810599 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 156 time: 1612796810600 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 156 time: 1612796810600 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 156 time: 1612796810600 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810603 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810603 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810633 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810633 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 156 time: 1612796810637 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810642 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810642 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810643 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 154 time: 1612796810679 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 154 time: 1612796810679 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796810681 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796810681 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 154 time: 1612796810681 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 152 time: 1612796810681 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796810682 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 154 time: 1612796810682 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 152 time: 1612796810683 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796810683 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 152 time: 1612796810683 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 152 time: 1612796810683 class: ShuffledRDD[3] at 
+BR: actural rdd computing thread id: 153 time: 1612796810684 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 153 time: 1612796810684 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810684 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810684 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810685 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810685 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796810685 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 153 time: 1612796810685 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing thread id: 153 time: 1612796810686 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing thread id: 153 time: 1612796810686 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810690 class: ShuffledRDD[3] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810690 class: MapPartitionsRDD[4] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810747 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810747 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810750 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810750 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 154 time: 1612796810750 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810751 class: MapPartitionsRDD[8] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810752 class: MapPartitionsRDD[18] at 
+BR: actural rdd computing thread id: 152 time: 1612796810753 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810753 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810753 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810753 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 153 time: 1612796810755 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810759 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810759 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810759 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810762 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810762 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810762 class: MapPartitionsRDD[24] at 
+BR: actural rdd computing thread id: 151 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 152 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 155 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 154 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 156 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 153 time: 1612796810967 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 156 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 152 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 151 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 154 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 155 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 153 time: 1612796810968 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 153 time: 1612796810971 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 155 time: 1612796810972 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 153 time: 1612796810972 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 156 time: 1612796810972 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 151 time: 1612796810972 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 154 time: 1612796810972 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 151 time: 1612796810973 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 151 time: 1612796810973 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 153 time: 1612796810974 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 154 time: 1612796810974 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 155 time: 1612796810974 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 156 time: 1612796810974 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 152 time: 1612796810974 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 154 time: 1612796810975 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 155 time: 1612796810975 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 156 time: 1612796810975 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 152 time: 1612796810975 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 152 time: 1612796810976 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810981 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810982 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810982 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810982 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810982 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810982 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 152 time: 1612796810982 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 151 time: 1612796810983 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 154 time: 1612796810983 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 155 time: 1612796810983 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 156 time: 1612796810982 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 153 time: 1612796810983 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811111 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811115 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811116 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811116 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811116 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811116 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811117 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811117 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811123 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811124 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811125 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811125 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811125 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811125 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811125 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811126 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811126 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811126 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 152 time: 1612796811209 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 152 time: 1612796811209 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 156 time: 1612796811210 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 156 time: 1612796811210 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 153 time: 1612796811210 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 153 time: 1612796811211 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 152 time: 1612796811212 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 155 time: 1612796811212 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 155 time: 1612796811212 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing thread id: 152 time: 1612796811212 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 156 time: 1612796811212 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 152 time: 1612796811212 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 156 time: 1612796811213 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 153 time: 1612796811213 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 156 time: 1612796811213 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 153 time: 1612796811213 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 155 time: 1612796811214 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing thread id: 153 time: 1612796811214 class: ShuffledRDD[25] at 
+BR: actural rdd computing thread id: 155 time: 1612796811214 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing thread id: 155 time: 1612796811215 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811215 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811215 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811216 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811216 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811216 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811216 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811217 class: ShuffledRDD[25] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811217 class: ZippedPartitionsRDD2[26] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811233 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811234 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811235 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811235 class: ZippedPartitionsRDD2[28] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811240 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811241 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811241 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811241 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811242 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811242 class: ZippedPartitionsRDD2[30] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811242 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811242 class: MapPartitionsRDD[32] at 
+BR: actural rdd computing thread id: 151 time: 1612796811488 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 152 time: 1612796811488 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 155 time: 1612796811488 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 156 time: 1612796811488 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 153 time: 1612796811489 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 154 time: 1612796811488 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 151 time: 1612796811490 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 151 time: 1612796811490 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 155 time: 1612796811491 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 155 time: 1612796811491 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 151 time: 1612796811491 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 154 time: 1612796811491 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 153 time: 1612796811491 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 155 time: 1612796811492 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 152 time: 1612796811492 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 154 time: 1612796811492 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 153 time: 1612796811492 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796811492 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 152 time: 1612796811492 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796811493 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796811493 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 152 time: 1612796811493 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 153 time: 1612796811494 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 156 time: 1612796811494 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811500 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811500 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 153 time: 1612796811501 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811503 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811503 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 155 time: 1612796811503 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811504 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811504 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811504 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 156 time: 1612796811508 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811508 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 152 time: 1612796811508 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811510 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811513 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811513 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 151 time: 1612796811514 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811514 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796811514 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811522 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811523 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811524 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811524 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811525 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811526 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811524 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811527 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811529 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811529 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811529 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811530 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811724 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 152 time: 1612796811746 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 152 time: 1612796811747 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 152 time: 1612796811747 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 152 time: 1612796811748 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811755 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811755 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 152 time: 1612796811755 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811763 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811763 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811765 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811765 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811772 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 155 time: 1612796811773 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 151 time: 1612796811778 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 153 time: 1612796811786 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 156 time: 1612796811787 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 153 time: 1612796811787 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 153 time: 1612796811788 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796811788 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 156 time: 1612796811788 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 153 time: 1612796811788 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 156 time: 1612796811789 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 156 time: 1612796811789 class: ShuffledRDD[21] at 
+BR: actural rdd computing thread id: 154 time: 1612796811790 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing thread id: 154 time: 1612796811790 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796811790 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811796 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811796 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 153 time: 1612796811797 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811798 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811798 class: ShuffledRDD[21] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811798 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811798 class: ZippedPartitionsRDD2[22] at 
+BR: actural rdd computing thread id: 154 time: 1612796811798 class: ShuffledRDD[33] at 
+BR: actural rdd computing thread id: 156 time: 1612796811798 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811806 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811807 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811807 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811807 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811808 class: ShuffledRDD[33] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811808 class: ZippedPartitionsRDD2[34] at 
+BR: actural rdd computing end thread id: 152 time: 1612796811878 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 154 time: 1612796811924 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 156 time: 1612796811927 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing end thread id: 153 time: 1612796811929 class: MapPartitionsRDD[36] at 
+BR: actural rdd computing thread id: 155 time: 1612796812407 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 156 time: 1612796812407 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 152 time: 1612796812407 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 155 time: 1612796812407 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 153 time: 1612796812407 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 156 time: 1612796812408 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 154 time: 1612796812408 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 151 time: 1612796812408 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 152 time: 1612796812408 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 153 time: 1612796812409 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 151 time: 1612796812409 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 154 time: 1612796812409 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 154 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 153 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 156 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 151 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 155 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 152 time: 1612796812410 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 154 time: 1612796812412 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 152 time: 1612796812413 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 151 time: 1612796812413 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 153 time: 1612796812413 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 155 time: 1612796812414 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 156 time: 1612796812413 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 152 time: 1612796812414 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 156 time: 1612796812415 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 155 time: 1612796812415 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 154 time: 1612796812415 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 152 time: 1612796812416 class: ShuffledRDD[37] at 
+BR: actural rdd computing thread id: 151 time: 1612796812416 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 153 time: 1612796812416 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 154 time: 1612796812416 class: ShuffledRDD[37] at 
+BR: actural rdd computing thread id: 156 time: 1612796812417 class: ShuffledRDD[37] at 
+BR: actural rdd computing thread id: 155 time: 1612796812417 class: ShuffledRDD[37] at 
+BR: actural rdd computing thread id: 151 time: 1612796812418 class: ShuffledRDD[37] at 
+BR: actural rdd computing thread id: 153 time: 1612796812418 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812427 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812427 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812427 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812427 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812427 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812427 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812427 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812428 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812428 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812428 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812428 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812428 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812452 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812453 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812453 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812454 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812455 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812457 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812459 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812459 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812459 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812459 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812459 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812459 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812459 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812460 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812460 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812460 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 154 time: 1612796812460 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing end thread id: 155 time: 1612796812461 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing end thread id: 152 time: 1612796812461 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing end thread id: 156 time: 1612796812461 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing end thread id: 153 time: 1612796812461 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812461 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812461 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 151 time: 1612796812461 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 152 time: 1612796813534 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 152 time: 1612796813535 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 152 time: 1612796813535 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 152 time: 1612796813536 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 152 time: 1612796813537 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 152 time: 1612796813537 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813540 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813540 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813567 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813572 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813572 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 152 time: 1612796813572 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 151 time: 1612796813582 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 151 time: 1612796813582 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 151 time: 1612796813582 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 151 time: 1612796813585 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 151 time: 1612796813585 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 151 time: 1612796813586 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813588 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813589 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813604 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813607 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813607 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 151 time: 1612796813608 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 155 time: 1612796813648 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 155 time: 1612796813648 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 155 time: 1612796813648 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 155 time: 1612796813650 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 155 time: 1612796813651 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 155 time: 1612796813652 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813655 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813655 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813669 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813675 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813675 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 155 time: 1612796813675 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 156 time: 1612796813696 class: MapPartitionsRDD[49] at 
+BR: actural rdd computing thread id: 156 time: 1612796813696 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing thread id: 156 time: 1612796813697 class: VertexRDDImpl[41] at 
+BR: actural rdd computing thread id: 156 time: 1612796813698 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing thread id: 156 time: 1612796813699 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing thread id: 156 time: 1612796813700 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813705 class: ShuffledRDD[37] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813705 class: ZippedPartitionsRDD2[38] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813723 class: ZippedPartitionsRDD2[40] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813728 class: VertexRDDImpl[41] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813728 class: MapPartitionsRDD[48] at 
+BR: actural rdd computing end thread id: 156 time: 1612796813728 class: MapPartitionsRDD[49] at 

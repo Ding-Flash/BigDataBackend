@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 import time
 
@@ -27,7 +28,9 @@ mysql_database = None
 def generate_random_program(num, program, main_class, jar_path, args, hdfs_loc_path, bdbench_home, lines_per_file,
                             words_per_line):
     from taskOpt.opt_utils.generateRandomParameters import generate_random_parameters
-    file_name = 'lib/' + program + '/run_' + program + str(int(time.time())) + '.sh'
+    if not os.path.exists(bdbench_home + '/lib/' + program):
+        os.makedirs(bdbench_home + '/lib/' + program)
+    file_name = bdbench_home + '/lib/' + program + '/run_' + program + str(int(time.time())) + '.sh'
     f = open(file_name, 'w', encoding='utf-8')
     f.write('cd ' + bdbench_home + '\n')
     ConfCombine = []
@@ -37,9 +40,9 @@ def generate_random_program(num, program, main_class, jar_path, args, hdfs_loc_p
             confs = generate_random_parameters(program)  # 对照参数是否重复
         ConfCombine.append(confs)  # 追加ConfCombine，用于对照
         if program.lower() == 'pagerank':
-            args[1] = str(confs[0])
+            args.insert(1,str(confs[0]))
         f.write(
-            f"utils/genData.sh {confs[0]} {hdfs_loc_path} {program} {bdbench_home} {lines_per_file} {words_per_line}")
+            'bash '+bdbench_home + f"/opt_utils/genData.sh {confs[0]} {hdfs_loc_path} {program} {bdbench_home} {lines_per_file} {words_per_line}")
         f.write('\n')
         f.write('spark-submit --class ')
         f.write(main_class)
@@ -172,7 +175,7 @@ def init_mysql():
                 print(Fore.BLUE + "已经存在数据库: " + mysql_database)
                 return
             else:
-                print(Fore.RED +"已经存在数据库: " + mysql_database + ', 但缺少数据表, 请更换数据库名或将该数据库删除, 由程序自动创建')
+                print(Fore.RED + "已经存在数据库: " + mysql_database + ', 但缺少数据表, 请更换数据库名或将该数据库删除, 由程序自动创建')
                 my_db.close()
                 raise Exception
 
@@ -197,17 +200,5 @@ def init_mysql():
             shuffleINCPP int, \
             inputsizeGB float)')
         my_cursor.execute('CREATE TABLE jobsubmit(jobid char(100) primary key, jobname char(50))')
-    print(Fore.BLUE +"mysql:" + mysql_host + ":" + mysql_port + "/" + mysql_database + " 初始化完成")
+    print(Fore.BLUE + "mysql:" + mysql_host + ":" + mysql_port + "/" + mysql_database + " 初始化完成")
     my_db.close()
-
-
-def check_mysql(main_class):
-    db = pymysql.connect(host=mysql_host, port=int(mysql_port), user=mysql_user, passwd=mysql_passwd, db=mysql_database)
-    cursor = db.cursor()
-    sql_command = f"SELECT * FROM jobParameters WHERE jobParameters.mainClass='{main_class}'"
-    cursor.execute(sql_command)
-    d = cursor.fetchall()
-    db.close()
-    if len(d) < 1:
-        print(Fore.RED +"mysql中没有{job}的数据，请使用 --mode run_all 重新运行该任务".format(job=main_class))
-        raise Exception

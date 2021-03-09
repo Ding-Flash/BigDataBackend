@@ -94,7 +94,7 @@ def decode_sar(slave, log_dir):
     count = 0
     period=7;pos=2;
     while line:
-        if 'eno1' in line:  # eth0
+        if 'eno2' in line:  # eth0
             line_list = line.split()
             if len(line_list)<9:
                 break
@@ -187,7 +187,7 @@ def decode_iostat(slave, log_dir):
     wkb = []
     avgrq = []
     avgqu = []
-    await = []
+    aawait = []
     rawait = []
     wawait = []
     svctm = []
@@ -207,7 +207,7 @@ def decode_iostat(slave, log_dir):
             wkb.append(linedata[5])
             avgrq.append(linedata[6])
             avgqu.append(linedata[7])
-            await.append(linedata[8])
+            aawait.append(linedata[8])
             rawait.append(linedata[9])
             wawait.append(linedata[10])
             svctm.append(linedata[11])
@@ -224,7 +224,7 @@ def decode_iostat(slave, log_dir):
             wkb.append(linedata[5])
             avgrq.append(linedata[6])
             avgqu.append(linedata[7])
-            await.append(linedata[8])
+            aawait.append(linedata[8])
             rawait.append(linedata[9])
             wawait.append('0')
             svctm.append('0')
@@ -233,7 +233,7 @@ def decode_iostat(slave, log_dir):
         line = iostatfile.readline()
     for i in range(0, count):
         outline = [time_count[i], ' ', rrgm[i], ' ', wrgm[i], ' ', rs[i], ' ', ws[i], ' ', rkb[i], ' ', wkb[i], ' ',
-                   avgrq[i], ' ', avgqu[i], ' ', await[i], ' ', rawait[i], ' ', wawait[i], ' ', svctm[i], ' ', util[i],
+                   avgrq[i], ' ', avgqu[i], ' ', aawait[i], ' ', rawait[i], ' ', wawait[i], ' ', svctm[i], ' ', util[i],
                    '\n']
         outfile.writelines(outline)
     outfile.close()

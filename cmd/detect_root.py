@@ -169,7 +169,7 @@ def init_root(work_dir):
     for slave in slaves_name:
         os.system("ssh "+slave+" python "+prefix+"/bigroot/kill_samp.py >/dev/null 2>&1")
 
-    os.system("rm $SPARK_HOME/tsee_log/* >/dev/null 2>&1")
+    # os.system("rm $SPARK_HOME/tsee_log/* >/dev/null 2>&1")
     logging.info('clear old logs in salves')
     for slave in slaves_name:
         os.system("ssh "+slave+" mkdir -p " + log_dir + "/logs " + log_dir + "/out")

@@ -15,6 +15,7 @@ def start_iostat(time):
         os.system("iostat -d -x -k 1 "+str(time)+" >> " + sample_path + "iostat_log_"+master+"&")
         for slave in slaves_name:
                 os.system("ssh "+user+"@"+slave+" \"iostat -d -x -k 1 "+str(time)+" >> "+slave_path+"/sample/iostat_log_"+slave+"&\"")
+                print("ssh "+user+"@"+slave+" \"iostat -d -x -k 1 "+str(time)+" >> "+slave_path+"/sample/iostat_log_"+slave+"&\"")
 
 
 def start_mpstat(time):
