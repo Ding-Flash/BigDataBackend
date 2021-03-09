@@ -115,3 +115,4 @@ venv.bak/
 *.txt
 *.pkl
 /cmd/taskOpt/datagen/BigDataGeneratorSuite/*
+cmd/temp/*
