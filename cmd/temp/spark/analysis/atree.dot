@@ -1,8 +1,0 @@
-digraph Tree {
-node [shape=box] ;
-0 [label="shuffle_records <= 0.484\ngini = 0.239\nsamples = 288\nvalue = [40, 248]"] ;
-1 [label="gini = 0.0\nsamples = 40\nvalue = [40, 0]"] ;
-0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
-2 [label="gini = 0.0\nsamples = 248\nvalue = [0, 248]"] ;
-0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
-}
