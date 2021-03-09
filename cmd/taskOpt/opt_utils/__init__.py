@@ -40,9 +40,9 @@ def generate_random_program(num, program, main_class, jar_path, args, hdfs_loc_p
             confs = generate_random_parameters(program)  # 对照参数是否重复
         ConfCombine.append(confs)  # 追加ConfCombine，用于对照
         if program.lower() == 'pagerank':
-            args.insert(1,str(confs[0]))
+            args.insert(1, str(confs[0]))
         f.write(
-            'bash '+bdbench_home + f"/opt_utils/genData.sh {confs[0]} {hdfs_loc_path} {program} {bdbench_home} {lines_per_file} {words_per_line}")
+            'bash ' + bdbench_home + f"/opt_utils/genData.sh {confs[0]} {hdfs_loc_path} {program} {bdbench_home} {lines_per_file} {words_per_line}")
         f.write('\n')
         f.write('spark-submit --class ')
         f.write(main_class)
